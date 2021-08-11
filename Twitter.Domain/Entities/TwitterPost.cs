@@ -1,8 +1,6 @@
 ﻿using NJsonSchema.Annotations;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Twitter.Domain.Entities
 {

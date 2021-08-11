@@ -19,6 +19,9 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@auth0/angular-jwt": "^4.2.0",
+    "guid-typescript": "^1.0.9",
+    "ngx-toastr": "^14.1.0",
     "rxjs": "~6.6.0",
     "zone.js": "~0.11.4"
   },

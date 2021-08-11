@@ -91,3 +91,14 @@ D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebAp
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Services.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Services.pdb
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Humanizer.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\EntityFramework.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

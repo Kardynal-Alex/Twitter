@@ -10,3 +10,6 @@ D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.
 D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.csproj.CopyComplete
 D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.dll
 D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.pdb
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\bin\Debug\netcoreapp3.1\Twitter.Persistence.runtimeconfig.json
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\bin\Debug\netcoreapp3.1\Twitter.Persistence.runtimeconfig.dev.json
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.genruntimeconfig.cache
