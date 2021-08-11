@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NJsonSchema" Version="10.5.2" />
+  </ItemGroup>
+
 </Project>

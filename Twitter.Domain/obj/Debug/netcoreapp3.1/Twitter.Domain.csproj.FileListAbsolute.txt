@@ -1,0 +1,12 @@
+D:\Asp.Net(project)\Twitter\Twitter.Domain\bin\Debug\netcoreapp3.1\Twitter.Domain.deps.json
+D:\Asp.Net(project)\Twitter\Twitter.Domain\bin\Debug\netcoreapp3.1\Twitter.Domain.runtimeconfig.json
+D:\Asp.Net(project)\Twitter\Twitter.Domain\bin\Debug\netcoreapp3.1\Twitter.Domain.runtimeconfig.dev.json
+D:\Asp.Net(project)\Twitter\Twitter.Domain\bin\Debug\netcoreapp3.1\Twitter.Domain.dll
+D:\Asp.Net(project)\Twitter\Twitter.Domain\bin\Debug\netcoreapp3.1\Twitter.Domain.pdb
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.AssemblyInfoInputs.cache
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.AssemblyInfo.cs
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.csproj.CoreCompileInputs.cache
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.dll
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.pdb
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.genruntimeconfig.cache
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.csprojAssemblyReference.cache

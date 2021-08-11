@@ -1,0 +1,9 @@
+D:\Asp.Net(project)\Twitter\Twitter.Contracts\bin\Debug\netcoreapp3.1\Twitter.Contracts.deps.json
+D:\Asp.Net(project)\Twitter\Twitter.Contracts\bin\Debug\netcoreapp3.1\Twitter.Contracts.dll
+D:\Asp.Net(project)\Twitter\Twitter.Contracts\bin\Debug\netcoreapp3.1\Twitter.Contracts.pdb
+D:\Asp.Net(project)\Twitter\Twitter.Contracts\obj\Debug\netcoreapp3.1\Twitter.Contracts.AssemblyInfoInputs.cache
+D:\Asp.Net(project)\Twitter\Twitter.Contracts\obj\Debug\netcoreapp3.1\Twitter.Contracts.AssemblyInfo.cs
+D:\Asp.Net(project)\Twitter\Twitter.Contracts\obj\Debug\netcoreapp3.1\Twitter.Contracts.csproj.CoreCompileInputs.cache
+D:\Asp.Net(project)\Twitter\Twitter.Contracts\obj\Debug\netcoreapp3.1\Twitter.Contracts.dll
+D:\Asp.Net(project)\Twitter\Twitter.Contracts\obj\Debug\netcoreapp3.1\Twitter.Contracts.pdb
+D:\Asp.Net(project)\Twitter\Twitter.Contracts\obj\Debug\netcoreapp3.1\Twitter.Contracts.csprojAssemblyReference.cache

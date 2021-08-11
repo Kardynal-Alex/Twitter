@@ -1,0 +1,12 @@
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\bin\Debug\netcoreapp3.1\Twitter.Persistence.deps.json
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\bin\Debug\netcoreapp3.1\Twitter.Persistence.dll
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\bin\Debug\netcoreapp3.1\Twitter.Persistence.pdb
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\bin\Debug\netcoreapp3.1\Twitter.Domain.dll
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\bin\Debug\netcoreapp3.1\Twitter.Domain.pdb
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.csprojAssemblyReference.cache
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.AssemblyInfoInputs.cache
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.AssemblyInfo.cs
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.csproj.CoreCompileInputs.cache
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.csproj.CopyComplete
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.dll
+D:\Asp.Net(project)\Twitter\Twitter.Persistence\obj\Debug\netcoreapp3.1\Twitter.Persistence.pdb
