@@ -1,1 +1,21 @@
-<p>auth-page works!</p>
+
+<div class="row">
+    <div class="col1">
+        <div class="picture">
+            <img [src]="createImgPath(twitterImage)" />
+        </div>
+    </div>
+    <div class="col2">
+        <a href="#" class="fa fa-twitter"></a>
+        <div class="mainText">
+            <h2>Twitter</h2>
+        </div>
+        <div class="subText">
+            <h5>Join Twitter now!</h5>
+        </div>
+        <div class="socialMediaBtn">
+            <app-facebook-login></app-facebook-login>
+            <app-google-login></app-google-login>
+        </div>
+    </div>
+</div>

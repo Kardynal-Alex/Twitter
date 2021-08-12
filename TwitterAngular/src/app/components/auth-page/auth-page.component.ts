@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { TwitterPostService } from 'src/app/services/twitter-post.service';
 
 @Component({
   selector: 'app-auth-page',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService:AuthService,
+              private twitterPost:TwitterPostService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+  twitterImage:string="Resources\\Images\\twitterImage.jpg";
+  createImgPath(path:string){
+    return this.twitterPost.createImgPath(path);
   }
 
 }

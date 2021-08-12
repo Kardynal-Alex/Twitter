@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "@auth0/angular-jwt": "^4.2.0",
+    "@types/gapi": "^0.0.41",
+    "@types/gapi.auth2": "^0.0.55",
     "guid-typescript": "^1.0.9",
     "ngx-toastr": "^14.1.0",
     "rxjs": "~6.6.0",

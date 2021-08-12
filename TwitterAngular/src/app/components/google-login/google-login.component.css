@@ -1,0 +1,21 @@
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+  }
+  
+  .fa:hover {
+    opacity: 0.7;
+  }
+  
+  .googleBtn button{
+      margin-top: 20px;
+      border-radius: 50px;
+      font-size: 30px;
+      background: none;
+      padding-right: 30px;
+      width: 400px;
+  }

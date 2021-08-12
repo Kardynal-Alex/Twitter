@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SortPipe } from './pipes/sort.pipe';
 
@@ -35,6 +36,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     ToastrModule.forRoot({preventDuplicates:true}),
     JwtModule.forRoot({

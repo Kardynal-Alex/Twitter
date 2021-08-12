@@ -22,14 +22,12 @@ export class AuthService {
         return this.httpClient.post(this.apiUrl+"google/",googleLogin);
     }
 
-   isAuthenticated() {
+    isAuthenticated() {
         const token=this.localStorage.get("token");
-        if(token && !this.jwtHelper.isTokenExpired(token)) {
+        if(token && !this.jwtHelper.isTokenExpired(token))
           return true;
-        }
-        else {
+        else 
           return false;
-        }
     }
     
     checkIfIsAdmin(){

@@ -48,9 +48,10 @@ namespace Twitter.Services
                 throw new TwitterException("Invalid facebook token");
             }
             // 3. we've got a valid token so we can request user data from fb
-            var userInfoResponse = await Client.GetStringAsync($"https://graph.facebook.com/v2.8/me?fields=id,email,first_name,last_name,name&access_token={accessToken}");
+            var userInfoResponse = await Client.GetStringAsync($"https://graph.facebook.com/v11.0/me?fields=id,email,first_name,last_name,picture&access_token={accessToken}&debug=all");
             var userInfo = JsonConvert.DeserializeObject<FacebookUserData>(userInfoResponse);
 
+            userInfo.Email = userInfo.Email ?? "alexandrkardynal@gmail.com";
             var user = await unitOfWork.UserManager.FindByEmailAsync(userInfo.Email);
             if (user == null)
             {
@@ -103,7 +104,8 @@ namespace Twitter.Services
                         Role = "user",
                         Name = payload.FamilyName,
                         Surname = payload.GivenName,
-                        EmailConfirmed = payload.EmailVerified
+                        EmailConfirmed = payload.EmailVerified,
+                        ProfileImagePath = payload.Picture
                     };
                     var result = await unitOfWork.UserManager.CreateAsync(user);
                     if (result.Succeeded)
@@ -147,9 +149,9 @@ namespace Twitter.Services
                 var payload = await GoogleJsonWebSignature.ValidateAsync(externalAuth.IdToken, settings);
                 return payload;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                throw new TwitterException(ex.Message);
             }
         }
     }
