@@ -10,10 +10,13 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { SortPipe } from './pipes/sort.pipe';
 
 import { AppComponent } from './app.component';
+import { AuthPageComponent } from './components/auth-page/auth-page.component';
+import { FacebookLoginComponent } from './components/facebook-login/facebook-login.component';
+import { GoogleLoginComponent } from './components/google-login/google-login.component';
 
 
 const appRoutes: Routes =[
-  { path: '', component: AppComponent },
+  { path: '', component: AuthPageComponent },
   { path: '**', component: AppComponent }
 ];
 
@@ -22,7 +25,10 @@ export function tokenGetter() {
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthPageComponent,
+    FacebookLoginComponent,
+    GoogleLoginComponent
   ],
   imports: [
     BrowserModule,

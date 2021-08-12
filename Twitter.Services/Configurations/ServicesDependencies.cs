@@ -34,6 +34,7 @@ namespace Twitter.Services.Configurations
             services.AddTransient<IImagesService, ImagesService>();
             services.AddTransient<ITwitterPostService, TwitterPostService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ITokenService, TokenService>();
 
             return services;
         }

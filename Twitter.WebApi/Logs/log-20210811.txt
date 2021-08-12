@@ -1,3 +1,0 @@
-2021-08-11T16:15:17.8762311+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2021-08-11T16:15:17.8851511+03:00  [INF] Hosting environment: "Development" (c3307c92)
-2021-08-11T16:15:17.8854486+03:00  [INF] Content root path: "D:\Asp.Net(project)\Twitter\Twitter.WebApi" (b5d60022)
