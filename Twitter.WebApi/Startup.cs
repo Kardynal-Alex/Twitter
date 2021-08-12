@@ -10,10 +10,10 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Twitter.Persistence.Configurations;
 using Twitter.Services.Configurations;
+using Twitter.WebApi.Middlewares;
 
 namespace Twitter.WebApi
 {
@@ -50,6 +50,8 @@ namespace Twitter.WebApi
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen();
+
+            services.AddTransient<ExceptionHandlingMiddleware>();
         }
 
         private void ConfigureAspnetRunServices(IServiceCollection services)
@@ -68,10 +70,12 @@ namespace Twitter.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
             app.UseHttpsRedirection();
             app.UseCors(options => options.AllowAnyOrigin()
-                                           .AllowAnyMethod()
-                                           .AllowAnyHeader());
+                                          .AllowAnyMethod()
+                                          .AllowAnyHeader());
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {

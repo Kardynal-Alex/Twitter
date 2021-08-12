@@ -9,3 +9,4 @@ D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domai
 D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.dll
 D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.pdb
 D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.genruntimeconfig.cache
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.csprojAssemblyReference.cache

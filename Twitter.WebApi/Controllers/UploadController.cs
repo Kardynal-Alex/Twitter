@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
@@ -49,6 +48,8 @@ namespace Twitter.WebApi.Controllers
             }
             catch (Exception ex)
             {
+                logger.LogInformation("[Message] : " + ex.Message);
+                logger.LogInformation("[In method] : " + ex.TargetSite);
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }

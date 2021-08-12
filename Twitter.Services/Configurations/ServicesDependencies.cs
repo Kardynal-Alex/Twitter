@@ -15,20 +15,22 @@ namespace Twitter.Services.Configurations
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-           .AddJwtBearer(options =>
-           {
-               options.TokenValidationParameters = new TokenValidationParameters
-               {
-                   ValidateIssuer = true,
-                   ValidateAudience = true,
-                   ValidateLifetime = true,
-                   ValidateIssuerSigningKey = true,
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
 
-                   ValidIssuer = AuthOptions.ISSUER,
-                   ValidAudience = AuthOptions.AUDIENCE,
-                   IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey()
-               };
-           });
+                    ValidIssuer = AuthOptions.ISSUER,
+                    ValidAudience = AuthOptions.AUDIENCE,
+                    IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey()
+                };
+            });
+            services.Configure<FacebookAuthSettings>(Configuration.GetSection(nameof(FacebookAuthSettings)));
+            services.Configure<GoogleAuthSettings>(Configuration.GetSection(nameof(GoogleAuthSettings)));
 
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IImagesService, ImagesService>();

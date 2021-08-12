@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Google.Apis.Auth;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Twitter.Contracts;
 using Twitter.Domain.Entities;
 using Twitter.Domain.Exceptions;
 using Twitter.Domain.Repositories;
 using Twitter.Services.Abstractions;
+using Twitter.Services.Configurations;
 
 namespace Twitter.Services
 {
@@ -17,10 +20,17 @@ namespace Twitter.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly ITokenService tokenService;
-        public UserService(IUnitOfWork unitOfWork, ITokenService tokenService)
+        private readonly FacebookAuthSettings fbAuthSettings;
+        private readonly GoogleAuthSettings googleAuthSettings;
+        public UserService(IUnitOfWork unitOfWork,
+                           ITokenService tokenService,
+                           IOptions<FacebookAuthSettings> fbAuthSettingsAccessor,
+                           IOptions<GoogleAuthSettings> googlelAuthSettingsAccessor)
         {
             this.unitOfWork = unitOfWork;
             this.tokenService = tokenService;
+            fbAuthSettings = fbAuthSettingsAccessor.Value;
+            googleAuthSettings = googlelAuthSettingsAccessor.Value;
         }
 
         public async Task<string> FacebookLoginAsync(string accessToken)
@@ -73,7 +83,74 @@ namespace Twitter.Services
 
         public async Task<string> GoogleLoginAsync(GoogleAuthDTO googleAuthDTO)
         {
-            throw new NotImplementedException();
+            var payload = await VerifyGoogleToken(googleAuthDTO);
+            if (payload == null)
+                throw new TwitterException("Invalid Google Authentication");
+
+            var info = new UserLoginInfo(googleAuthDTO.Provider, payload.Subject, googleAuthDTO.Provider);
+            var user = await unitOfWork.UserManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+
+            if (user == null)
+            {
+                user = await unitOfWork.UserManager.FindByEmailAsync(payload.Email);
+
+                if (user == null)
+                {
+                    user = new User
+                    {
+                        Email = payload.Email,
+                        UserName = payload.Email,
+                        Role = "user",
+                        Name = payload.FamilyName,
+                        Surname = payload.GivenName,
+                        EmailConfirmed = payload.EmailVerified
+                    };
+                    var result = await unitOfWork.UserManager.CreateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        await unitOfWork.UserManager.AddToRoleAsync(user, user.Role);
+                        await unitOfWork.UserManager.AddLoginAsync(user, info);
+                    }
+                    else
+                    {
+                        throw new TwitterException("Invalid External Authentication");
+                    }
+                }
+                else
+                {
+                    await unitOfWork.UserManager.AddLoginAsync(user, info);
+                }
+            }
+            if (user == null)
+                throw new TwitterException("Invalid External Authentication");
+
+            AuthenticationProperties properties = new AuthenticationProperties
+            {
+                IsPersistent = true
+            };
+            await unitOfWork.SignInManager.SignInAsync(user, properties);
+
+            var claims = await tokenService.GetClaims(user.Email);
+            var token = tokenService.GenerateToken(claims);
+            return token;
+        }
+
+        private async Task<GoogleJsonWebSignature.Payload> VerifyGoogleToken(GoogleAuthDTO externalAuth)
+        {
+            try
+            {
+                var settings = new GoogleJsonWebSignature.ValidationSettings()
+                {
+                    Audience = new List<string>() { googleAuthSettings.ClientId }
+                };
+
+                var payload = await GoogleJsonWebSignature.ValidateAsync(externalAuth.IdToken, settings);
+                return payload;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

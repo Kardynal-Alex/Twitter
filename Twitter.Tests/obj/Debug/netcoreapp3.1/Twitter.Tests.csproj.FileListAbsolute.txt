@@ -442,3 +442,7 @@ D:\Asp.Net(project)\Twitter\Twitter.Tests\obj\Debug\netcoreapp3.1\Twitter.Tests.
 D:\Asp.Net(project)\Twitter\Twitter.Tests\obj\Debug\netcoreapp3.1\Twitter.Tests.pdb
 D:\Asp.Net(project)\Twitter\Twitter.Tests\obj\Debug\netcoreapp3.1\Twitter.Tests.genruntimeconfig.cache
 D:\Asp.Net(project)\Twitter\Twitter.Tests\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
+D:\Asp.Net(project)\Twitter\Twitter.Tests\bin\Debug\netcoreapp3.1\Google.Apis.dll
+D:\Asp.Net(project)\Twitter\Twitter.Tests\bin\Debug\netcoreapp3.1\Google.Apis.Auth.PlatformServices.dll
+D:\Asp.Net(project)\Twitter\Twitter.Tests\bin\Debug\netcoreapp3.1\Google.Apis.Auth.dll
+D:\Asp.Net(project)\Twitter\Twitter.Tests\bin\Debug\netcoreapp3.1\Google.Apis.Core.dll
