@@ -12,6 +12,9 @@ namespace Twitter.Services.Mapping
         public AutoMapperProfile()
         {
             CreateMap<TwitterPost, TwitterPostDTO>().ReverseMap();
+            CreateMap<Images, ImagesDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<Comment, CommentDTO>().ReverseMap();
         }
     }
 }

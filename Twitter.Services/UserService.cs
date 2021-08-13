@@ -51,7 +51,6 @@ namespace Twitter.Services
             var userInfoResponse = await Client.GetStringAsync($"https://graph.facebook.com/v11.0/me?fields=id,email,first_name,last_name,picture&access_token={accessToken}&debug=all");
             var userInfo = JsonConvert.DeserializeObject<FacebookUserData>(userInfoResponse);
 
-            userInfo.Email = userInfo.Email ?? "alexandrkardynal@gmail.com";
             var user = await unitOfWork.UserManager.FindByEmailAsync(userInfo.Email);
             if (user == null)
             {
@@ -70,12 +69,6 @@ namespace Twitter.Services
                     throw new TwitterException("Cannot create user");
                 await unitOfWork.UserManager.AddToRoleAsync(newUser, newUser.Role);
             }
-
-            AuthenticationProperties properties = new AuthenticationProperties
-            {
-                IsPersistent = true
-            };
-            await unitOfWork.SignInManager.SignInAsync(user, properties);
 
             var claims = await tokenService.GetClaims(userInfo.Email);
             var token = tokenService.GenerateToken(claims);

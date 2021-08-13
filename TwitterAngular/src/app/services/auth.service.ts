@@ -64,7 +64,7 @@ export class AuthService {
             role:payload.role,
             email:payload.email,
             password:"",
-            profileImagePath:payload.profileImagePath
+            profileImagePath:payload.profileimagepath
         }
         return user;
     }

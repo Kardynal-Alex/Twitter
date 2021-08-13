@@ -3,7 +3,7 @@ import { user } from "../models/user";
 import { images } from "./images";
 
 export interface twitterPost{
-    id:Guid;
+    id:string;
     postText:string;
     dateCreation:Date;
     like:number;

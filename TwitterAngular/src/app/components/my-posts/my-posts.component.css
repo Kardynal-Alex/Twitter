@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+    outline:none;
+}
+
+.mainText {
+    border: 2px solid #d4d8dc; 
+}
+
+.mainText h2{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.tweetForm {
+    border: 2px solid #d4d8dc;
+    display: flex;
+}
+
+.profileImage,
+.tweetForm textarea {
+    margin: 10px;
+}
+
+.profileImage img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.tweetForm {
+    position: inherit;
+}
+
+.tweetForm textarea {
+    border: none;
+    height: auto;
+    width: 96%;
+    /* width: 600px; */ 
+    min-height: 100px;
+    resize: both;
+    padding: 8px 10px;
+    overflow:hidden;
+    font-size: 25px;
+}
+
+.cancel button {
+    background: none;
+    font-size: 20px;
+    position: absolute;
+    border-radius: 20px;
+    background: white;
+}
+
+.images {
+    align-items: stretch;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.image img {
+    border-radius: 20px;
+}
+
+.upload button {
+    border-radius: 20px;
+    background: #1a91da;
+    color: white;
+    font-size: 30px;
+}
+
+.upload button,
+.image img {
+    width: 140px;
+    height: 100px;
+    margin: 5px;
+}
+
+.tweetBtn button {
+    background: #1a91da;
+    font-size: 30px;
+    border-radius: 30px;
+    color: white;
+    padding: 5px 20px;
+    float: right;
+    margin: 10px 0 10px;
+}

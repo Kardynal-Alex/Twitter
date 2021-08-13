@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { facebook } from 'src/app/models/facebook';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,13 +15,14 @@ declare var FB: any;
 export class FacebookLoginComponent implements OnInit {
 
   constructor(private toastrService:ToastrService,
-    private authService:AuthService,
-    private localStorage:LocalStorageService) { }
+              private authService:AuthService,
+              private localStorage:LocalStorageService,
+              private router:Router) { }
 
   ngOnInit(){
     (window as any).fbAsyncInit = function() {
       FB.init({
-        appId      : '539783017256590',
+        appId      : '786261148712197',
         cookie     : true,
         xfbml      : true,
         version    : 'v11.0'
@@ -46,9 +48,12 @@ export class FacebookLoginComponent implements OnInit {
           accessToken:response.authResponse['accessToken']
         }
         this.authService.facebookLogin(facebookLogin).subscribe(response=>{
+          this.router.navigate(['/home']);
+          document.getElementById('auth').style.display="none";
           this.toastrService.success("Login successfully.");
           const token=(<any>response).token;
           this.localStorage.set("token", JSON.stringify(token));
+          document.getElementById('router').className="router1";
         },error=>{
           this.toastrService.error("error");
         });

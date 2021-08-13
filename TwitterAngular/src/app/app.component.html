@@ -1,3 +1,7 @@
-<div> 
-  <router-outlet></router-outlet>
+
+<div id="menu" class="menu" *ngIf="isAuth">
+  <app-menu></app-menu>
+</div>
+<div id="router" class="router"> 
+  <router-outlet [isAuth]="isAuth"></router-outlet>
 </div>

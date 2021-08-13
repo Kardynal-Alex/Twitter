@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { externalAuth } from 'src/app/models/external-auth';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,7 +15,8 @@ export class GoogleLoginComponent implements OnInit {
   auth2:any;
   constructor(private toastrService:ToastrService,
               private authService:AuthService,
-              private localStorage:LocalStorageService) { }
+              private localStorage:LocalStorageService,
+              private router:Router) { }
 
   ngOnInit(){
     this.googleInitialize();
@@ -50,9 +52,12 @@ export class GoogleLoginComponent implements OnInit {
           idToken: googleUser.getAuthResponse().id_token
         }
         this.authService.googleLogin(externalAuth).subscribe(response=>{
+          this.router.navigate(['/home']);
+          document.getElementById('auth').style.display="none";
           this.toastrService.success("Login successfully.");
           const token=(<any>response).token;
           this.localStorage.set("token", JSON.stringify(token));
+          document.getElementById('router').className="router1";
         },error=>{
           this.toastrService.error("error");
         })

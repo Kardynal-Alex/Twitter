@@ -1,7 +1,7 @@
 import { Guid } from "guid-typescript";
 
 export interface images{
-    id:Guid;
+    id:string;
     image1:string;
     image2:string;
     image3:string;

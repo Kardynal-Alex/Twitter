@@ -27,8 +27,4 @@
     <ProjectReference Include="..\Twitter.Services\Twitter.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ServiceTests\" />
-  </ItemGroup>
-
 </Project>

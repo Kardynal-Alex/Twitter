@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+    outline:none;
+}
+
+body { 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+.router1 {
+    width: 33.3%;
+    margin: 0 auto;
+}

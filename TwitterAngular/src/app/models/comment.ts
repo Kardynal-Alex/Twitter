@@ -1,7 +1,7 @@
 import { Guid } from "guid-typescript";
 
 export interface comment{
-    id:Guid;
+    id:string;
     author:string;
     text:string;
     dateCreation:Date;

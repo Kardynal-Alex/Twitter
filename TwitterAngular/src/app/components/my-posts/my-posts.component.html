@@ -1,0 +1,38 @@
+<div class="myPosts">
+    <div class="mainText">
+        <h2>My Twitter Posts</h2>
+    </div>
+    <div class="tweetForm">
+        <div class="profileImage">
+            <img [src]="user['profileImagePath']" />
+        </div>
+        <form #createTwitterPostForm="ngForm">
+            <div class="textArea">
+                <textarea type="text" name="postText" id="postText" ngModel #postText="ngModel" required minlength="10" 
+                placeholder="What`s happening?" contenteditable rows='3' (ngModelChange)="textareaAutoHeight()"></textarea>
+            </div>
+            <div class="images">
+                <div *ngFor="let n of numbersOfImages; let i=index">
+                    <div class="image">
+                        <div class="cancel">
+                            <button (click)="deletePhotoByPath(images['image'+(i+1)],'image'+(i+1))"
+                            *ngIf="images['image'+(i+1)]">&times;</button>
+                        </div>
+
+                        <img [src]="createImgPath(images['image'+(i+1)])" *ngIf="images['image'+(i+1)]" />
+
+                        <input type="file" #file (change)="uploadFiles(file.files,'image'+(i+1),(i+1))"
+                        style="display: none;" multiple required onclick="this.value=null" />
+                        <div class="upload" *ngIf="!images['image'+(i+1)]">
+                            <button id="but-{{(i+1)}}" (click)="file.click()" >+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tweetBtn">
+                <button type="submit" [disabled]="postText.invalid" 
+                (click)="createTwitterPost(createTwitterPostForm)">Tweet</button>
+            </div>
+        </form>
+    </div>
+</div>
