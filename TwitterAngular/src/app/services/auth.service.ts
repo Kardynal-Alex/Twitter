@@ -22,6 +22,10 @@ export class AuthService {
         return this.httpClient.post(this.apiUrl+"google/",googleLogin);
     }
 
+    logout() {
+        this.localStorage.remove("token");
+    }
+
     isAuthenticated() {
         const token=this.localStorage.get("token");
         if(token && !this.jwtHelper.isTokenExpired(token))

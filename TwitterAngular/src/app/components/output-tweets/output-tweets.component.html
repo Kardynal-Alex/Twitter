@@ -1,0 +1,36 @@
+<div *ngFor="let tweet of twitterPosts | sort:'desc':'dateCreation'">
+    <div class="tweetPost">
+        <div class="flex">
+            <div class="profileImage" *ngIf="user['profileImagePath']!=''">
+                <img [src]="user['profileImagePath']" />
+            </div>
+            <div class="text">
+                <div class="profileName">
+                    <p>{{user['name']}} {{user['surname']}}</p>
+                    <div class="grey">
+                        <p>{{tweet['dateCreation']|date:'mediumDate'}}</p>
+                    </div>
+                </div>
+                <div class="postText">
+                    <p>{{tweet['postText']}}</p>
+                </div>
+
+                <div class="imageCollage">
+                    <div class="image"  *ngIf="tweet['images']['image1']!=''">
+                        <img [src]="createImgPath(tweet['images']['image1'])" /> 
+                    </div>
+                    <div class="image"  *ngIf="tweet['images']['image2']!=''">
+                        <img [src]="createImgPath(tweet['images']['image2'])" /> 
+                    </div>
+                    <div class="image"  *ngIf="tweet['images']['image3']!=''">
+                        <img [src]="createImgPath(tweet['images']['image3'])" /> 
+                    </div>
+                    <div class="image"  *ngIf="tweet['images']['image4']!=''">
+                        <img [src]="createImgPath(tweet['images']['image4'])" /> 
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

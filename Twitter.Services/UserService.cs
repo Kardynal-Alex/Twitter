@@ -119,12 +119,6 @@ namespace Twitter.Services
             if (user == null)
                 throw new TwitterException("Invalid External Authentication");
 
-            AuthenticationProperties properties = new AuthenticationProperties
-            {
-                IsPersistent = true
-            };
-            await unitOfWork.SignInManager.SignInAsync(user, properties);
-
             var claims = await tokenService.GetClaims(user.Email);
             var token = tokenService.GenerateToken(claims);
             return token;

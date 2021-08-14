@@ -12,5 +12,7 @@ namespace Twitter.Domain.Repositories
         void UpdateTwitterPost(TwitterPost twitterPost);
 
         void DeleteTwitterPostById(Guid id);
+
+        Task<List<TwitterPost>> GetTwitterPostByUserIdWithDetailsExceptUserAsync(string userId);
     }
 }

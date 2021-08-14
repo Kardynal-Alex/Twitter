@@ -8,8 +8,8 @@
         </div>
         <form #createTwitterPostForm="ngForm">
             <div class="textArea">
-                <textarea type="text" name="postText" id="postText" ngModel #postText="ngModel" required minlength="10" 
-                placeholder="What`s happening?" contenteditable rows='3' (ngModelChange)="textareaAutoHeight()"></textarea>
+                <textarea type="text" name="postText" autosize  id="postText" ngModel #postText="ngModel" required minlength="10" 
+                placeholder="What`s happening?" contenteditable rows='3'></textarea>
             </div>
             <div class="images">
                 <div *ngFor="let n of numbersOfImages; let i=index">
@@ -35,4 +35,5 @@
             </div>
         </form>
     </div>
+    <app-output-tweets [twitterPosts]="twitterPosts" [user]="user"></app-output-tweets>
 </div>

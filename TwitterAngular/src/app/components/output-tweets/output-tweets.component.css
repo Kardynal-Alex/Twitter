@@ -1,0 +1,62 @@
+
+.flex {
+    display: flex;
+}
+
+.tweetPost {
+    border: 1px solid #d4d8dc; 
+    padding-right: 10px;
+}
+
+.tweetPost .profileImage img {
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.text {
+    display: flexbox;
+}
+.profileName {
+    display: flex;
+}
+
+.profileName p {
+    font-weight: 600;
+    height: 10px;
+}
+
+.postText p,
+.profileName p {
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.grey p {
+    color: grey;
+    padding-left: 10px;
+}
+
+.postText p {
+    margin-top: 0px;
+}
+
+.imageCollage {
+    max-width: 630px;
+    max-height: 420px;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex:50%;  
+    margin-bottom: 10px;
+}
+
+ .image img {
+    width: auto;
+    max-width: 300px;
+    height: 200px;
+    flex-grow: 1;
+    object-fit: cover;
+    margin-top: -5px;
+} 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Twitter.Domain.Entities;
 using Twitter.Domain.Repositories;
@@ -23,6 +24,15 @@ namespace Twitter.Persistence.Repositories
         public void DeleteTwitterPostById(Guid id)
         {
             context.TwitterPosts.Remove(new TwitterPost { Id = id });
+        }
+
+        public async Task<List<TwitterPost>> GetTwitterPostByUserIdWithDetailsExceptUserAsync(string userId)
+        {
+            return await context.TwitterPosts
+                .Include(x => x.Images)
+                .AsNoTracking()
+                .Where(x => x.UserId == userId)
+                .ToListAsync();
         }
 
         public void UpdateTwitterPost(TwitterPost twitterPost)

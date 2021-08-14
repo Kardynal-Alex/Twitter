@@ -72,7 +72,7 @@ namespace Twitter.Tests
             if (x == null || y == null)
                 return false;
 
-            return x.Id == y.Id && x.Name == y.Surname && x.Surname == y.Surname
+            return x.Id == y.Id && x.Name == y.Name && x.Surname == y.Surname
                 && x.Email == y.Email && x.Role == y.Role;
         }
 

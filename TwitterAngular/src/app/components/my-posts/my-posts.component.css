@@ -3,8 +3,12 @@
     outline:none;
 }
 
+body { 
+    font-family: Georgia, serif;
+}
+
 .mainText {
-    border: 2px solid #d4d8dc; 
+    border: 1px solid #d4d8dc; 
 }
 
 .mainText h2{
@@ -42,7 +46,7 @@
     resize: both;
     padding: 8px 10px;
     overflow:hidden;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .cancel button {

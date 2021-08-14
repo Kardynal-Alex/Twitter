@@ -1,6 +1,6 @@
 import { Guid } from "guid-typescript";
 
-export interface comment{
+export class comment{
     id:string;
     author:string;
     text:string;

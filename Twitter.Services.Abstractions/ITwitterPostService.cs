@@ -9,5 +9,7 @@ namespace Twitter.Services.Abstractions
     public interface ITwitterPostService
     {
         Task AddTwitterPostsAsync(TwitterPostDTO twitterPostDTO);
+
+        Task<List<TwitterPostDTO>> GetTwitterPostByUserIdAsync(string userId);
     }
 }

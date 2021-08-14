@@ -24,5 +24,12 @@ namespace Twitter.WebApi.Controllers
             await service.AddTwitterPostsAsync(twitterPostDTO);
             return Ok();
         }
+
+        [HttpGet("getUserTwitterPosts/{id}")]
+        public async Task<ActionResult<List<TwitterPostDTO>>> GetTwitterPostsByUserId(string id)
+        {
+            var twitterPostDTOs = await service.GetTwitterPostByUserIdAsync(id);
+            return Ok(twitterPostDTOs);
+        }
     }
 }

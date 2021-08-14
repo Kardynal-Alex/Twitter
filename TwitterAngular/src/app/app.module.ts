@@ -7,6 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AutosizeModule} from 'ngx-autosize';
 
 import { SortPipe } from './pipes/sort.pipe';
 import { LoginGuard } from './guards/login.guard';
@@ -18,6 +19,7 @@ import { GoogleLoginComponent } from './components/google-login/google-login.com
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { MyPostsComponent } from './components/my-posts/my-posts.component';
+import { OutputTweetsComponent } from './components/output-tweets/output-tweets.component';
 
 
 const appRoutes: Routes =[
@@ -37,8 +39,10 @@ export function tokenGetter() {
     FacebookLoginComponent,
     GoogleLoginComponent,
     HomePageComponent,
+    SortPipe,
     MenuComponent,
-    MyPostsComponent
+    MyPostsComponent,
+    OutputTweetsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AutosizeModule,
     RouterModule.forRoot(appRoutes),
     ToastrModule.forRoot({preventDuplicates:true}),
     JwtModule.forRoot({

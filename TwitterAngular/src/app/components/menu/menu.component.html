@@ -1,7 +1,7 @@
 <div id="menu" *ngIf="isAuth" class="mainMenu"> 
     <div class="links">
         <div class="link">
-            <a routerLink="/home" routerLinkActive="active">Main</a>
+            <a routerLink="/home" routerLinkActive="active">Home</a>
         </div>
         <div class="link">
             <a routerLink="/myposts" routerLinkActive="active">My posts</a>
@@ -11,6 +11,9 @@
         </div>
         <div class="link">
             <a routerLink="/profile" routerLinkActive="active">Profile</a>
+        </div>
+        <div class="link">
+            <a (click)="logout()">Logout</a>
         </div>
     </div>
 </div>

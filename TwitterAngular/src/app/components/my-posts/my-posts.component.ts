@@ -19,16 +19,25 @@ export class MyPostsComponent implements OnInit {
   constructor(private authService:AuthService,
               private httpClient:HttpClient,
               private toastrService:ToastrService,
-              private twitterPost:TwitterPostService) { }
+              private twitterPostService:TwitterPostService) { }
 
   numbersOfImages=Array.from(Array(4).keys());
   user:user;
   images:images={
     image1:'',image2:'',image3:'',image4:'',id:null
   };
+  twitterPosts:twitterPost[];
   ngOnInit(){
     document.getElementById('router').className="router1";
     this.user=this.authService.getUserFromToken();
+    this.getTwitterPostByUserId();
+  }
+
+  getTwitterPostByUserId(){
+    if(this.user['id'] && this.user['id']!=undefined)
+    this.twitterPostService.getTwitterPostByUserId(this.user['id']).subscribe(response=>{
+      this.twitterPosts=response;
+    });
   }
 
   createTwitterPost(form:NgForm){
@@ -43,12 +52,13 @@ export class MyPostsComponent implements OnInit {
       user:null,
       images:this.images
     }
-    console.log("tp",twitterPost);
-    this.twitterPost.addTwitterPost(twitterPost).subscribe(response=>{
+    this.twitterPostService.addTwitterPost(twitterPost).subscribe(response=>{
       this.toastrService.success("Post is added");
       form.resetForm();
       for(let i of this.numbersOfImages)
         this.images['image'+(i+1)]='';
+        //this.twitterPosts.unshift(twitterPost);
+        this.getTwitterPostByUserId();
     },error=>{
       this.toastrService.error("Something went wrong!");
     })
@@ -58,7 +68,7 @@ export class MyPostsComponent implements OnInit {
   uploadFiles(files, field, number){
     if(files.length === 0)
       return;
-    let uploadApiPhoto=this.twitterPost.uploadApiPhoto;
+    let uploadApiPhoto=this.twitterPostService.uploadApiPhoto;
     let fileToUpload=<File>files[0];
     let formData=new FormData();
     formData.append('file',fileToUpload,fileToUpload.name);
@@ -76,7 +86,7 @@ export class MyPostsComponent implements OnInit {
 
   deletePhotoByPath(imagePath:string, field:string){
     if(imagePath!==''){
-      this.twitterPost.deletePhoto(imagePath).subscribe(response=>{
+      this.twitterPostService.deletePhoto(imagePath).subscribe(response=>{
         this.toastrService.success("Photo is deleted");
         this.images[field]='';
       });
@@ -84,19 +94,7 @@ export class MyPostsComponent implements OnInit {
   }
 
   public createImgPath(serverPath: string){
-    return this.twitterPost.createImgPath(serverPath);
-  }
-
-  textareaAutoHeight(){
-    var textarea = document.querySelector('textarea');
-    textarea.addEventListener('keydown', autosize);
-    function autosize(){
-      var el = this;
-      setTimeout(function(){
-        el.style.cssText = 'height:auto; padding:0';
-        el.style.cssText = 'height:' + el.scrollHeight + 'px';
-      },0);
-    }
+    return this.twitterPostService.createImgPath(serverPath);
   }
 
 }

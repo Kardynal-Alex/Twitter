@@ -19,4 +19,8 @@ export class TwitterPostService {
     deletePhoto(path:string){
         return this.httpClient.delete(this.uploadApiPhoto+"?path="+path);
     }
+
+    getTwitterPostByUserId(id:string){
+        return this.httpClient.get<twitterPost[]>(this.apiUrl+"getUserTwitterPosts/"+id);
+    }
 }

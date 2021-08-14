@@ -33,6 +33,15 @@ namespace Twitter.Services
 
         }
 
+        public async Task<List<TwitterPostDTO>> GetTwitterPostByUserIdAsync(string userId)
+        {
+            ValidateStringData(userId);
+
+            var twitterPosts = await unitOfWork.TwitterPostRepository
+                .GetTwitterPostByUserIdWithDetailsExceptUserAsync(userId);
+            return mapper.Map<List<TwitterPostDTO>>(twitterPosts);
+        }
+
         private void ValidateTwitterPostDTO(TwitterPostDTO model)
         {
             if (model.PostText == null || model.PostText.Length == 0)
@@ -43,6 +52,12 @@ namespace Twitter.Services
 
             if (model.UserId == null || model.UserId.Length == 0)
                 throw new TwitterException("Incorect UserId length or null");
+        }
+
+        private void ValidateStringData(string model)
+        {
+            if (model == null || model.Length == 0)
+                throw new TwitterException("Incorect string data length or null");
         }
     }
 }
