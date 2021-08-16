@@ -26,12 +26,13 @@ namespace Twitter.Tests.RepositoryTests
             await using var context = new ApplicationContext(_context);
 
             var twitterRepository = new TwitterPostRepository(context);
-            var twitterPost = new TwitterPost { Id = id };
+            var twitterPost = new TwitterPost { Id = id, Images = new Images { Id = id } };
 
             await twitterRepository.AddTwitterPostAsync(twitterPost);
             await context.SaveChangesAsync();
 
             Assert.That(context.TwitterPosts.Count(), Is.EqualTo(5));
+            Assert.That(context.Images.Count(), Is.EqualTo(5));
         }
 
         [TestCase("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")]
@@ -45,8 +46,47 @@ namespace Twitter.Tests.RepositoryTests
             await context.SaveChangesAsync();
 
             Assert.That(context.TwitterPosts.Count(), Is.EqualTo(3));
-            //delete images on cascade
-            Assert.That(context.TwitterPosts.Count(), Is.EqualTo(3));
+        }
+
+        [TestCase("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")]
+        public async Task TwitterPostRepository_GetTwitterPostsByIdWithDetails(Guid twitterPostId)
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var twitterRepository = new TwitterPostRepository(context);
+            var twitterPost = await twitterRepository.GetTwitterPostByIdWithDetails(twitterPostId);
+
+            var expectedTwitterPost = InitialData.ExpectedTwitterPosts.FirstOrDefault(x => x.Id == twitterPostId);
+            var expectedImages = InitialData.ExpectedImages.FirstOrDefault(x => x.Id == twitterPostId);
+            var expectedUser = InitialData.ExpectedUsers.ElementAt(0);
+            var expectedComments = InitialData.ExpectedComments.Where(x => x.TwitterPostId == twitterPostId);
+
+            Assert.That(twitterPost, Is.EqualTo(expectedTwitterPost)
+                .Using(new TwitterPostEqualityComparer()));
+            Assert.That(twitterPost.Images, Is.EqualTo(twitterPost.Images)
+                .Using(new ImagesEqualityComparer()));
+            Assert.That(twitterPost.Comments, Is.EqualTo(expectedComments)
+                .Using(new CommentEqualityComparer()));
+            Assert.That(twitterPost.User, Is.EqualTo(expectedUser)
+                .Using(new UserEqualityComparer()));
+        }
+
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task TwitterPostRepository_GetTwitterPostsByUserIdWithDetailsExceptUser(string userId)
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var twitterRepository = new TwitterPostRepository(context);
+            var twitterPosts = await twitterRepository.GetTwitterPostByUserIdWithDetailsExceptUserAsync(userId);
+
+            var expectedTwitterPosts = InitialData.ExpectedTwitterPosts.Where(x => x.UserId == userId).ToList();
+            var expectedImages = InitialData.ExpectedImages.Join(expectedTwitterPosts, images => images.Id, twitterPost => twitterPost.Id,
+                (images, twitterPost) => images).Distinct().ToList();
+            
+            Assert.That(twitterPosts, Is.EqualTo(expectedTwitterPosts)
+                .Using(new TwitterPostEqualityComparer()));
+            Assert.That(twitterPosts.Select(x => x.Images), Is.EqualTo(expectedImages)
+                .Using(new ImagesEqualityComparer()));
         }
 
         [Test]
@@ -75,24 +115,6 @@ namespace Twitter.Tests.RepositoryTests
                 Like = 1,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
             }).Using(new TwitterPostEqualityComparer()));
-        }
-
-        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
-        public async Task TwitterPostRepository_GetTwitterPostsByUserIdWithDetailsExceptUser(string userId)
-        {
-            await using var context = new ApplicationContext(_context);
-
-            var twitterRepository = new TwitterPostRepository(context);
-            var twitterPosts = await twitterRepository.GetTwitterPostByUserIdWithDetailsExceptUserAsync(userId);
-
-            var expectedTwitterPosts = InitialData.ExpectedTwitterPosts.Where(x => x.UserId == userId).ToList();
-            var expectedImages = InitialData.ExpectedImages.Join(expectedTwitterPosts, images => images.Id, twitterPost => twitterPost.Id,
-                (images, twitterPost) => images).Distinct().ToList();
-            
-            Assert.That(twitterPosts, Is.EqualTo(expectedTwitterPosts)
-                .Using(new TwitterPostEqualityComparer()));
-            Assert.That(twitterPosts.Select(x => x.Images), Is.EqualTo(expectedImages)
-                .Using(new ImagesEqualityComparer()));
         }
 
     }

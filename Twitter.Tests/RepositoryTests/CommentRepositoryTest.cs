@@ -47,6 +47,20 @@ namespace Twitter.Tests.RepositoryTests
             Assert.That(context.Comments.Count(), Is.EqualTo(3));
         }
 
+        [TestCase("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")]
+        public async Task CommentRepository_GetCommentsByTwitterPostId(Guid twitterPostId)
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var commentRepository = new CommentRepository(context);
+
+            var comments = await commentRepository.GetCommentsByTwitterPostIdAsync(twitterPostId);
+            var expectedComments = InitialData.ExpectedComments.Where(x => x.TwitterPostId == twitterPostId);
+
+            Assert.That(comments, Is.EqualTo(expectedComments)
+                .Using(new CommentEqualityComparer()));
+        }
+
         [Test]
         public async Task CommentRepository_UpdateComment()
         {

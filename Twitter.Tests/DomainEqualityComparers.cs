@@ -73,7 +73,7 @@ namespace Twitter.Tests
                 return false;
 
             return x.Id == y.Id && x.Name == y.Name && x.Surname == y.Surname
-                && x.Email == y.Email && x.Role == y.Role;
+                && x.Email == y.Email && x.Role == y.Role && x.ProfileImagePath == y.ProfileImagePath;
         }
 
         public int GetHashCode([DisallowNull] User obj)

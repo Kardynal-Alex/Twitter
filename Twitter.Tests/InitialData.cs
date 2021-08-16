@@ -12,7 +12,7 @@ namespace Twitter.Tests
         {
                 new TwitterPost
                 {
-                    Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                    Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                     PostText = "TwitterPost text1",
                     DateCreation = DateTime.Now.Date,
                     Like = 0,
@@ -20,7 +20,7 @@ namespace Twitter.Tests
                 },
                 new TwitterPost
                 {
-                    Id = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
+                    Id = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
                     PostText = "TwitterPost text2",
                     DateCreation = DateTime.Now.Date,
                     Like = 3,
@@ -28,7 +28,7 @@ namespace Twitter.Tests
                 },
                 new TwitterPost
                 {
-                    Id = Guid.Parse("cccccccc-cccc-cccc-cccc-cccccccccccc"),
+                    Id = new Guid("cccccccc-cccc-cccc-cccc-cccccccccccc"),
                     PostText = "TwitterPost text3",
                     DateCreation = DateTime.Now.Date,
                     Like = 0,
@@ -36,7 +36,7 @@ namespace Twitter.Tests
                 },
                 new TwitterPost
                 {
-                    Id = Guid.Parse("dddddddd-dddd-dddd-dddd-dddddddddddd"),
+                    Id = new Guid("dddddddd-dddd-dddd-dddd-dddddddddddd"),
                     PostText = "TwitterPost text4",
                     DateCreation = DateTime.Now.Date,
                     Like = 5,
@@ -49,7 +49,7 @@ namespace Twitter.Tests
             {
                 new Images
                 {
-                    Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                    Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                     Image1 = "Resources\\Images\\11-1.jpg",
                     Image2 = "Resources\\Images\\11-2.jpg",
                     Image3 = "Resources\\Images\\11-3.jpg",
@@ -57,7 +57,7 @@ namespace Twitter.Tests
                 },
                 new Images
                 {
-                    Id = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
+                    Id = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
                     Image1 = "Resources\\Images\\22-1.jpg",
                     Image2 = "Resources\\Images\\22-2.jpg",
                     Image3 = "Resources\\Images\\22-3.jpg",
@@ -65,7 +65,7 @@ namespace Twitter.Tests
                 },
                 new Images
                 {
-                    Id = Guid.Parse("cccccccc-cccc-cccc-cccc-cccccccccccc"),
+                    Id = new Guid("cccccccc-cccc-cccc-cccc-cccccccccccc"),
                     Image1 = "Resources\\Images\\33-1.jpg",
                     Image2 = "Resources\\Images\\33-2.jpg",
                     Image3 = "Resources\\Images\\33-3.jpg",
@@ -73,7 +73,7 @@ namespace Twitter.Tests
                 },
                 new Images
                 {
-                    Id = Guid.Parse("dddddddd-dddd-dddd-dddd-dddddddddddd"),
+                    Id = new Guid("dddddddd-dddd-dddd-dddd-dddddddddddd"),
                     Image1 = "Resources\\Images\\44-1.jpg",
                     Image2 = "Resources\\Images\\44-2.jpg",
                     Image3 = "Resources\\Images\\44-3.jpg",

@@ -43,7 +43,8 @@ namespace Twitter.Tests
                     Surname = "Kardynal",
                     Role = "admin",
                     Email = "admin@gmail.com",
-                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123")
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
+                    ProfileImagePath = "Image path1"
                 },
                 new User
                 {
@@ -53,7 +54,8 @@ namespace Twitter.Tests
                     Surname = "Kardynal",
                     Role = "user",
                     Email = "irakardinal@gmail.com",
-                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("ira123")
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("ira123"),
+                    ProfileImagePath = "Image path2"
                 }
             }.AsQueryable();
             context.Roles.Add(new IdentityRole { Id = "105695ec-0e70-4e43-8514-8a0710e11d53", Name = "user" });
