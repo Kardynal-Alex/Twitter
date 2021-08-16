@@ -14,7 +14,7 @@ namespace Twitter.Tests
             if (x == null || y == null)
                 return false;
 
-            return x.Id == y.Id && x.PostText == y.PostText && x.DateCreation == y.DateCreation
+            return x.Id == y.Id && x.PostText == y.PostText && x.DateCreation.Date == y.DateCreation.Date
                 && x.Like == y.Like && x.UserId == y.UserId;
         }
 
@@ -53,7 +53,7 @@ namespace Twitter.Tests
                 return false;
 
             return x.Id == y.Id && x.Author == y.Author && x.Text == y.Text
-                && x.DateCreation == y.DateCreation && x.TwitterPostId == y.TwitterPostId
+                && x.DateCreation.Date == y.DateCreation.Date && x.TwitterPostId == y.TwitterPostId
                 && x.UserId == y.UserId;
         }
 

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Twitter.Contracts;
 using Twitter.Domain.Entities;
 
 namespace Twitter.Tests
 {
     public static class InitialData
     {
-        #region data
+        #region model data
         public static IEnumerable<TwitterPost> ExpectedTwitterPosts =>
         new[]
         {
@@ -152,7 +153,49 @@ namespace Twitter.Tests
                     ProfileImagePath = "Image path2"
                 }
             };
+
+        #endregion
+        #region DTO data
+        public static IEnumerable<CommentDTO> ExpectedCommentDTOs =>
+            new[]
+            {
+                 new CommentDTO
+                 {
+                     Id = new Guid("1f8d4896-a7cd-1b5d-3527-0151a96d94de"),
+                     Author = "Oleksandr Kardynal", Text = "Comment1",
+                     DateCreation = DateTime.Now.Date,
+                     TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                     UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                     ProfileImagePath = "Image path1"
+                 },
+                new CommentDTO
+                {
+                    Id = new Guid("8a25b419-782d-34b5-1478-43a0b2dc9736"),
+                    Author = "Ira Kardynal", Text = "Comment2",
+                    DateCreation = DateTime.Now.Date,
+                    TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                    UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
+                    ProfileImagePath = "Image path2"
+                },
+                new CommentDTO
+                {
+                    Id = new Guid("c5a4692a-b390-114b-f6f9-3f6953e41fe5"),
+                    Author = "Oleksandr Kardynal", Text = "Comment3",
+                    DateCreation = DateTime.Now.Date,
+                    TwitterPostId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
+                    UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    ProfileImagePath = "Image path1"
+                },
+                new CommentDTO
+                {
+                    Id = new Guid("c6ec7102-9af6-09ab-0eb9-5b74c8afd128"),
+                    Author = "Ira Kardynal", Text = "Comment4",
+                    DateCreation = DateTime.Now.Date,
+                    TwitterPostId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
+                    UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
+                    ProfileImagePath = "Image path2"
+                }
+            };
         #endregion
     }
-
 }

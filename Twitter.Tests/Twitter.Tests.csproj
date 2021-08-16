@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Twitter.Persistence\Twitter.Persistence.csproj" />
     <ProjectReference Include="..\Twitter.Services\Twitter.Services.csproj" />
+    <ProjectReference Include="..\Twitter.WebApi\Twitter.WebApi.csproj" />
   </ItemGroup>
 
 </Project>
