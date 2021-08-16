@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    outline:none;
+}
+
+.makeCommentsArea {
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.commentForm {
+    margin: 10px;
+}
+
+.commentForm {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.profileImage img {
+    border-radius: 20px;
+}
+
+.textArea textarea {
+    border: none;
+    height: auto;
+    width: 90%;
+    min-width: 640px;
+    resize: both;
+    padding: 8px 10px;
+    overflow: hidden;
+    font-size: 20px;
+}
+
+.replyBtn {
+    text-align: center;
+    position: inherit;
+    margin: 10px auto;
+}
+
+.replyBtn button {
+    background-color: #1a91da;
+    margin: 10px auto;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 20px;
+    color: white;
+    width: 100%;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.replyBtn:hover {
+    opacity: 0.7;
+}
+
+.comment {
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+
+.imageComment {
+    display: flex;
+    margin: 10px;
+}
+
+.imageComment img {
+    border-radius: 20px;
+    width: 70px;
+    height: 70px;
+}
+
+.imageComment p {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.flexBox {
+    display: flexbox;
+}
+
+.deleteComment a {
+    float: right;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.deleteComment a:hover {
+    color: #1a91da;
+}
+
+.flex {
+    display: flex;
+}
+
+.text p {
+    font-size: 22px;
+}

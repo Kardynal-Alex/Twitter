@@ -13,5 +13,7 @@ namespace Twitter.Domain.Repositories
         void UpdateComment(Comment comment);
 
         void DeleteCommentById(Guid id);
+
+        Task<List<Comment>> GetCommentsByTwitterPostIdAsync(Guid twitterPostId);
     }
 }

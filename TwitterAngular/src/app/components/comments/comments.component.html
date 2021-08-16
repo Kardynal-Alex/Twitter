@@ -1,1 +1,38 @@
-<p>comments works!</p>
+<div class="makeCommentsArea">
+    <div class="commentForm">
+        <div class="profileImage">
+            <img [src]="user['profileImagePath']" *ngIf="user['profileImagePath']">
+        </div>
+        <form #createCommentFrom="ngForm">
+            <div class="textArea">
+                <textarea type="text" name="makeComment" autosize id="makeComment" ngModel 
+                #makeComment minlength="2" placeholder="Tweet your reply" rows="2"></textarea>
+            </div>
+            <div class="replyBtn">
+                <button (click)="addComment(createCommentFrom)">Reply</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="comments">
+    <div *ngFor="let comment of comments | sort:'desc':'dateCreation'" >
+        <div class="comment">
+            <div class="imageComment">
+                <img [src]="comment['profileImagePath']" />
+                
+                <div class="flexBox">
+                    <div class="flex">
+                        <p>{{comment['author']}} {{comment['dateCreation']|date:'mediumDate'}}</p>
+                        <div class="deleteComment" *ngIf="comment['userId']==user['id']">
+                            <a (click)="deleteComment(comment['id'])">&times;</a>
+                        </div>
+                    </div>
+                    <div class="text">
+                        <p>{{comment['text']}}</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

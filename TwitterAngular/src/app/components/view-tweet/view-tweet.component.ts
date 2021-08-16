@@ -20,7 +20,6 @@ export class ViewTweetComponent implements OnInit {
     this.id=this.activateRoute.snapshot.params['id'];
     this.twitterPostService.getTwitterPostByIdWithDetails(this.id).subscribe(response=>{
       this.twitterPost=response;
-      console.log("tp=",this.twitterPost);
     });
   }
 

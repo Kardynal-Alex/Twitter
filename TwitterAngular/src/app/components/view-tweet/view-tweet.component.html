@@ -3,7 +3,7 @@
 </div>
 <div class="tweetPost">
     <div class="profileImage">
-        <img [src]="twitterPost['user']['profileImagePath']" />
+        <img [src]="twitterPost['user']['profileImagePath']" *ngIf="twitterPost['user']['profileImagePath']"/>
         <div class="nickName">
             <p>{{twitterPost['user']['name']}} {{twitterPost['user']['surname']}}</p>
         </div>
@@ -29,4 +29,4 @@
         </div>
     </div>
 </div>
-<app-comments [id]="id"></app-comments>
+<app-comments [id]="id" [comments]="twitterPost['comments']"></app-comments>
