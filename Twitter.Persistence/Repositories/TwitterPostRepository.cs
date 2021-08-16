@@ -26,6 +26,16 @@ namespace Twitter.Persistence.Repositories
             context.TwitterPosts.Remove(new TwitterPost { Id = id });
         }
 
+        public async Task<TwitterPost> GetTwitterPostByIdWithDetails(Guid twitterPostId)
+        {
+            return await context.TwitterPosts
+                .Include(x => x.Images)
+                .Include(x => x.User)
+                .Include(x => x.Comments)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == twitterPostId);
+        }
+
         public async Task<List<TwitterPost>> GetTwitterPostByUserIdWithDetailsExceptUserAsync(string userId)
         {
             return await context.TwitterPosts

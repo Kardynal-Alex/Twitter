@@ -162,6 +162,9 @@ namespace Twitter.Persistence.Migrations
                     b.Property<DateTime>("DateCreation")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ProfileImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 
@@ -172,6 +175,8 @@ namespace Twitter.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TwitterPostId");
 
                     b.ToTable("Comments");
                 });
@@ -351,6 +356,17 @@ namespace Twitter.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Twitter.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("Twitter.Domain.Entities.TwitterPost", "TwitterPost")
+                        .WithMany("Comments")
+                        .HasForeignKey("TwitterPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TwitterPost");
+                });
+
             modelBuilder.Entity("Twitter.Domain.Entities.Images", b =>
                 {
                     b.HasOne("Twitter.Domain.Entities.TwitterPost", "TwitterPost")
@@ -373,6 +389,8 @@ namespace Twitter.Persistence.Migrations
 
             modelBuilder.Entity("Twitter.Domain.Entities.TwitterPost", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Images");
                 });
 

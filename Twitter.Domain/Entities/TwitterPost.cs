@@ -1,5 +1,6 @@
 ﻿using NJsonSchema.Annotations;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Twitter.Domain.Entities
@@ -17,5 +18,7 @@ namespace Twitter.Domain.Entities
         public User User { get; set; }
 
         public Images Images { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }

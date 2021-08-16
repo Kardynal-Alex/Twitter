@@ -7,4 +7,5 @@ export class comment{
     dateCreation:Date;
     twitterPostId:Guid;
     userId:string;
+    profileImagePath:string;
 }

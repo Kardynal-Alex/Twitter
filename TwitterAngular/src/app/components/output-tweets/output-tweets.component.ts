@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { twitterPost } from 'src/app/models/twitter-post';
 import { user } from 'src/app/models/user';
 import { TwitterPostService } from 'src/app/services/twitter-post.service';
@@ -10,15 +11,33 @@ import { TwitterPostService } from 'src/app/services/twitter-post.service';
 })
 export class OutputTweetsComponent implements OnInit {
 
-  constructor(private twitterPostService:TwitterPostService) { }
+  constructor(private twitterPostService:TwitterPostService,
+              private toastrService:ToastrService) { }
   @Input() twitterPosts:twitterPost[];
   @Input() user:user;
   ngOnInit() {
     
   }
+  image(){}
+  deleteTwitterPost(tweet:twitterPost){
+    if(confirm("Are you sure?")){
+      this.twitterPostService.deleteTwitterPost(tweet).subscribe(response=>{
+        this.twitterPosts=this.twitterPosts.filter(x=>x['id']!=tweet['id']);
+        this.toastrService.success("Post is deleted!");
+      },error=>{
+        this.toastrService.error("Error!");
+      });
+    }
+  }
 
- 
-
+  togle3DotsForm(id:string){
+    var x = document.getElementById('myForm-'+id);
+    if(x.style.display=="none")
+      x.style.display="block";
+    else
+      x.style.display="none";
+  }
+  
   createImgPath(path:string){
     return this.twitterPostService.createImgPath(path);
   }

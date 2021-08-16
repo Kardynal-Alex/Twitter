@@ -1,10 +1,11 @@
+<link href='https://css.gg/more-alt.css' rel='stylesheet'>
 <div *ngFor="let tweet of twitterPosts | sort:'desc':'dateCreation'">
     <div class="tweetPost">
         <div class="flex">
             <div class="profileImage" *ngIf="user['profileImagePath']!=''">
                 <img [src]="user['profileImagePath']" />
             </div>
-            <div class="text">
+            <div class="text" routerLink="/view-tweet/{{tweet['id']}}">
                 <div class="profileName">
                     <p>{{user['name']}} {{user['surname']}}</p>
                     <div class="grey">
@@ -32,5 +33,16 @@
 
             </div>
         </div>
+        <div class="icon">
+            <i class="gg-more-alt" (click)="togle3DotsForm(tweet['id'])"></i>
+        </div>
+        <div class="form-popup" id="myForm-{{tweet['id']}}" style="display: none;">
+            <div class="form-container">
+                <a (click)="deleteTwitterPost(tweet)">Delete Post</a>
+                <a href="#">Href22</a>
+                <a (click)="togle3DotsForm(tweet['id'])" >Close</a>
+            </div>
+        </div>
+
     </div>
 </div>

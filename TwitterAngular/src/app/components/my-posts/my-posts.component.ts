@@ -50,7 +50,8 @@ export class MyPostsComponent implements OnInit {
       like:0,
       userId:this.user['id'],
       user:null,
-      images:this.images
+      images:this.images,
+      comments:null
     }
     this.twitterPostService.addTwitterPost(twitterPost).subscribe(response=>{
       this.toastrService.success("Post is added");

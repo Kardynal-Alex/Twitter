@@ -23,7 +23,12 @@ namespace Twitter.Persistence
             modelBuilder.Entity<TwitterPost>()
                         .HasOne(x => x.Images)
                         .WithOne(x => x.TwitterPost)
-                        .HasForeignKey<Images>(x => x.Id);
+                        .HasForeignKey<Images>(x => x.Id)
+                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<TwitterPost>()
+                        .HasMany(x => x.Comments)
+                        .WithOne(x => x.TwitterPost)
+                        .HasForeignKey(x => x.TwitterPostId);
         }
     }
 }

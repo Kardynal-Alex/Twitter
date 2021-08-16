@@ -1,0 +1,32 @@
+<div class="mainText">
+    <h2><a class="fa fa-twitter"></a>Twitter Posts</h2>
+</div>
+<div class="tweetPost">
+    <div class="profileImage">
+        <img [src]="twitterPost['user']['profileImagePath']" />
+        <div class="nickName">
+            <p>{{twitterPost['user']['name']}} {{twitterPost['user']['surname']}}</p>
+        </div>
+        <div class="grey">
+            <p>{{twitterPost['dateCreation']|date:'mediumDate'}}</p>
+        </div>
+    </div>
+    <div class="postText">
+        <p>{{twitterPost['postText']}}</p>
+    </div>
+    <div class="imageCollage">
+        <div class="image"  *ngIf="twitterPost['images']['image1']!=''">
+            <img [src]="createImgPath(twitterPost['images']['image1'])" /> 
+        </div>
+        <div class="image"  *ngIf="twitterPost['images']['image2']!=''">
+            <img [src]="createImgPath(twitterPost['images']['image2'])" /> 
+        </div>
+        <div class="image"  *ngIf="twitterPost['images']['image3']!=''">
+            <img [src]="createImgPath(twitterPost['images']['image3'])" /> 
+        </div>
+        <div class="image"  *ngIf="twitterPost['images']['image4']!=''">
+            <img [src]="createImgPath(twitterPost['images']['image4'])" /> 
+        </div>
+    </div>
+</div>
+<app-comments [id]="id"></app-comments>

@@ -1,5 +1,6 @@
 ﻿using NJsonSchema.Annotations;
 using System;
+using System.Collections.Generic;
 
 namespace Twitter.Contracts
 {
@@ -15,5 +16,8 @@ namespace Twitter.Contracts
         public UserDTO User { get; set; }
 
         public ImagesDTO Images { get; set; }
+
+        public ICollection<CommentDTO> Comments { get; set; }
+
     }
 }

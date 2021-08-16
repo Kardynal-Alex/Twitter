@@ -44,20 +44,41 @@ namespace Twitter.Services
 
         private void ValidateTwitterPostDTO(TwitterPostDTO model)
         {
-            if (model.PostText == null || model.PostText.Length == 0)
+            if (string.IsNullOrEmpty(model.PostText)) 
                 throw new TwitterException("Incorect PostText length or null");
 
             if (!int.TryParse(model.Like.ToString(), out int like) || like < 0)
                 throw new TwitterException("Incorect Like format ot less than 0");
 
-            if (model.UserId == null || model.UserId.Length == 0)
+            if (string.IsNullOrEmpty(model.UserId)) 
                 throw new TwitterException("Incorect UserId length or null");
         }
 
         private void ValidateStringData(string model)
         {
-            if (model == null || model.Length == 0)
+            if (string.IsNullOrEmpty(model)) 
                 throw new TwitterException("Incorect string data length or null");
+        }
+
+        public async Task DeleteTwitterPostWithImagesAsync(TwitterPostDTO twitterPostDTO)
+        {
+            ValidateTwitterPostDTO(twitterPostDTO);
+
+            var twitterPost = mapper.Map<TwitterPostDTO, TwitterPost>(twitterPostDTO);
+            unitOfWork.ImagesRepository.DeletePhysicalImages(twitterPost.Images);
+            //delete images in cascade
+            unitOfWork.TwitterPostRepository.DeleteTwitterPostById(twitterPost.Id);
+
+            await unitOfWork.SaveAsync();
+        }
+
+        public async Task<TwitterPostDTO> GetTwitterPostByIdWithDetails(Guid twitterPostId)
+        {
+            if (string.IsNullOrEmpty(twitterPostId.ToString()))
+                throw new TwitterException("incorect guid data");
+
+            var twitterPosts = await unitOfWork.TwitterPostRepository.GetTwitterPostByIdWithDetails(twitterPostId);
+            return mapper.Map<TwitterPost, TwitterPostDTO>(twitterPosts);
         }
     }
 }

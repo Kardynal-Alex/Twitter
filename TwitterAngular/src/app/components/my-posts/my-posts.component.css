@@ -8,18 +8,27 @@ body {
 }
 
 .mainText {
-    border: 1px solid #d4d8dc; 
+    border: 1px solid black; 
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.mainText .fa {
+    font-size: 30px;
+    padding-right: 20px;
 }
 
 .mainText h2{
     font-size: 30px;
     font-weight: 600;
-    text-align: center;
 }
 
 .tweetForm {
-    border: 2px solid #d4d8dc;
+    border: 2px solid black;
     display: flex;
+    border-radius: 20px;
 }
 
 .profileImage,
@@ -28,7 +37,7 @@ body {
 }
 
 .profileImage img {
-    border-radius: 50%;
+    border-radius: 20px;
     width: 100px;
     height: 100px;
 }
@@ -41,7 +50,6 @@ body {
     border: none;
     height: auto;
     width: 96%;
-    /* width: 600px; */ 
     min-height: 100px;
     resize: both;
     padding: 8px 10px;

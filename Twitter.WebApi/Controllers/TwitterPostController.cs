@@ -31,5 +31,19 @@ namespace Twitter.WebApi.Controllers
             var twitterPostDTOs = await service.GetTwitterPostByUserIdAsync(id);
             return Ok(twitterPostDTOs);
         }
+
+        [HttpPost("deleteTwitterPost")]
+        public async Task<ActionResult> DeleteTwitterPost([FromBody] TwitterPostDTO twitterPostDTO)
+        {
+            await service.DeleteTwitterPostWithImagesAsync(twitterPostDTO);
+            return Ok();
+        }
+
+        [HttpGet("getTweetByIdWithDetails/{id}")]
+        public async Task<ActionResult<TwitterPostDTO>> GetTwitterPostByIdWithDetails(Guid id)
+        {
+            var twitterPostDTOs = await service.GetTwitterPostByIdWithDetails(id);
+            return Ok(twitterPostDTOs);
+        }
     }
 }

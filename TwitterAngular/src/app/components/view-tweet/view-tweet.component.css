@@ -1,0 +1,76 @@
+* {
+    box-sizing: border-box;
+    outline:none;
+}
+
+
+.mainText {
+    border: 1px solid black; 
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.mainText .fa {
+    font-size: 30px;
+    padding-right: 20px;
+}
+
+.mainText h2{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.tweetPost {
+    border-radius: 20px;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.profileImage img {
+    border-radius: 20px;
+    margin: 10px 10px 0;
+}
+
+.profileImage {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nickName p,
+.grey p {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.grey p {
+    color: grey;
+    padding-left: 10px;
+}
+
+.postText {
+    margin: 0px 20px 10px;
+    font-size: 30px;
+}
+
+.imageCollage {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 96%;
+    margin: 0 auto 20px;
+    align-items: center;
+}
+
+ .image img {
+    width: auto;
+    max-width: 360px;
+    height: auto;
+    max-height: 250px;
+    flex-grow: 1;
+    object-fit: cover;
+    margin-top: -5px;
+    border-radius: 20px;
+} 
+

@@ -12,6 +12,10 @@ export class TwitterPostService {
         return this.httpClient.post(this.apiUrl+"addTwitterPost/",twitterPost);
     }
 
+    deleteTwitterPost(twitterPost:twitterPost){
+        return this.httpClient.post(this.apiUrl+"deleteTwitterPost/",twitterPost);
+    }
+
     createImgPath(serverPath: string){
         return `https://localhost:44318/${serverPath}`;
     }
@@ -22,5 +26,9 @@ export class TwitterPostService {
 
     getTwitterPostByUserId(id:string){
         return this.httpClient.get<twitterPost[]>(this.apiUrl+"getUserTwitterPosts/"+id);
+    }
+
+    getTwitterPostByIdWithDetails(id:string){
+        return this.httpClient.get<twitterPost>(this.apiUrl+"getTweetByIdWithDetails/"+id);
     }
 }

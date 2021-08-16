@@ -1,4 +1,5 @@
 import { user } from "../models/user";
+import { comment } from "./comment";
 import { images } from "./images";
 
 export class twitterPost{
@@ -9,4 +10,5 @@ export class twitterPost{
     userId:string;
     user:user;
     images:images;
+    comments:comment[];
 }
