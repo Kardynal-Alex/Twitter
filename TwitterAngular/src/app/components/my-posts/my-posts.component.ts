@@ -1,6 +1,7 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { images } from 'src/app/models/images';
@@ -19,7 +20,8 @@ export class MyPostsComponent implements OnInit {
   constructor(private authService:AuthService,
               private httpClient:HttpClient,
               private toastrService:ToastrService,
-              private twitterPostService:TwitterPostService) { }
+              private twitterPostService:TwitterPostService,
+              private router:Router) { }
 
   numbersOfImages=Array.from(Array(4).keys());
   user:user;
@@ -63,6 +65,10 @@ export class MyPostsComponent implements OnInit {
     },error=>{
       this.toastrService.error("Something went wrong!");
     })
+  }
+
+  navigateToUserProfile(id:string){
+    this.router.navigate(['user-profile/'+id]);
   }
 
   response;

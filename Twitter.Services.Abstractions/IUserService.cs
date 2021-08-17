@@ -6,6 +6,9 @@ namespace Twitter.Services.Abstractions
     public interface IUserService
     {
         Task<string> FacebookLoginAsync(string accessToken);
+
         Task<string> GoogleLoginAsync(GoogleAuthDTO googleAuthDTO);
+
+        Task<UserDTO> GetUserByUserIdAsync(string userId);
     }
 }

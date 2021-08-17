@@ -181,5 +181,27 @@ namespace Twitter.Tests.ServiceTests
                 .Using(new CommentDTOEqualityComparer()));
         }
 
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task TwitterPost_GetTwitterPostsByUserIdWithImagesAndUsers(string userId)
+        {
+            var twitterPosts = TwitterPosts.Where(x => x.UserId == userId).ToList();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.TwitterPostRepository
+                .GetTwitterPostsByUserIdWithImagesAndUsers(It.IsAny<string>()))
+                .Returns(Task.FromResult(twitterPosts));
+
+            var twitterPostService = new TwitterPostService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+            var actualTwitterPostDTOs = await twitterPostService.GetTwitterPostsByUserIdWithImagesAndUsers(userId);
+            var expectedTwitterPostDTOs = TwitterPostDTOs.Where(x => x.UserId == userId).ToList();
+
+            Assert.That(actualTwitterPostDTOs, Is.InstanceOf<List<TwitterPostDTO>>());
+            Assert.That(actualTwitterPostDTOs, Is.EqualTo(expectedTwitterPostDTOs)
+                .Using(new TwitterPostDTOEqualityComparer()));
+            Assert.That(actualTwitterPostDTOs.Select(x => x.Images), Is.EqualTo(expectedTwitterPostDTOs.Select(x => x.Images))
+                .Using(new ImagesDTOEqualityComparer()));
+            Assert.That(actualTwitterPostDTOs[0].User, Is.EqualTo(expectedTwitterPostDTOs[0].User)
+                .Using(new UserDTOEqualityComparer()));
+        }
+
     }
 }

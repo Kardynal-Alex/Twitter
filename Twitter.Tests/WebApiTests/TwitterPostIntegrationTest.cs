@@ -199,5 +199,24 @@ namespace Twitter.Tests.WebApiTests
                 .Using(new CommentDTOEqualityComparer()));
         }
 
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task TwitterPostController_GetTwitterPostsByUserIdWithImagesAndUsers(string id)
+        {
+            var expectedTwitterPostDTOs = TwitterPostDTOs.Where(x => x.UserId == id);
+            var httpResponse = await _client.GetAsync(requestUri + "getTweetByUserIdWithImagesAndUsers/" + id);
+
+            httpResponse.EnsureSuccessStatusCode();
+            var stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            var actual = JsonConvert.DeserializeObject<IEnumerable<TwitterPostDTO>>(stringResponse).ToList();
+
+            Assert.AreEqual(actual.Count, expectedTwitterPostDTOs.Count());
+            Assert.That(actual, Is.EqualTo(expectedTwitterPostDTOs)
+                .Using(new TwitterPostDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.Images), Is.EqualTo(expectedTwitterPostDTOs.Select(x => x.Images))
+                .Using(new ImagesDTOEqualityComparer()));
+            Assert.That(actual[0].User, Is.EqualTo(expectedTwitterPostDTOs.ElementAt(0).User)
+               .Using(new UserDTOEqualityComparer()));
+        }
+
     }
 }

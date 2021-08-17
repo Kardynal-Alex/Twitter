@@ -22,6 +22,10 @@ export class AuthService {
         return this.httpClient.post(this.apiUrl+"google/",googleLogin);
     }
 
+    getUserById(id:string){
+        return this.httpClient.get<user>(this.apiUrl+"getUserById/"+id);
+    }
+
     logout() {
         this.localStorage.remove("token");
     }

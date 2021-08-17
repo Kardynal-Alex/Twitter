@@ -22,13 +22,16 @@ import { MyPostsComponent } from './components/my-posts/my-posts.component';
 import { OutputTweetsComponent } from './components/output-tweets/output-tweets.component';
 import { ViewTweetComponent } from './components/view-tweet/view-tweet.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ViewUsersTweetComponent } from './components/view-users-tweet/view-users-tweet.component';
 
 
 const appRoutes: Routes =[
   { path: '', component: AuthPageComponent },
   { path: 'home', component: HomePageComponent, canActivate: [LoginGuard] },
-  { path: 'myposts', component:MyPostsComponent, canActivate: [LoginGuard] },
-  { path: 'view-tweet/:id', component:ViewTweetComponent, canActivate: [LoginGuard] },
+  { path: 'myposts', component: MyPostsComponent, canActivate: [LoginGuard] },
+  { path: 'view-tweet/:id', component: ViewTweetComponent, canActivate: [LoginGuard] },
+  { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [LoginGuard] },
   { path: '**', component: HomePageComponent }
 ];
 
@@ -47,7 +50,9 @@ export function tokenGetter() {
     MyPostsComponent,
     OutputTweetsComponent,
     ViewTweetComponent,
-    CommentsComponent
+    CommentsComponent,
+    UserProfileComponent,
+    ViewUsersTweetComponent
   ],
   imports: [
     BrowserModule,

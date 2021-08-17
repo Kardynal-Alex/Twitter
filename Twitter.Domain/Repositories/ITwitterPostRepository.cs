@@ -16,5 +16,7 @@ namespace Twitter.Domain.Repositories
         Task<List<TwitterPost>> GetTwitterPostByUserIdWithDetailsExceptUserAsync(string userId);
 
         Task<TwitterPost> GetTwitterPostByIdWithDetails(Guid twitterPostId);
+
+        Task<List<TwitterPost>> GetTwitterPostsByUserIdWithImagesAndUsers(string userId);
     }
 }

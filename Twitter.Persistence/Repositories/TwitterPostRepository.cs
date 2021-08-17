@@ -45,6 +45,16 @@ namespace Twitter.Persistence.Repositories
                 .ToListAsync();
         }
 
+        public async Task<List<TwitterPost>> GetTwitterPostsByUserIdWithImagesAndUsers(string userId)
+        {
+            return await context.TwitterPosts
+                .Include(x => x.Images)
+                .Include(x => x.User)
+                .AsNoTracking()
+                .Where(x => x.UserId == userId)
+                .ToListAsync();
+        }
+
         public void UpdateTwitterPost(TwitterPost twitterPost)
         {
             context.Entry(twitterPost).State = EntityState.Modified;

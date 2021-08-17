@@ -80,5 +80,13 @@ namespace Twitter.Services
             var twitterPosts = await unitOfWork.TwitterPostRepository.GetTwitterPostByIdWithDetails(twitterPostId);
             return mapper.Map<TwitterPost, TwitterPostDTO>(twitterPosts);
         }
+
+        public async Task<List<TwitterPostDTO>> GetTwitterPostsByUserIdWithImagesAndUsers(string userId)
+        {
+            ValidateStringData(userId);
+
+            var twitterPosts = await unitOfWork.TwitterPostRepository.GetTwitterPostsByUserIdWithImagesAndUsers(userId);
+            return mapper.Map<List<TwitterPostDTO>>(twitterPosts);
+        }
     }
 }

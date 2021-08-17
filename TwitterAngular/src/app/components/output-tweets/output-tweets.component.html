@@ -3,7 +3,7 @@
     <div class="tweetPost">
         <div class="flex">
             <div class="profileImage" *ngIf="user['profileImagePath']!=''">
-                <img [src]="user['profileImagePath']" />
+                <img [src]="user['profileImagePath']" (click)="navigateToUserProfile(user['id'])"/>
             </div>
             <div class="text" routerLink="/view-tweet/{{tweet['id']}}">
                 <div class="profileName">

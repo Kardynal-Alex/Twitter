@@ -89,6 +89,27 @@ namespace Twitter.Tests.RepositoryTests
                 .Using(new ImagesEqualityComparer()));
         }
 
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task TwitterPostRepository_GetTwitterPostsByUserIdWithImagesAndUsers(string userId)
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var twitterRepository = new TwitterPostRepository(context);
+            var twitterPosts = await twitterRepository.GetTwitterPostsByUserIdWithImagesAndUsers(userId);
+
+            var expectedUser = InitialData.ExpectedUsers.ElementAt(0);
+            var expectedTwitterPosts = InitialData.ExpectedTwitterPosts.Where(x => x.UserId == userId).ToList();
+            var expectedImages = InitialData.ExpectedImages.Join(expectedTwitterPosts, images => images.Id, twitterPost => twitterPost.Id,
+                (images, twitterPost) => images).Distinct().ToList();
+
+            Assert.That(twitterPosts, Is.EqualTo(expectedTwitterPosts)
+                .Using(new TwitterPostEqualityComparer()));
+            Assert.That(twitterPosts.Select(x => x.Images), Is.EqualTo(expectedImages)
+                .Using(new ImagesEqualityComparer()));
+            Assert.That(twitterPosts.ElementAt(0).User, Is.EqualTo(expectedUser)
+                .Using(new UserEqualityComparer()));
+        }
+
         [Test]
         public async Task TwitterPostRepository_UpdateTwitterPost()
         {

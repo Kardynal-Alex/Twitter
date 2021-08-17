@@ -1,0 +1,14 @@
+
+<div class="profile">
+    <div class="background">
+        <img [src]="createImgPath(backgroungImage)" />
+    </div>
+    <div class="profileImage">
+        <img [src]="user['profileImagePath']" />
+    </div>
+    <div class="profileText">
+        <p>{{user['name']}} {{user['surname']}}</p>
+    </div>
+
+</div>
+<app-view-users-tweet [twitterPosts]="twitterPosts"></app-view-users-tweet>

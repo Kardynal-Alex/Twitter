@@ -1,0 +1,38 @@
+<div class="twitterPosts">
+    <div *ngFor="let tweet of twitterPosts">
+        <div class="twitterPost">
+            <div class="flex">
+                <div class="userImage">
+                    <img [src]="tweet['user']['profileImagePath']" (click)="navigateToUserProfile(tweet['user']['id'])"/>
+                </div>
+                <div class="flexBox" routerLink="/view-tweet/{{tweet['id']}}">
+                    <div class="flex">
+                    <div class="profileData">
+                        <p>{{tweet['user']['name']}} {{tweet['user']['surname']}}</p>
+                    </div>
+                    <div class="grey">
+                        <p>{{tweet['dateCreation']|date:'mediumDate'}}</p>
+                    </div>
+                    </div>
+                    <div class="tweetText">
+                        <p>{{tweet['postText']}}</p>
+                    </div>
+                    <div class="imageCollage">
+                        <div class="image"  *ngIf="tweet['images']['image1']!=''">
+                            <img [src]="createImgPath(tweet['images']['image1'])" /> 
+                        </div>
+                        <div class="image"  *ngIf="tweet['images']['image2']!=''">
+                            <img [src]="createImgPath(tweet['images']['image2'])" /> 
+                        </div>
+                        <div class="image"  *ngIf="tweet['images']['image3']!=''">
+                            <img [src]="createImgPath(tweet['images']['image3'])" /> 
+                        </div>
+                        <div class="image"  *ngIf="tweet['images']['image4']!=''">
+                            <img [src]="createImgPath(tweet['images']['image4'])" /> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

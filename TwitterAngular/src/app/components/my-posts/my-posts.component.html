@@ -4,7 +4,7 @@
     </div>
     <div class="tweetForm">
         <div class="profileImage">
-            <img [src]="user['profileImagePath']" />
+            <img [src]="user['profileImagePath']" (click)="navigateToUserProfile(user['id'])"/>
         </div>
         <form #createTwitterPostForm="ngForm">
             <div class="textArea">

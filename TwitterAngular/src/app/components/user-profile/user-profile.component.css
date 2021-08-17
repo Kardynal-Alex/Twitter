@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    outline:none;
+}
+
+.profile {
+    border-radius: 20px;
+    border: 1px solid black;
+    overflow: hidden;
+    height: auto;
+    min-height: 390px;
+}
+
+.background {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.background img {
+    height: auto;
+    width: 100%;
+}
+
+.profileImage {
+    margin: -300px 80px 0px;
+}
+
+.profileImage img {
+    border-radius: 20px;
+    width: 150px;
+    height: 150px;
+}
+
+.profileText p {
+    color: white;
+    font-size: 40px;
+    margin: 60px 0px 0px 80px;
+    font-weight: 600;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

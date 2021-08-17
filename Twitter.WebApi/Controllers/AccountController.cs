@@ -38,5 +38,13 @@ namespace Twitter.WebApi.Controllers
             }
             return BadRequest();
         }
+
+        [HttpGet("getUserById/{id}")]
+        public async Task<ActionResult<UserDTO>> GetUserById(string id)
+        {
+            var userDTO = await service.GetUserByUserIdAsync(id);
+            return Ok(userDTO);
+        }
+
     }
 }

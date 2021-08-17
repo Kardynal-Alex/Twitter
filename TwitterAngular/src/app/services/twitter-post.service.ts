@@ -31,4 +31,8 @@ export class TwitterPostService {
     getTwitterPostByIdWithDetails(id:string){
         return this.httpClient.get<twitterPost>(this.apiUrl+"getTweetByIdWithDetails/"+id);
     }
+
+    getTwitterpostByUserIdWithImagesAndUsers(id:string){
+        return this.httpClient.get<twitterPost[]>(this.apiUrl+"getTweetByUserIdWithImagesAndUsers/"+id);
+    }
 }

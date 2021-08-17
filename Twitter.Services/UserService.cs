@@ -1,4 +1,5 @@
-﻿using Google.Apis.Auth;
+﻿using AutoMapper;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -20,15 +21,18 @@ namespace Twitter.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly ITokenService tokenService;
+        private readonly IMapper mapper;
         private readonly FacebookAuthSettings fbAuthSettings;
         private readonly GoogleAuthSettings googleAuthSettings;
         public UserService(IUnitOfWork unitOfWork,
                            ITokenService tokenService,
+                           IMapper mapper,
                            IOptions<FacebookAuthSettings> fbAuthSettingsAccessor,
                            IOptions<GoogleAuthSettings> googlelAuthSettingsAccessor)
         {
             this.unitOfWork = unitOfWork;
             this.tokenService = tokenService;
+            this.mapper = mapper;
             fbAuthSettings = fbAuthSettingsAccessor.Value;
             googleAuthSettings = googlelAuthSettingsAccessor.Value;
         }
@@ -73,6 +77,15 @@ namespace Twitter.Services
             var claims = await tokenService.GetClaims(userInfo.Email);
             var token = tokenService.GenerateToken(claims);
             return token;
+        }
+
+        public async Task<UserDTO> GetUserByUserIdAsync(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+                throw new TwitterException("UserId is null or empty");
+
+            var user = await unitOfWork.UserManager.FindByIdAsync(userId);
+            return mapper.Map<User, UserDTO>(user);
         }
 
         public async Task<string> GoogleLoginAsync(GoogleAuthDTO googleAuthDTO)

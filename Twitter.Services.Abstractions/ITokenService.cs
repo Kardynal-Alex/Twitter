@@ -9,6 +9,7 @@ namespace Twitter.Services.Abstractions
     public interface ITokenService
     {
         Task<List<Claim>> GetClaims(string email);
+
         string GenerateToken(List<Claim> claims);
     }
 }
