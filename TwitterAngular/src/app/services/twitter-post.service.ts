@@ -16,6 +16,10 @@ export class TwitterPostService {
         return this.httpClient.post(this.apiUrl+"deleteTwitterPost/",twitterPost);
     }
 
+    updateTwitterPostWithImages(twitterPost:twitterPost){
+        return this.httpClient.put(this.apiUrl+"updateTwitterPost/",twitterPost);
+    }
+
     createImgPath(serverPath: string){
         return `https://localhost:44318/${serverPath}`;
     }

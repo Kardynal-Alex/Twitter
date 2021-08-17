@@ -7,5 +7,7 @@ namespace Twitter.Domain.Repositories
     public interface IImagesRepository
     {
         void DeletePhysicalImages(Images images);
+
+        void UpdateImages(Images images);
     }
 }

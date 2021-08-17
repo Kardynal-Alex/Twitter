@@ -66,7 +66,7 @@ namespace Twitter.Services
 
             var twitterPost = mapper.Map<TwitterPostDTO, TwitterPost>(twitterPostDTO);
             unitOfWork.ImagesRepository.DeletePhysicalImages(twitterPost.Images);
-            //delete images in cascade
+            //delete images,comments in cascade
             unitOfWork.TwitterPostRepository.DeleteTwitterPostById(twitterPost.Id);
 
             await unitOfWork.SaveAsync();
@@ -87,6 +87,17 @@ namespace Twitter.Services
 
             var twitterPosts = await unitOfWork.TwitterPostRepository.GetTwitterPostsByUserIdWithImagesAndUsers(userId);
             return mapper.Map<List<TwitterPostDTO>>(twitterPosts);
+        }
+
+        public async Task UpdateTwitterPostWithImagesAsync(TwitterPostDTO twitterPostDTO)
+        {
+            ValidateTwitterPostDTO(twitterPostDTO);
+
+            var twitterPost = mapper.Map<TwitterPostDTO, TwitterPost>(twitterPostDTO);
+            unitOfWork.TwitterPostRepository.UpdateTwitterPost(twitterPost);
+            unitOfWork.ImagesRepository.UpdateImages(twitterPost.Images);
+
+            await unitOfWork.SaveAsync();
         }
     }
 }

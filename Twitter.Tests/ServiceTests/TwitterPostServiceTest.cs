@@ -203,5 +203,45 @@ namespace Twitter.Tests.ServiceTests
                 .Using(new UserDTOEqualityComparer()));
         }
 
+        [Test]
+        public async Task TwitterPost_UpdateTwitterPostWithImagesAsync()
+        {
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+
+            mockUnitOfWork.Setup(x => x.TwitterPostRepository.UpdateTwitterPost(It.IsAny<TwitterPost>()));
+            mockUnitOfWork.Setup(x => x.ImagesRepository.UpdateImages(It.IsAny<Images>()));
+            var twitterPostService = new TwitterPostService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+
+            var twitterPostDTO = new TwitterPostDTO
+            {
+                Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                PostText = "update TwitterPost text1",
+                DateCreation = DateTime.Now.Date,
+                Like = 0,
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                Images = new ImagesDTO
+                {
+                    Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                    Image1 = "Resources\\Images\\111-1.jpg",
+                    Image2 = "Resources\\Images\\111-2.jpg",
+                    Image3 = "Resources\\Images\\111-3.jpg",
+                    Image4 = "Resources\\Images\\111-4.jpg"
+                }
+            };
+            await twitterPostService.UpdateTwitterPostWithImagesAsync(twitterPostDTO);
+
+            mockUnitOfWork.Verify(x => x.TwitterPostRepository.UpdateTwitterPost(It.Is<TwitterPost>(x =>
+                  x.Id == twitterPostDTO.Id && x.PostText == twitterPostDTO.PostText &&
+                  x.DateCreation.Date == twitterPostDTO.DateCreation.Date && x.Like == twitterPostDTO.Like &&
+                  x.UserId == twitterPostDTO.UserId)), Times.Once);
+
+            mockUnitOfWork.Verify(x => x.ImagesRepository.UpdateImages(It.Is<Images>(x =>
+                  x.Id == twitterPostDTO.Images.Id && x.Image1 == twitterPostDTO.Images.Image1 &&
+                  x.Image2 == twitterPostDTO.Images.Image2 && x.Image3 == twitterPostDTO.Images.Image3 &&
+                  x.Image4 == twitterPostDTO.Images.Image4)), Times.Once);
+
+            mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
+        }
+
     }
 }

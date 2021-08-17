@@ -11,6 +11,8 @@ namespace Twitter.Services.Abstractions
 
         Task<List<TwitterPostDTO>> GetTwitterPostByUserIdAsync(string userId);
 
+        Task UpdateTwitterPostWithImagesAsync(TwitterPostDTO twitterPostDTO);
+
         Task DeleteTwitterPostWithImagesAsync(TwitterPostDTO twitterPostDTO);
 
         Task<TwitterPostDTO> GetTwitterPostByIdWithDetails(Guid twitterPostId);

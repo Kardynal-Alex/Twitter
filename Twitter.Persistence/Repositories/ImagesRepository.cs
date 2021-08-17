@@ -27,5 +27,10 @@ namespace Twitter.Persistence.Repositories
                 }
             }
         }
+
+        public void UpdateImages(Images images)
+        {
+            context.Images.Update(images);
+        }
     }
 }

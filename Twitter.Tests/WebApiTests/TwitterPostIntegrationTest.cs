@@ -218,5 +218,41 @@ namespace Twitter.Tests.WebApiTests
                .Using(new UserDTOEqualityComparer()));
         }
 
+        public async Task TwitterPostController_UpdateTwitterPostWithImages()
+        {
+            var twitterPostDTO = new TwitterPostDTO
+            {
+                Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                PostText = "update TwitterPost text1",
+                DateCreation = DateTime.Now.Date,
+                Like = 0,
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                Images = new ImagesDTO
+                {
+                    Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                    Image1 = "Resources\\Images\\111-1.jpg",
+                    Image2 = "Resources\\Images\\111-2.jpg",
+                    Image3 = "Resources\\Images\\111-3.jpg",
+                    Image4 = "Resources\\Images\\111-4.jpg"
+                }
+            };
+            var content = new StringContent(JsonConvert.SerializeObject(twitterPostDTO), Encoding.UTF8, "application/json");
+            var httpResponse = await _client.PutAsync(requestUri + "updateTwitterPost", content);
+
+            httpResponse.EnsureSuccessStatusCode();
+            using (var test = _factory.Services.CreateScope())
+            {
+                var context = test.ServiceProvider.GetService<ApplicationContext>();
+                var updatedTwitterPost = await context.TwitterPosts.Include(x => x.Images)
+                    .FirstOrDefaultAsync(x => x.Id == twitterPostDTO.Id);
+                var expected = new AutoMapperHelper<TwitterPost, TwitterPostDTO>().MapToType(updatedTwitterPost);
+
+                Assert.That(twitterPostDTO, Is.EqualTo(expected)
+                    .Using(new TwitterPostDTOEqualityComparer()));
+                Assert.That(twitterPostDTO.Images, Is.EqualTo(expected.Images)
+                    .Using(new ImagesDTOEqualityComparer()));
+            }
+        }
+
     }
 }

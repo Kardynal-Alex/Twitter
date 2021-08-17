@@ -1,5 +1,11 @@
 <link href='https://css.gg/more-alt.css' rel='stylesheet'>
 <div *ngFor="let tweet of twitterPosts | sort:'desc':'dateCreation'">
+    <ng-template [ngTemplateOutlet]="loadTemplate(tweet)" 
+        [ngTemplateOutletContext]="{ $implicit: tweet}">
+    </ng-template>
+</div>
+
+<ng-template #readOnlyTemplate let-tweet>
     <div class="tweetPost">
         <div class="flex">
             <div class="profileImage" *ngIf="user['profileImagePath']!=''">
@@ -39,10 +45,49 @@
         <div class="form-popup" id="myForm-{{tweet['id']}}" style="display: none;">
             <div class="form-container">
                 <a (click)="deleteTwitterPost(tweet)">Delete Post</a>
-                <a href="#">Href22</a>
+                <a  (click)="editTwitterPostMethod(tweet)">Update Post</a>
                 <a (click)="togle3DotsForm(tweet['id'])" >Close</a>
             </div>
         </div>
 
     </div>
-</div>
+</ng-template>
+
+<ng-template #editTemplate>
+    <div class="editTweetForm">
+        <div class="profileImage">
+            <img [src]="user['profileImagePath']"/>
+        </div>
+        <form>
+            <div class="textArea">
+                <textarea type="text"  autosize  [(ngModel)]="editTwitterPost['postText']" name="postText"
+                #editPostText="ngModel" required minlength="10" 
+                placeholder="What`s happening?" contenteditable rows='3'></textarea>
+            </div>
+            <div class="editImages">
+                <div *ngFor="let n of numbersOfImages; let i=index">
+                    <div class="editImage">
+                        <div class="cancel">
+                            <button (click)="deletePhotoByPathForEdit(editTwitterPost['images']['image'+(i+1)],'image'+(i+1))"
+                            *ngIf="editTwitterPost['images']['image'+(i+1)]">&times;</button>
+                        </div>
+
+                        <img [src]="createImgPath(editTwitterPost['images']['image'+(i+1)])" 
+                        *ngIf="editTwitterPost['images']['image'+(i+1)]" />
+
+                        <input type="file" #editfile (change)="uploadFilesForEdit(editfile.files,'image'+(i+1),(i+1))"
+                        style="display: none;" multiple required onclick="this.value=null" />
+                        <div class="upload" *ngIf="!editTwitterPost['images']['image'+(i+1)]">
+                            <button id="editbut-{{(i+1)}}" (click)="editfile.click()" >+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tweetBtn">
+                <button type="submit" 
+                (click)="updateTwitterPost()">Update Tweet</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
