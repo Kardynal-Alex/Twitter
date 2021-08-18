@@ -7,6 +7,7 @@
     float: left;
     margin-top: 45px;
     margin-left: 20%;
+    position: fixed;
 }
 
 .links{

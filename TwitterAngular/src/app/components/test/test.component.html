@@ -1,0 +1,13 @@
+<form method="post" #createLotForm="ngForm" (ngSubmit)="createLot(createLotForm)">
+    <div *ngFor="let lot of numbers; let i=index">
+        <div class="cancel">
+            <button (click)="deletePhoto(images['image'+(i+1)],'image'+(i+1))" *ngIf="images['image'+(i+1)]">x</button>
+        </div>
+        <img [src]="createImgPath(images['image'+(i+1)])" *ngIf="images['image'+(i+1)]">
+        <input type="file" #file placeholder="Choose file" (change)="upload(file.files,'image'+(i+1),(i+1))" style="display:none;" 
+        multiple required  onclick="this.value=null">
+        <div class="upload">
+            <button type="button" id="but-{{i+1}}" class="btn btn-success" (click)="file.click()" >+</button>
+        </div>
+    </div>
+</form> 

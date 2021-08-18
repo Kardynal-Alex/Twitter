@@ -66,7 +66,7 @@
     width: auto;
     max-width: 360px;
     height: auto;
-    max-height: 250px;
+    max-height: 200px;
     flex-grow: 1;
     object-fit: cover;
     margin-top: -5px;

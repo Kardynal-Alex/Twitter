@@ -1,5 +1,5 @@
 <link href='https://css.gg/home-alt.css' rel='stylesheet'>
-<div id="menu" *ngIf="isAuth" class="mainMenu"> 
+<div id="menus" *ngIf="isAuth" class="mainMenu"> 
     <div class="links">
         <div class="link">
             <a routerLink="/home" routerLinkActive="active">Home</a>
@@ -9,6 +9,9 @@
         </div>
         <div class="link">
             <a routerLink="/bookmarks" routerLinkActive="active">Bookmarks</a>
+        </div>
+        <div class="link">
+            <a routerLink="/search-users" routerLinkActive="active">Search</a>
         </div>
         <div class="link">
             <a routerLink="/user-profile/{{id}}" routerLinkActive="active">Profile</a>

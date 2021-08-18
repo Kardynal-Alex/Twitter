@@ -196,6 +196,37 @@ namespace Twitter.Tests
                     ProfileImagePath = "Image path2"
                 }
             };
+
+        public static IEnumerable<UserDTO> ExpectedUserDTOs =>
+            new[]
+            {
+                new UserDTO
+                {
+                    Id = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    Name = "Oleksandr",
+                    Surname = "Kardynal",
+                    Role = "admin",
+                    Email = "admin@gmail.com",
+                    ProfileImagePath = "Image path1"
+                },
+                new UserDTO
+                {
+                    Id = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
+                    Name = "Ira",
+                    Surname = "Kardynal",
+                    Role = "user",
+                    Email = "irakardinal@gmail.com",
+                    ProfileImagePath = "Image path2",
+                }
+            };
+        #endregion
+        #region oAuth
+        public static string FBAccessToken = "EAALLGbB4PQUBACTTDQxmtDkedVDpcOsuDpNO7n6ioZBX1phNY8lHOGhykwsC6ndlug6HLvoyHWKaiXZBFvzD5IiHIoftM3d3MOSbMZCX4RroJUd267fHdQqKWqMvvPJTYI6YXUVmZAyxL6SbHPHgyyWQZC2itOtSGmgCgmVInO8tZCSG3ZBxyLHZBDLVHnKAMZCIZD";
+
+        public static string GoogleToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZlZjRiZDkwODU5MWY2OTdhOGE5Yjg5M2IwM2U2YTc3ZWIwNGU1MWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNTE0OTIwMTc2NjMwLTgyMTZsdnUzZGo5MXJzaWUxNnMzOWsxYmJoc2oydGczLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNTE0OTIwMTc2NjMwLTgyMTZsdnUzZGo5MXJzaWUxNnMzOWsxYmJoc2oydGczLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTA5MTUwMzA2OTc0NjcwODc2NDE0IiwiZW1haWwiOiJpcmFrYXJkaW5hbEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6InVfUFFYWHR1YnVyUThUR1VLYU1XZGciLCJuYW1lIjoiSXJhIEthcmRpbmFsIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdoYzlkcWdudVpPM0FwV3dtUmc1OENxNkR3aHRWd1ozVzhZTmR2Rj1zOTYtYyIsImdpdmVuX25hbWUiOiJJcmEiLCJmYW1pbHlfbmFtZSI6IkthcmRpbmFsIiwibG9jYWxlIjoicnUiLCJpYXQiOjE2MjkyMTA3NzQsImV4cCI6MTYyOTIxNDM3NCwianRpIjoiZTI4ODYwZWM2M2QzZWI3NGY3N2EwYjMzZjllYWJhZDQ5MWZjOTU4YiJ9.OohEIi_9_ASFOaetUbyPXx0OxOMzasxDPalCGgma0a5X2wKj7TTAhVrjp-8859hww1YyM-PycF_QdWL6SEjB_HMEkMT-e6JHODwgiDXmdP41FGCqOZWZUhmNcv7ygbhodK8mowU1ZYRXYHhfcimNh-mouxQl3qeqYmYvKJeMVmdtBMMr2za1v_EIHHr6TACjTjKpMCFEtTmiI4tQuUPzPvdTuIl7fEtFzTu0MsNYR0cu0x2WaNZvgcdGGqoe4M-yoLiHd_kP31nEn_rG7R3Pu0-95yKNWvp62e1oEHA1IluuooQh8fu9gPrA0iI8zDWwABcoLlgKZFEOz32jVWAQkQ";
+
+        public static string FBTokenAfterAuth = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1OWRmZjc2LWYxMTItNDk4OC1iNzJjLTQ0MjE4ZTRjOWEzZiIsIm5hbWUiOiJPbGVrc2FuZHIiLCJzdXJuYW1lIjoiS2FyZHluYWwiLCJlbWFpbCI6ImFsZXhhbmRya2FyZHluYWxAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJwcm9maWxlaW1hZ2VwYXRoIjoiaHR0cHM6Ly9wbGF0Zm9ybS1sb29rYXNpZGUuZmJzYnguY29tL3BsYXRmb3JtL3Byb2ZpbGVwaWMvP2FzaWQ9MjY1MDU4ODY2ODU4MDMxMyZoZWlnaHQ9NTAmd2lkdGg9NTAmZXh0PTE2MzEzNjg5MDcmaGFzaD1BZVNCWHQtc0YxbmxFMUpfMFVBIiwibmJmIjoxNjI5MjcwNjg4LCJleHAiOjE2MjkyNzQyODgsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzE4IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMTgifQ.ehb0-rS6vEZwWSEcl-m7u907i6uKBKzT7WG3EmlStZ8";
+
         #endregion
     }
 }

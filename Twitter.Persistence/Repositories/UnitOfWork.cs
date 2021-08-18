@@ -46,6 +46,15 @@ namespace Twitter.Persistence.Repositories
             }
         }
 
+        private IUserRepository userRepository;
+        public IUserRepository UserRepository
+        {
+            get
+            {
+                return userRepository ?? (userRepository = new UserRepository(context));
+            }
+        }
+
         private readonly UserManager<User> userManager;
         public UserManager<User> UserManager
         {
@@ -72,7 +81,7 @@ namespace Twitter.Persistence.Repositories
                 return roleManager;
             }
         }
-       
+
         public async Task SaveAsync()
         {
             await context.SaveChangesAsync();

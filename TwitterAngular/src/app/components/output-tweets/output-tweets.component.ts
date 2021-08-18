@@ -87,13 +87,7 @@ export class OutputTweetsComponent implements OnInit {
   uploadFilesForEdit(files, field, number){
     if(files.length === 0)
       return;
-    let uploadApiPhoto=this.twitterPostService.uploadApiPhoto;
-    let fileToUpload=<File>files[0];
-    let formData=new FormData();
-    formData.append('file',fileToUpload,fileToUpload.name);
-    this.httpClient.post(uploadApiPhoto,formData, {reportProgress: true, observe: 'events'}).
-    subscribe(event=>
-    {
+    this.twitterPostService.uploadPhoto(files).subscribe(event=>{
       if (event.type === HttpEventType.Response) {
             this.response=event.body;
             document.getElementById('editbut-'+number).style.display='none';
@@ -111,5 +105,5 @@ export class OutputTweetsComponent implements OnInit {
       });
     }
   } 
-  
+
 }

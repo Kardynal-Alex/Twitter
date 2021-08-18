@@ -51,6 +51,7 @@ export class GoogleLoginComponent implements OnInit {
           provider: "GOOGLE",
           idToken: googleUser.getAuthResponse().id_token
         }
+        console.log(externalAuth.idToken);
         this.authService.googleLogin(externalAuth).subscribe(response=>{
           this.router.navigate(['/home']);
           document.getElementById('auth').style.display="none";

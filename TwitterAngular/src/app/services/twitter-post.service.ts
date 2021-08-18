@@ -39,4 +39,11 @@ export class TwitterPostService {
     getTwitterpostByUserIdWithImagesAndUsers(id:string){
         return this.httpClient.get<twitterPost[]>(this.apiUrl+"getTweetByUserIdWithImagesAndUsers/"+id);
     }
+
+    uploadPhoto(files){
+        let fileToUpload=<File>files[0];
+        let formData=new FormData();
+        formData.append('file',fileToUpload,fileToUpload.name);
+        return this.httpClient.post(this.uploadApiPhoto,formData, {reportProgress: true, observe: 'events'});
+    }
 }

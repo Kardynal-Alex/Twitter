@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Twitter.Domain.Entities;
+
+namespace Twitter.Domain.Repositories
+{
+    public interface IUserRepository
+    {
+        Task<List<User>> SearchUserByNameAndSurname(string search);
+    }
+}

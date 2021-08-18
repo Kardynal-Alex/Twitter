@@ -13,6 +13,8 @@ namespace Twitter.Domain.Repositories
 
         ICommentRepository CommentRepository { get; }
 
+        IUserRepository UserRepository { get; }
+
         UserManager<User> UserManager { get; }
         
         SignInManager<User> SignInManager { get; }

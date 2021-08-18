@@ -154,5 +154,11 @@ namespace Twitter.Services
                 throw new TwitterException(ex.Message);
             }
         }
+
+        public async Task<List<UserDTO>> SearchUsersByNameAndSurnameAsync(string search)
+        {
+            var users = await unitOfWork.UserRepository.SearchUserByNameAndSurname(search);
+            return mapper.Map<List<UserDTO>>(users);
+        }
     }
 }

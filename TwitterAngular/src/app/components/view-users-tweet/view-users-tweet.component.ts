@@ -17,7 +17,6 @@ export class ViewUsersTweetComponent implements OnInit {
   ngOnInit(){
   }
 
-
   public createImgPath(serverPath: string){
     return this.twitterPostService.createImgPath(serverPath);
   }

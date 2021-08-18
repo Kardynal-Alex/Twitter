@@ -61,7 +61,6 @@ namespace Twitter.Tests
             context.Roles.Add(new IdentityRole { Id = "105695ec-0e70-4e43-8514-8a0710e11d53", Name = "user" });
             context.Roles.Add(new IdentityRole { Id = "205695ec-0e70-4e43-8514-8a0710e11d53", Name = "USER" });
             context.Roles.Add(new IdentityRole { Id = "012095ec-0e70-4e43-8514-8a0710e11d53", Name = "admin" });
-            context.Users.AddRange(users);
             context.UserRoles.Add(new IdentityUserRole<string>
             {
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
@@ -72,6 +71,19 @@ namespace Twitter.Tests
                 UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
                 RoleId = "012095ec-0e70-4e43-8514-8a0710e11d53"
             });
+            context.Roles.Add(new IdentityRole
+            {
+                Id = "11d13586-936f-424c-978b-edfc0bd5216a",
+                Name = "user",
+                NormalizedName = "USER"
+            });
+            context.Roles.Add(new IdentityRole
+            {
+                Id = "db33e7d4-e51f-4615-a526-fcf3ab7eedd0",
+                Name = "admin",
+                NormalizedName = "ADMIN"
+            });
+            context.Users.AddRange(users);
 
             context.Comments.AddRange(InitialData.ExpectedComments);
 
