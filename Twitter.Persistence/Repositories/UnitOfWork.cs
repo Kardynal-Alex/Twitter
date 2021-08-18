@@ -55,6 +55,15 @@ namespace Twitter.Persistence.Repositories
             }
         }
 
+        private IFriendRepository friendRepository;
+        public IFriendRepository FriendRepository 
+        { 
+            get
+            {
+                return friendRepository ?? (friendRepository = new FriendRepository(context));
+            }
+        }
+
         private readonly UserManager<User> userManager;
         public UserManager<User> UserManager
         {

@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Twitter.Domain.Entities;
 using Twitter.Persistence;
 using Twitter.Services.Mapping;
@@ -86,6 +85,7 @@ namespace Twitter.Tests
             context.Users.AddRange(users);
 
             context.Comments.AddRange(InitialData.ExpectedComments);
+            context.Friends.AddRange(InitialData.ExpectedFriends);
 
             context.SaveChanges();
         }

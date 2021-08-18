@@ -15,6 +15,8 @@ namespace Twitter.Domain.Repositories
 
         IUserRepository UserRepository { get; }
 
+        IFriendRepository FriendRepository { get; }
+
         UserManager<User> UserManager { get; }
         
         SignInManager<User> SignInManager { get; }

@@ -37,6 +37,7 @@ namespace Twitter.Services.Configurations
             services.AddTransient<ITwitterPostService, TwitterPostService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<IFriendService, FriendService>();
 
             return services;
         }

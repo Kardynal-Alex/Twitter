@@ -11,11 +11,11 @@ namespace Twitter.Persistence.Configurations
             string adminEmail = "admin@gmail.com";
             string adminPassword = "admin123";
             string adminName = "Oleksandr";
-            string adminSurname = "Kardynal";
+            string adminSurname = "Kardinal";
             string userEmail = "irenakardynal@gmail.com";
             string userPassword = "ira1234";
-            string userName = "Ira";
-            string userSurname = "Kardynal";
+            string userName = "Irena";
+            string userSurname = "Kardinal";
             if (await roleManager.FindByNameAsync("admin") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("admin"));

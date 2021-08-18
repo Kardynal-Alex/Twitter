@@ -154,6 +154,22 @@ namespace Twitter.Tests
                 }
             };
 
+        public static IEnumerable<Friend> ExpectedFriends =>
+            new[]
+            {
+                new Friend
+                {
+                    Id = new Guid("b4edd1e5-c05d-ee7d-ed93-4603de11d462"),
+                    UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    FriendId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c"
+                },
+                new Friend
+                {
+                    Id = new Guid("c1aedb38-a2db-f9c0-8a2c-5ded2dca4826"),
+                    UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
+                    FriendId = "925695ec-0e70-4e43-8514-8a0710e11d53"
+                }
+            };
         #endregion
         #region DTO data
         public static IEnumerable<CommentDTO> ExpectedCommentDTOs =>
@@ -217,6 +233,23 @@ namespace Twitter.Tests
                     Role = "user",
                     Email = "irakardinal@gmail.com",
                     ProfileImagePath = "Image path2",
+                }
+            };
+
+        public static IEnumerable<FriendDTO> ExpectedFriendDTOs =>
+            new[]
+            {
+                new FriendDTO
+                {
+                    Id = new Guid("b4edd1e5-c05d-ee7d-ed93-4603de11d462"),
+                    UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    FriendId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c"
+                },
+                new FriendDTO
+                {
+                    Id = new Guid("c1aedb38-a2db-f9c0-8a2c-5ded2dca4826"),
+                    UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
+                    FriendId = "925695ec-0e70-4e43-8514-8a0710e11d53"
                 }
             };
         #endregion

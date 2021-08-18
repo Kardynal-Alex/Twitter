@@ -82,4 +82,22 @@ namespace Twitter.Tests
         }
     }
 
+    public class FriendEqualityComparer : IEqualityComparer<Friend>
+    {
+        public bool Equals([AllowNull] Friend x, [AllowNull] Friend y)
+        {
+            if (x == null && y == null)
+                return true;
+            if (x == null || y == null)
+                return false;
+
+            return x.Id == y.Id && x.UserId == y.UserId && x.FriendId == y.FriendId;
+        }
+
+        public int GetHashCode([DisallowNull] Friend obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
+
 }
