@@ -30,6 +30,10 @@ export class AuthService {
         return this.httpClient.get<user[]>(this.apiUrl+"SearchUsers/?search="+search);
     }
 
+    getUserFriendsByUserId(id:string){
+        return this.httpClient.get<user[]>(this.apiUrl+"getUserFriendsByUserId/"+id);
+    }
+
     logout() {
         this.localStorage.remove("token");
     }

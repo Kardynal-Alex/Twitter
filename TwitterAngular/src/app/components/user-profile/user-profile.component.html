@@ -12,6 +12,10 @@
             <button id="friend-{{friendId}}" (click)="changeFriend(friendId)">friend</button>
         </div>
     </div>
-
+</div>
+<div class="info">
+    <div class="friends">
+        <a routerLink="/user-friends/{{friendId}}">Friends</a>
+    </div>
 </div>
 <app-view-users-tweet [twitterPosts]="twitterPosts"></app-view-users-tweet>

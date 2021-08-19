@@ -58,3 +58,29 @@
     font-size: 20px;
     font-weight: 600;
 }
+
+.info,
+.friends a {
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info a {
+    font-weight: 600;
+}
+
+.friends {
+    font-size: 20px;
+    margin: 20px;
+}
+
+.friends a {
+    color: black;
+    text-decoration: none;
+    padding: 5px 10px 5px 10px;
+}

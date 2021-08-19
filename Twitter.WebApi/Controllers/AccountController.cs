@@ -53,5 +53,12 @@ namespace Twitter.WebApi.Controllers
             var userDTOs = await service.SearchUsersByNameAndSurnameAsync(search);
             return Ok(userDTOs);
         }
+
+        [HttpGet("getUserFriendsByUserId/{id}")]
+        public async Task<ActionResult<List<UserDTO>>> GetUserFriendsByUserId(string id)
+        {
+            var userFriendDTOs = await service.GetUserFriendsByUserIdAsync(id);
+            return Ok(userFriendDTOs);
+        }
     }
 }

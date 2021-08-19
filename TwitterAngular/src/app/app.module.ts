@@ -26,6 +26,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ViewUsersTweetComponent } from './components/view-users-tweet/view-users-tweet.component';
 import { TestComponent } from './components/test/test.component';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
+import { UserFriendsComponent } from './components/user-friends/user-friends.component';
 
 
 const appRoutes: Routes =[
@@ -35,6 +36,7 @@ const appRoutes: Routes =[
   { path: 'view-tweet/:id', component: ViewTweetComponent, canActivate: [LoginGuard] },
   { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [LoginGuard] },
   { path: 'search-users', component:SearchUsersComponent, canActivate: [LoginGuard] },
+  { path: 'user-friends/:id', component: UserFriendsComponent, canActivate: [LoginGuard] },
   { path: 'test', component: TestComponent },
   { path: '**', component: HomePageComponent }
 ];
@@ -58,7 +60,8 @@ export function tokenGetter() {
     UserProfileComponent,
     ViewUsersTweetComponent,
     TestComponent,
-    SearchUsersComponent
+    SearchUsersComponent,
+    UserFriendsComponent
   ],
   imports: [
     BrowserModule,

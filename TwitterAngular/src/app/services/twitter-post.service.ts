@@ -40,6 +40,10 @@ export class TwitterPostService {
         return this.httpClient.get<twitterPost[]>(this.apiUrl+"getTweetByUserIdWithImagesAndUsers/"+id);
     }
 
+    getFriendsTweetsByUserId(id:string){
+        return this.httpClient.get<twitterPost[]>(this.apiUrl+"getFriendsTweetsByUserId/"+id);
+    }
+
     uploadPhoto(files){
         let fileToUpload=<File>files[0];
         let formData=new FormData();

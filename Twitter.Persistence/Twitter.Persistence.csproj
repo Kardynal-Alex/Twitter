@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Twitter.Domain\Twitter.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SQLQueries\" />
+  </ItemGroup>
+
 </Project>

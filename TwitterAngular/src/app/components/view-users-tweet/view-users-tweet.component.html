@@ -1,5 +1,5 @@
 <div class="twitterPosts">
-    <div *ngFor="let tweet of twitterPosts">
+    <div *ngFor="let tweet of twitterPosts | sort:'desc':'dateCreation'">
         <div class="twitterPost">
             <div class="flex">
                 <div class="userImage">

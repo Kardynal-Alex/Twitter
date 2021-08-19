@@ -138,5 +138,23 @@ namespace Twitter.Tests.RepositoryTests
             }).Using(new TwitterPostEqualityComparer()));
         }
 
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task TwitterPostRepository_GetFriendsTweetsByUserId(string userId)
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var twitterRepository = new TwitterPostRepository(context);
+            var actual = await twitterRepository.GetFriendsTweetsByUserIdAsync(userId);
+            var expectedTwitterPosts = InitialData.ExpectedTwitterPosts.OrderBy(x => x.Id);
+            var expectedImages = InitialData.ExpectedImages.OrderBy(x => x.Id);
+            var expectedUsers = InitialData.ExpectedUsers.OrderBy(x => x.Id);
+
+            Assert.That(actual.OrderBy(x => x.Id), Is.EqualTo(expectedTwitterPosts)
+                .Using(new TwitterPostEqualityComparer()));
+            Assert.That(actual.Select(x => x.Images).OrderBy(x => x.Id), Is.EqualTo(expectedImages)
+                .Using(new ImagesEqualityComparer()));
+            Assert.That(actual.Select(x => x.User).Distinct().OrderBy(x => x.Id), Is.EqualTo(expectedUsers)
+                .Using(new UserEqualityComparer()));
+        }
     }
 }

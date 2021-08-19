@@ -8,5 +8,7 @@ namespace Twitter.Domain.Repositories
     public interface IUserRepository
     {
         Task<List<User>> SearchUserByNameAndSurname(string search);
+
+        Task<List<User>> GetUserFriendsByUserIdAsync(string userId);
     }
 }

@@ -33,5 +33,17 @@ namespace Twitter.Tests.RepositoryTests
             Assert.That(users, Is.EqualTo(InitialData.ExpectedUsers)
                 .Using(new UserEqualityComparer()));
         }
+
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task UserRepository_GetUserFriendsByUserIdAsync(string userId)
+        {
+            await using var context = new ApplicationContext(_context);
+            var userRepository = new UserRepository(context);
+
+            var userFriends = await userRepository.GetUserFriendsByUserIdAsync(userId);
+
+            Assert.That(userFriends, Is.EqualTo(InitialData.ExpectedUsers)
+                .Using(new UserEqualityComparer()));
+        }
     }
 }

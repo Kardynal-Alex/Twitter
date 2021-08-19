@@ -11,3 +11,21 @@ body {
     width: 33.3%;
     margin: 0 auto;
 }
+
+.mainText {
+    border: 1px solid black; 
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.mainText .fa {
+    font-size: 30px;
+    padding-right: 20px;
+}
+
+.mainText h2{
+    font-size: 30px;
+    font-weight: 600;
+}

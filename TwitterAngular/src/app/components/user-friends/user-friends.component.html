@@ -1,0 +1,18 @@
+<div class="mainText">
+    <h2><a class="fa fa-twitter"></a>Friends</h2>
+</div>
+<div class="users">
+    <div *ngFor="let user of users">
+        <div class="user">
+            <div class="imageProfile" (click)="navigateToUserProfile(user['id'])">
+                <img [src]="user['profileImagePath']" />
+            </div>
+            <div class="nickName">
+                <p>{{user['name']}} {{user['surname']}}</p>
+            </div>
+            <div class="friendBtn" *ngIf="tokenUserId!=user['id']">
+                <button id="friend-{{user['id']}}" (click)="changeFriend(user['id'])">friend</button>
+            </div>
+        </div>
+    </div>
+</div>

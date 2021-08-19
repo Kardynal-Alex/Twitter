@@ -98,5 +98,13 @@ namespace Twitter.Services
 
             await unitOfWork.SaveAsync();
         }
+
+        public async Task<List<TwitterPostDTO>> GetFriendsTweetsByUserIdAsync(string userId)
+        {
+            ValidateStringData(userId);
+
+            var twitterPosts = await unitOfWork.TwitterPostRepository.GetFriendsTweetsByUserIdAsync(userId);
+            return mapper.Map<List<TwitterPostDTO>>(twitterPosts);
+        }
     }
 }

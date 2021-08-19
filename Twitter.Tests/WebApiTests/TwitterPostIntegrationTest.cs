@@ -254,5 +254,27 @@ namespace Twitter.Tests.WebApiTests
             }
         }
 
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task TwitterPostController_GetFriendsTweetsByUserId(string id)
+        {
+            var httpResponse = await _client.GetAsync(requestUri + "getFriendsTweetsByUserId/" + id);
+
+            httpResponse.EnsureSuccessStatusCode();
+            var stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            var actual = JsonConvert.DeserializeObject<IEnumerable<TwitterPostDTO>>(stringResponse).ToList();
+
+            var expectedTwitterPostDTOs = TwitterPostDTOs.OrderBy(x => x.Id);
+            var expectedImagesDTOs = expectedTwitterPostDTOs.Select(x => x.Images).OrderBy(x => x.Id);
+            var expectedUserDTOs = expectedTwitterPostDTOs.Select(x => x.User).OrderBy(x => x.Id);
+            var actualUserDTOs = actual.Select(x => x.User).OrderBy(x => x.Id);
+
+            Assert.That(actual.OrderBy(x => x.Id), Is.EqualTo(expectedTwitterPostDTOs)
+                .Using(new TwitterPostDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.Images).OrderBy(x => x.Id), Is.EqualTo(expectedImagesDTOs)
+                .Using(new ImagesDTOEqualityComparer()));
+            Assert.That(actualUserDTOs, Is.EqualTo(expectedUserDTOs)
+                .Using(new UserDTOEqualityComparer()));
+        }
+
     }
 }

@@ -133,6 +133,26 @@ namespace Twitter.Tests.ServiceTests
                 .Using(new UserDTOEqualityComparer()));
         }
 
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task UserService_GetUserFriendsByUserIdAsync(string userId)
+        {
+            var mockTokenService = new Mock<ITokenService>();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.UserRepository.GetUserFriendsByUserIdAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(InitialData.ExpectedUsers.ToList()));
+
+            var userService = new UserService(mockUnitOfWork.Object,
+                                           mockTokenService.Object,
+                                           UnitTestHelper.CreateMapperProfile(),
+                                           new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                           new Mock<IOptions<GoogleAuthSettings>>().Object);
+            var actual = await userService.GetUserFriendsByUserIdAsync(userId);
+
+            Assert.AreEqual(actual.Count, InitialData.ExpectedUserDTOs.Count());
+            Assert.That(actual, Is.EqualTo(InitialData.ExpectedUserDTOs)
+               .Using(new UserDTOEqualityComparer()));
+        }
+
         Mock<UserManager<TIDentityUser>> GetUserManagerMock<TIDentityUser>() where TIDentityUser : IdentityUser
         {
             return new Mock<UserManager<TIDentityUser>>(

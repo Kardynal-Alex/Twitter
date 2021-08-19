@@ -41,7 +41,7 @@ namespace Twitter.Tests.ServiceTests
         }
 
         [Test]
-        public async Task TwitterPost_AddTwitterPost()
+        public async Task TwitterPostService_AddTwitterPost()
         {
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.Setup(x => x.TwitterPostRepository.AddTwitterPostAsync(It.IsAny<TwitterPost>()));
@@ -77,7 +77,7 @@ namespace Twitter.Tests.ServiceTests
         }
 
         [Test]
-        public void TwitterPost_AddTwitterPost_ThrowTwitterExceptionIfModelIsIncorrect()
+        public void TwitterPostService_AddTwitterPost_ThrowTwitterExceptionIfModelIsIncorrect()
         {
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.Setup(x => x.TwitterPostRepository.AddTwitterPostAsync(It.IsAny<TwitterPost>()));
@@ -106,7 +106,7 @@ namespace Twitter.Tests.ServiceTests
         }
 
         [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
-        public async Task TwitterPost_GetTwitterPostByUserIdWithDetailsExceptUser(string userId)
+        public async Task TwitterPostService_GetTwitterPostByUserIdWithDetailsExceptUser(string userId)
         {
             var twitterPosts = TwitterPosts.Where(x => x.UserId == userId).ToList();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -126,7 +126,7 @@ namespace Twitter.Tests.ServiceTests
         }
 
         [Test]
-        public async Task TwitterPost_DeleteTwitterPostWithImages()
+        public async Task TwitterPostService_DeleteTwitterPostWithImages()
         {
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.Setup(x => x.TwitterPostRepository.DeleteTwitterPostById(It.IsAny<Guid>()));
@@ -160,7 +160,7 @@ namespace Twitter.Tests.ServiceTests
         }
 
         [TestCase("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")]
-        public async Task TwitterPost_GetTwitterPostByIdWithDetails(Guid twitterPostId)
+        public async Task TwitterPostService_GetTwitterPostByIdWithDetails(Guid twitterPostId)
         {
             var twitterPost = TwitterPosts.FirstOrDefault(x => x.Id == twitterPostId);
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -182,7 +182,7 @@ namespace Twitter.Tests.ServiceTests
         }
 
         [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
-        public async Task TwitterPost_GetTwitterPostsByUserIdWithImagesAndUsers(string userId)
+        public async Task TwitterPostService_GetTwitterPostsByUserIdWithImagesAndUsers(string userId)
         {
             var twitterPosts = TwitterPosts.Where(x => x.UserId == userId).ToList();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -204,7 +204,7 @@ namespace Twitter.Tests.ServiceTests
         }
 
         [Test]
-        public async Task TwitterPost_UpdateTwitterPostWithImagesAsync()
+        public async Task TwitterPostService_UpdateTwitterPostWithImagesAsync()
         {
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
@@ -241,6 +241,29 @@ namespace Twitter.Tests.ServiceTests
                   x.Image4 == twitterPostDTO.Images.Image4)), Times.Once);
 
             mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
+        }
+
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task TwitterPostService_GetFriendsTweetsByUserId(string userId)
+        {
+            var twitterPosts = TwitterPosts.ToList();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.TwitterPostRepository.GetFriendsTweetsByUserIdAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(twitterPosts));
+
+            var twitterPostService = new TwitterPostService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+            var actual = await twitterPostService.GetFriendsTweetsByUserIdAsync(userId);
+            var expectedTwitterPostDTOs = TwitterPostDTOs.OrderBy(x => x.Id);
+            var expectedImagesDTOs = expectedTwitterPostDTOs.Select(x => x.Images).OrderBy(x => x.Id);
+            var expectedUserDTOs = expectedTwitterPostDTOs.Select(x => x.User).OrderBy(x => x.Id);
+            var actualUserDTOs = actual.Select(x => x.User).OrderBy(x => x.Id);
+
+            Assert.That(actual.OrderBy(x => x.Id), Is.EqualTo(expectedTwitterPostDTOs)
+                .Using(new TwitterPostDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.Images).OrderBy(x => x.Id), Is.EqualTo(expectedImagesDTOs)
+                .Using(new ImagesDTOEqualityComparer()));
+            Assert.That(actualUserDTOs, Is.EqualTo(expectedUserDTOs)
+                .Using(new UserDTOEqualityComparer()));
         }
 
     }

@@ -13,5 +13,7 @@ namespace Twitter.Services.Abstractions
         Task<UserDTO> GetUserByUserIdAsync(string userId);
 
         Task<List<UserDTO>> SearchUsersByNameAndSurnameAsync(string search);
+
+        Task<List<UserDTO>> GetUserFriendsByUserIdAsync(string userId);
     }
 }

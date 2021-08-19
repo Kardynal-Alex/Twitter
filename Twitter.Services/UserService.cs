@@ -160,5 +160,14 @@ namespace Twitter.Services
             var users = await unitOfWork.UserRepository.SearchUserByNameAndSurname(search);
             return mapper.Map<List<UserDTO>>(users);
         }
+
+        public async Task<List<UserDTO>> GetUserFriendsByUserIdAsync(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+                throw new TwitterException("Incorect userId");
+
+            var userFriends = await unitOfWork.UserRepository.GetUserFriendsByUserIdAsync(userId);
+            return mapper.Map<List<UserDTO>>(userFriends);
+        }
     }
 }

@@ -59,5 +59,14 @@ namespace Twitter.Persistence.Repositories
         {
             context.Entry(twitterPost).State = EntityState.Modified;
         }
+
+        public async Task<List<TwitterPost>> GetFriendsTweetsByUserIdAsync(string userId)
+        {
+            var friendTweets = from tweet in context.TwitterPosts.Include(x => x.Images).Include(x => x.User)
+                               from friend in context.Friends
+                               where friend.UserId == userId && (friend.FriendId == tweet.UserId || friend.UserId == tweet.UserId)
+                               select tweet;
+            return await friendTweets.ToListAsync();
+        }
     }
 }

@@ -59,5 +59,12 @@ namespace Twitter.WebApi.Controllers
             await service.UpdateTwitterPostWithImagesAsync(twitterPostDTO);
             return Ok();
         }
+
+        [HttpGet("getFriendsTweetsByUserId/{id}")]
+        public async Task<ActionResult<List<TwitterPostDTO>>> GetFriendsTweetsByUserId(string id)
+        {
+            var twitterPostDTOs = await service.GetFriendsTweetsByUserIdAsync(id);
+            return Ok(twitterPostDTOs);
+        }
     }
 }
