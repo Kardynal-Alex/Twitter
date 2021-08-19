@@ -111,5 +111,38 @@ namespace Twitter.Tests.WebApiTests
             Assert.That(actual, Is.EqualTo(InitialData.ExpectedFriendDTOs.ElementAt(0))
                 .Using(new FriendDTOEqualityComparer()));
         }
+
+        [Test]
+        public async Task FriendController_GetFriendByUserAndFriendId()
+        {
+            var friendDTO = new FriendDTO
+            {
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                FriendId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c"
+            };
+            var content = new StringContent(JsonConvert.SerializeObject(friendDTO), Encoding.UTF8, "application/json");
+            var httpResponse = await _client.PostAsync(requestUri + "getFriendByUserAndFriendId", content);
+
+            httpResponse.EnsureSuccessStatusCode();
+            var stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            var actual = JsonConvert.DeserializeObject<FriendDTO>(stringResponse);
+
+            Assert.That(actual, Is.EqualTo(InitialData.ExpectedFriendDTOs.ElementAt(0))
+                .Using(new FriendDTOEqualityComparer()));
+        }
+
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task FriendController_GetFriendsByUserId(string id)
+        {
+            var httpResponse = await _client.GetAsync(requestUri + "getFriendsByUserId/" + id);
+
+            httpResponse.EnsureSuccessStatusCode();
+            var stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            var actual = JsonConvert.DeserializeObject<List<FriendDTO>>(stringResponse);
+            var expected = InitialData.ExpectedFriendDTOs.Where(x => x.UserId == id);
+
+            Assert.That(actual, Is.EqualTo(expected)
+                .Using(new FriendDTOEqualityComparer()));
+        }
     }
 }

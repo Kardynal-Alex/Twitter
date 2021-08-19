@@ -8,6 +8,9 @@
     </div>
     <div class="profileText">
         <p>{{user['name']}} {{user['surname']}}</p>
+        <div class="friendBtn" *ngIf="user['id']!=userId">
+            <button id="friend-{{friendId}}" (click)="changeFriend(friendId)">friend</button>
+        </div>
     </div>
 
 </div>

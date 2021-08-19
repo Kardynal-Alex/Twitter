@@ -57,5 +57,38 @@ namespace Twitter.Tests.RepositoryTests
             Assert.That(friend, Is.EqualTo(InitialData.ExpectedFriends.ElementAt(0))
                 .Using(new FriendEqualityComparer()));
         }
+
+        [Test]
+        public async Task FriendRepository_GetFriendByUserAndFriendId()
+        {
+            await using var context = new ApplicationContext(_context);
+            var friendRepository = new FriendRepository(context);
+
+            var friend = new Friend
+            {
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                FriendId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c"
+            };
+
+            var actual = await friendRepository.GetFriendByUserAndFriendIdAsync(friend);
+
+            Assert.That(actual, Is.EqualTo(InitialData.ExpectedFriends.ElementAt(0))
+                .Using(new FriendEqualityComparer()));
+        }
+
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task FriendRepository_GetFriendsByUserId(string userId)
+        {
+            await using var context = new ApplicationContext(_context);
+            var friendRepository = new FriendRepository(context);
+
+            var friends = await friendRepository.GetFriendsByUserIdAsync(userId);
+            var expected = InitialData.ExpectedFriends.Where(x => x.UserId == userId);
+
+            Assert.AreEqual(friends.Count, expected.Count());
+            Assert.That(friends, Is.EqualTo(expected)
+                .Using(new FriendEqualityComparer()));
+        }
+
     }
 }

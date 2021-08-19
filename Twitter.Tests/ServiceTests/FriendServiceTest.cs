@@ -90,5 +90,43 @@ namespace Twitter.Tests.ServiceTests
             Assert.That(friendDTO, Is.EqualTo(InitialData.ExpectedFriendDTOs.ElementAt(0))
                 .Using(new FriendDTOEqualityComparer()));
         }
+
+        [Test]
+        public async Task FriendService_GetFriendByUserAndFriendId()
+        {
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.FriendRepository.GetFriendByUserAndFriendIdAsync(It.IsAny<Friend>()))
+                .Returns(Task.FromResult(InitialData.ExpectedFriends.ElementAt(0)));
+
+            var friendService = new FriendService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+            var friendDTO = new FriendDTO
+            {
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                FriendId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c"
+            };
+
+            var actual = await friendService.GetFriendByUserAndFriendIdAsync(friendDTO);
+
+            Assert.That(actual, Is.EqualTo(InitialData.ExpectedFriendDTOs.ElementAt(0))
+                .Using(new FriendDTOEqualityComparer()));
+        }
+
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task FriendService_GetFriendsByUserId(string userId)
+        {
+            var expectedFriends = InitialData.ExpectedFriends.Where(x => x.UserId == userId).ToList();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.FriendRepository.GetFriendsByUserIdAsync(It.IsAny<string>()))
+               .Returns(Task.FromResult(expectedFriends));
+
+            var friendService = new FriendService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+
+            var actual = await friendService.GetFriendsByUserIdAsync(userId);
+            var expectedFriendDTOs = InitialData.ExpectedFriendDTOs.Where(x => x.UserId == userId);
+
+            Assert.That(actual, Is.EqualTo(expectedFriendDTOs)
+                .Using(new FriendDTOEqualityComparer()));
+        }
+
     }
 }

@@ -33,10 +33,28 @@
     border: 1px solid white;
 }
 
+.profileText {
+    display: flex;
+}
+
 .profileText p {
     color: white;
     font-size: 40px;
     margin: 60px 0px 0px 80px;
     font-weight: 600;
     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.friendBtn {
+    margin-top: 65px;
+    margin-left: 100px;
+}
+
+.friendBtn button {
+    color: black;
+    background: white;
+    border-radius: 20px;
+    padding: 5px 20px 5px;
+    font-size: 20px;
+    font-weight: 600;
 }

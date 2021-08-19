@@ -16,6 +16,9 @@
             <div class="nickName">
                 <p>{{user['name']}} {{user['surname']}}</p>
             </div>
+            <div class="friendBtn" *ngIf="userId!=user['id']">
+                <button id="friend-{{user['id']}}" (click)="changeFriend(user['id'])">friend</button>
+            </div>
         </div>
     </div>
 </div>

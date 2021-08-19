@@ -12,5 +12,9 @@ namespace Twitter.Services.Abstractions
         Task DeleteFriendByIdAsync(Guid id);
 
         Task<FriendDTO> GetFriendByIdAsync(Guid id);
+
+        Task<FriendDTO> GetFriendByUserAndFriendIdAsync(FriendDTO friendDTO);
+
+        Task<List<FriendDTO>> GetFriendsByUserIdAsync(string userId);
     }
 }

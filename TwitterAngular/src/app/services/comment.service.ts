@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LocalStorageService } from './local-storage.service';
 import { comment } from '../models/comment';
 
 @Injectable({providedIn: 'root'})
 export class CommentService {
     apiUrl = 'https://localhost:44318/api/comment/';
-    constructor(private httpClient:HttpClient,
-                private localStorage:LocalStorageService) { }
-
+    constructor(private httpClient:HttpClient) { }
 
     addComment(comment:comment){
         return this.httpClient.post(this.apiUrl+"addComment/",comment);

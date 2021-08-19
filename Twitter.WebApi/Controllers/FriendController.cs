@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Twitter.Contracts;
 using Twitter.Services.Abstractions;
@@ -38,6 +37,20 @@ namespace Twitter.WebApi.Controllers
         {
             var friendDTO = await service.GetFriendByIdAsync(id);
             return Ok(friendDTO);
+        }
+
+        [HttpPost("getFriendByUserAndFriendId")]
+        public async Task<ActionResult<FriendDTO>> GetFriendByUserAndFriendId([FromBody] FriendDTO friendDTO)
+        {
+            var result = await service.GetFriendByUserAndFriendIdAsync(friendDTO);
+            return Ok(result);
+        }
+
+        [HttpGet("getFriendsByUserId/{id}")]
+        public async Task<ActionResult<List<FriendDTO>>> GetFriendsByUserId(string id)
+        {
+            var friendDTOs = await service.GetFriendsByUserIdAsync(id);
+            return Ok(friendDTOs);
         }
     }
 }

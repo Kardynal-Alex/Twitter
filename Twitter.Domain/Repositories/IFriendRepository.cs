@@ -12,5 +12,9 @@ namespace Twitter.Domain.Repositories
         void DeleteFriendById(Guid id);
 
         Task<Friend> GetFriendByIdAsync(Guid id);
+
+        Task<Friend> GetFriendByUserAndFriendIdAsync(Friend friend);
+
+        Task<List<Friend>> GetFriendsByUserIdAsync(string userId);
     }
 }

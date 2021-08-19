@@ -58,5 +58,28 @@ namespace Twitter.Services
             if (!Guid.TryParse(id.ToString(), out Guid guid) || string.IsNullOrEmpty(guid.ToString()))
                 throw new TwitterException("Incorect Guid data");
         }
+
+        public async Task<FriendDTO> GetFriendByUserAndFriendIdAsync(FriendDTO friendDTO)
+        {
+            ValidateFriendDTO(friendDTO);
+
+            var mappedFriend = mapper.Map<FriendDTO, Friend>(friendDTO);
+            var friend = await unitOfWork.FriendRepository.GetFriendByUserAndFriendIdAsync(mappedFriend);
+            return mapper.Map<Friend, FriendDTO>(friend);
+        }
+
+        public async Task<List<FriendDTO>> GetFriendsByUserIdAsync(string userId)
+        {
+            ValidateStringData(userId);
+
+            var friends = await unitOfWork.FriendRepository.GetFriendsByUserIdAsync(userId);
+            return mapper.Map<List<FriendDTO>>(friends);
+        }
+
+        private void ValidateStringData(string model)
+        {
+            if (string.IsNullOrEmpty(model))
+                throw new TwitterException("Incorect string data");
+        }
     }
 }

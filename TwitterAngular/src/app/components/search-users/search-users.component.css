@@ -73,3 +73,14 @@
     font-size: 30px;
     font-weight: 600;
 }
+
+.friendBtn button {
+    border-radius: 20px;
+    color: black;
+    background: white;
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
+    margin: 30px;
+    margin-left: 40px;
+    font-weight: 600;
+}
