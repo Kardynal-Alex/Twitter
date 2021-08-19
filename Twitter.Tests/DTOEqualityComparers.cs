@@ -99,4 +99,22 @@ namespace Twitter.Tests
             return obj.GetHashCode();
         }
     }
+
+    public class FavoriteDTOEqualityComparer : IEqualityComparer<FavoriteDTO>
+    {
+        public bool Equals([AllowNull] FavoriteDTO x, [AllowNull] FavoriteDTO y)
+        {
+            if (x == null && y == null)
+                return true;
+            if (x == null || y == null)
+                return false;
+
+            return x.Id == y.Id && x.UserId == y.UserId && x.TwitterPostId == y.TwitterPostId;
+        }
+
+        public int GetHashCode([DisallowNull] FavoriteDTO obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
 }

@@ -100,4 +100,22 @@ namespace Twitter.Tests
         }
     }
 
+    public class FavoriteEqualityComparer : IEqualityComparer<Favorite>
+    {
+        public bool Equals([AllowNull] Favorite x, [AllowNull] Favorite y)
+        {
+            if (x == null && y == null)
+                return true;
+            if (x == null || y == null)
+                return false;
+
+            return x.Id == y.Id && x.UserId == y.UserId && x.TwitterPostId == y.TwitterPostId;
+        }
+
+        public int GetHashCode([DisallowNull] Favorite obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
+
 }

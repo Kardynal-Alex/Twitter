@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
 using Twitter.Contracts;
 using Twitter.Domain.Entities;
 
@@ -15,6 +14,7 @@ namespace Twitter.Services.Mapping
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<Comment, CommentDTO>().ReverseMap();
             CreateMap<Friend, FriendDTO>().ReverseMap();
+            CreateMap<Favorite, FavoriteDTO>().ReverseMap();
         }
     }
 }

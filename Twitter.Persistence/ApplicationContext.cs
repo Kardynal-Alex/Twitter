@@ -12,6 +12,7 @@ namespace Twitter.Persistence
         public DbSet<Images> Images { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Friend> Friends { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

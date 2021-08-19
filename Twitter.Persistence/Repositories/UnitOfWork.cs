@@ -64,6 +64,15 @@ namespace Twitter.Persistence.Repositories
             }
         }
 
+        private IFavoriteRepository favoriteRepository;
+        public IFavoriteRepository FavoriteRepository
+        { 
+            get
+            {
+                return favoriteRepository ?? (favoriteRepository = new FavoriteRepository(context));
+            }
+        }
+
         private readonly UserManager<User> userManager;
         public UserManager<User> UserManager
         {
