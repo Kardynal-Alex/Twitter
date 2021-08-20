@@ -157,6 +157,16 @@
     font-size: 20px;
 }
 
+.editTweetForm .emoji a {
+    font-size: 20px;
+}
+
+.emoji-mart {
+    position: absolute;
+    margin-top: 25px;
+    z-index: 289;
+}
+
 
 .editTweetForm .cancel button {
     background: none;

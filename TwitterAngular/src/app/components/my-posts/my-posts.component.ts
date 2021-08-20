@@ -47,7 +47,7 @@ export class MyPostsComponent implements OnInit {
     this.images['id']=idGuid;
     const twitterPost:twitterPost={
       id:idGuid,
-      postText:form.value.postText,
+      postText:this.textArea,
       dateCreation:new Date(Date.now()),
       like:0,
       userId:this.user['id'],
@@ -69,6 +69,14 @@ export class MyPostsComponent implements OnInit {
 
   navigateToUserProfile(id:string){
     this.router.navigate(['user-profile/'+id]);
+  }
+
+  openImageUploadForm(){
+    var x=document.getElementById("uploadImages");
+    if(x.style.display=="block")
+      x.style.display="none";
+    else
+      x.style.display="block";
   }
 
   response;
@@ -96,6 +104,13 @@ export class MyPostsComponent implements OnInit {
 
   public createImgPath(serverPath: string){
     return this.twitterPostService.createImgPath(serverPath);
+  }
+
+  public textArea: string = '';
+  public isEmojiPickerVisible: boolean;
+  public addEmoji(event) {
+     this.textArea = `${this.textArea}${event.emoji.native}`;
+     this.isEmojiPickerVisible = false;
   }
 
 }

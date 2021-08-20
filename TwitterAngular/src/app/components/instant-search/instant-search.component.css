@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+    outline:none;
+}
+
+.search {
+    float: right;
+    width: 100%;
+}
+
+.searchBar {
+    width: 60%;
+    margin: 20px 20%;
+}
+
+.searchBar input {
+    font-size: 30px;
+}
+
+.searchBar input[type=text] {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.searchBar input,
+.search,
+.user,
+.userImage img {
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.users {
+    margin-top: 90px;
+    overflow: auto;
+    height: 300px;
+    scroll-behavior: smooth;
+    display: block;
+}
+
+.user {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.userImage {
+    margin: 10px;
+}
+
+.userImage img {
+    width: 50px;
+    height: 50px;
+}
+
+.user p {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 30px;
+}
+

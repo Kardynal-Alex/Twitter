@@ -57,4 +57,7 @@ export class TestComponent implements OnInit {
   public createImgPath(serverPath: string){
     return this.twitterService.createImgPath(serverPath);
   }
+
+  
+  
 }

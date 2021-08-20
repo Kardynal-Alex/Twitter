@@ -106,4 +106,10 @@ export class OutputTweetsComponent implements OnInit {
     }
   } 
 
+  public isEmojiPickerVisible: boolean;
+  public addEmoji(event) {
+    this.editTwitterPost['postText'] = `${this.editTwitterPost['postText']}${event.emoji.native}`;
+    this.isEmojiPickerVisible = false;
+  }
+
 }

@@ -47,6 +47,27 @@ body {
     position: inherit;
 }
 
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.icon {
+    margin-left: 10px;
+    padding-top: 5px;
+}
+
+.emoji {
+    font-size: 20px;
+    margin-top: 0;
+}
+
+.emoji-mart {
+    position: absolute;
+    margin-top: 170px;
+    margin-left: -600px;
+}
+
 .tweetForm textarea {
     border: none;
     height: auto;
@@ -55,7 +76,7 @@ body {
     min-width: 580px;
     resize: both;
     padding: 8px 10px;
-    overflow:hidden;
+    overflow: hidden;
     font-size: 20px;
 }
 

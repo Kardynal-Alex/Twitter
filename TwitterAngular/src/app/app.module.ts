@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AutosizeModule} from 'ngx-autosize';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 import { SortPipe } from './pipes/sort.pipe';
 import { LoginGuard } from './guards/login.guard';
@@ -28,6 +29,7 @@ import { TestComponent } from './components/test/test.component';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { UserFriendsComponent } from './components/user-friends/user-friends.component';
 import { SavedPostsComponent } from './components/saved-posts/saved-posts.component';
+import { InstantSearchComponent } from './components/instant-search/instant-search.component';
 
 
 const appRoutes: Routes =[
@@ -64,7 +66,8 @@ export function tokenGetter() {
     TestComponent,
     SearchUsersComponent,
     UserFriendsComponent,
-    SavedPostsComponent
+    SavedPostsComponent,
+    InstantSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ export function tokenGetter() {
     HttpClientModule,
     BrowserAnimationsModule,
     AutosizeModule,
+    PickerModule,
     RouterModule.forRoot(appRoutes),
     ToastrModule.forRoot({preventDuplicates:true}),
     JwtModule.forRoot({

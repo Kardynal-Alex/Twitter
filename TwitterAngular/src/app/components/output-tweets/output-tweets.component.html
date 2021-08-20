@@ -60,9 +60,13 @@
         </div>
         <form>
             <div class="textArea">
-                <textarea type="text"  autosize  [(ngModel)]="editTwitterPost['postText']" name="postText"
-                #editPostText="ngModel" required minlength="10" 
-                placeholder="What`s happening?" contenteditable rows='3'></textarea>
+                <textarea autosize type="text" name="textarea" [(ngModel)]="editTwitterPost['postText']"
+                required minlength="10" placeholder="What`s happening?" contenteditable></textarea>
+                <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible"
+                (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
+            </div>
+            <div class="emoji">
+                <a (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀</a>
             </div>
             <div class="editImages">
                 <div *ngFor="let n of numbersOfImages; let i=index">
