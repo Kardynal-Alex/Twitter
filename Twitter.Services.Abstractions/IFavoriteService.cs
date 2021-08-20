@@ -12,5 +12,7 @@ namespace Twitter.Services.Abstractions
         Task DeleteFavoriteByIdAsync(Guid id);
 
         Task<List<FavoriteDTO>> GetFavoritesByUserIdAsync(string userId);
+
+        Task DeleteFavoriteByTwitterPostAndUserIdAsync(FavoriteDTO favoriteDTO);
     }
 }

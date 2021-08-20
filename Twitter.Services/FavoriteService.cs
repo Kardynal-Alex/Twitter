@@ -59,5 +59,15 @@ namespace Twitter.Services
             if (string.IsNullOrEmpty(model))
                 throw new TwitterException("Incorect string data length or null");
         }
+
+        public async Task DeleteFavoriteByTwitterPostAndUserIdAsync(FavoriteDTO favoriteDTO)
+        {
+            ValidateFavoriteDTOData(favoriteDTO);
+
+            var favorite = mapper.Map<FavoriteDTO, Favorite>(favoriteDTO);
+            await unitOfWork.FavoriteRepository.DeleteFavoriteByTwitterPostAndUserIdAsync(favorite);
+
+            await unitOfWork.SaveAsync();
+        }
     }
 }

@@ -20,5 +20,7 @@ namespace Twitter.Domain.Repositories
         Task<List<TwitterPost>> GetTwitterPostsByUserIdWithImagesAndUsers(string userId);
 
         Task<List<TwitterPost>> GetFriendsTweetsByUserIdAsync(string userId);
+
+        Task<List<TwitterPost>> GetFavoriteUserTwitterPostsByUserIdAsync(string userId);
     }
 }

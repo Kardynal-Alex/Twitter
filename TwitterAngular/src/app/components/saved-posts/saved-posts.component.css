@@ -7,6 +7,25 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 
+.mainText {
+    border: 1px solid black; 
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.mainText .fa {
+    font-size: 30px;
+    padding-right: 20px;
+}
+
+.mainText h2{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
 .twitterPost {
     border-radius: 20px;
     border: 1px solid black;
@@ -92,4 +111,5 @@ body {
 
 .save i {
     font-size: 20px;
+    background: black;
 }

@@ -20,5 +20,7 @@ namespace Twitter.Services.Abstractions
         Task<List<TwitterPostDTO>> GetTwitterPostsByUserIdWithImagesAndUsers(string userId);
 
         Task<List<TwitterPostDTO>> GetFriendsTweetsByUserIdAsync(string userId);
+
+        Task<List<TwitterPostDTO>> GetFavoriteUserTwitterPostsByUserIdAsync(string userId);
     }
 }

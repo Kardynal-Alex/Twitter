@@ -1,4 +1,4 @@
-<link href='https://css.gg/more-alt.css' rel='stylesheet'>
+<link href='https://css.gg/more-o.css' rel='stylesheet'>
 <div *ngFor="let tweet of twitterPosts | sort:'desc':'dateCreation'">
     <ng-template [ngTemplateOutlet]="loadTemplate(tweet)" 
         [ngTemplateOutletContext]="{ $implicit: tweet}">
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="icon">
-            <i class="gg-more-alt" (click)="togle3DotsForm(tweet['id'])"></i>
+            <i class="gg-more-o" (click)="togle3DotsForm(tweet['id'])"></i>
         </div>
         <div class="form-popup" id="myForm-{{tweet['id']}}" style="display: none;">
             <div class="form-container">

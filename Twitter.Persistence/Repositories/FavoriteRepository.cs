@@ -28,7 +28,17 @@ namespace Twitter.Persistence.Repositories
 
         public async Task<List<Favorite>> GetFavoritesByUserIdAsync(string userId)
         {
-            return await context.Favorites.Where(x => x.UserId == userId).ToListAsync();
+            return await context.Favorites
+                .Where(x => x.UserId == userId)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task DeleteFavoriteByTwitterPostAndUserIdAsync(Favorite favorite)
+        {
+            var favoriteToDelete = await context.Favorites
+                .FirstOrDefaultAsync(x => x.TwitterPostId == favorite.TwitterPostId && x.UserId == favorite.UserId);
+            context.Favorites.Remove(favoriteToDelete);
         }
     }
 }

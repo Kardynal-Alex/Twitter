@@ -266,5 +266,25 @@ namespace Twitter.Tests.ServiceTests
                 .Using(new UserDTOEqualityComparer()));
         }
 
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task TwitterPostService_GetFavoriteUserTwitterPostsByUserId(string userId)
+        {
+            var twitterPosts = new List<TwitterPost>(new[] { TwitterPosts[0], TwitterPosts[1], TwitterPosts[3] });
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.TwitterPostRepository.GetFavoriteUserTwitterPostsByUserIdAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(twitterPosts));
+
+            var twitterPostService = new TwitterPostService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+            var actual = await twitterPostService.GetFavoriteUserTwitterPostsByUserIdAsync(userId);
+            var expected = new List<TwitterPostDTO>(new[] { TwitterPostDTOs[0], TwitterPostDTOs[1], TwitterPostDTOs[3] });
+
+            Assert.That(actual, Is.EqualTo(expected)
+                .Using(new TwitterPostDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.Images), Is.EqualTo(expected.Select(x => x.Images))
+                .Using(new ImagesDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.User), Is.EqualTo(expected.Select(x => x.User))
+                .Using(new UserDTOEqualityComparer()));
+        }
+
     }
 }

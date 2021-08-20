@@ -12,5 +12,7 @@ namespace Twitter.Domain.Repositories
         void DeleteFavoriteById(Guid id);
 
         Task<List<Favorite>> GetFavoritesByUserIdAsync(string userId);
+
+        Task DeleteFavoriteByTwitterPostAndUserIdAsync(Favorite favorite);
     }
 }

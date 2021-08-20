@@ -87,5 +87,25 @@ namespace Twitter.Tests.ServiceTests
             Assert.That(actual,Is.EqualTo(expected)
                 .Using(new FavoriteDTOEqualityComparer()));
         }
+
+        [Test]
+        public async Task FavoriteService_DeleteFavoriteByTwitterPostAndUserId()
+        {
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.FavoriteRepository.DeleteFavoriteByTwitterPostAndUserIdAsync(It.IsAny<Favorite>()));
+
+            var favoriteDTO = new FavoriteDTO
+            {
+                TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
+            };
+
+            var favoriteService = new FavoriteService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+            await favoriteService.DeleteFavoriteByTwitterPostAndUserIdAsync(favoriteDTO);
+
+            mockUnitOfWork.Verify(x => x.FavoriteRepository.DeleteFavoriteByTwitterPostAndUserIdAsync(It.Is<Favorite>(x =>
+                x.TwitterPostId == favoriteDTO.TwitterPostId && x.UserId == favoriteDTO.UserId)), Times.Once);
+            mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
+        }
     }
 }

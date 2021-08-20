@@ -107,5 +107,25 @@ namespace Twitter.Tests.WebApiTests
             Assert.That(actual, Is.EqualTo(expected)
                 .Using(new FavoriteDTOEqualityComparer()));
         }
+
+        [Test]
+        public async Task FavoriteIntegration_DeleteFavoriteByTwitterPostAndUserId()
+        {
+            var favoriteDTO = new FavoriteDTO
+            {
+                TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(favoriteDTO), Encoding.UTF8, "application/json");
+            var httpResponse = await _client.PostAsync(requestUri + "deleteFavoriteByTwitterPostAndUserId", content);
+
+            httpResponse.EnsureSuccessStatusCode();
+            using (var test = _factory.Services.CreateScope())
+            {
+                var context = test.ServiceProvider.GetService<ApplicationContext>();
+                Assert.AreEqual(2, context.Favorites.Count());
+            }
+        }
     }
 }

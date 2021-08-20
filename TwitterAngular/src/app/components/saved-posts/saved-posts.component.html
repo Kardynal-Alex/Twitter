@@ -1,3 +1,6 @@
+<div class="mainText">
+    <h2><a class="fa fa-twitter"></a>Bookmarks</h2>
+</div>
 <link href='https://css.gg/shape-square.css' rel='stylesheet'>
 <div class="twitterPosts">
     <div *ngFor="let tweet of twitterPosts | sort:'desc':'dateCreation'">
@@ -35,7 +38,7 @@
                 </div>
             </div>
             <div class="save">
-                <i id="save-{{tweet['id']}}" class="gg-shape-square" (click)="changeIconSavedPost(tweet['id'])"></i>
+                <i id="save-{{tweet['id']}}" class="gg-shape-square" (click)="removeBookmark(tweet['id'])"></i>
             </div>
         </div>
     </div>

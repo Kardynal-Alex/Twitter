@@ -106,5 +106,13 @@ namespace Twitter.Services
             var twitterPosts = await unitOfWork.TwitterPostRepository.GetFriendsTweetsByUserIdAsync(userId);
             return mapper.Map<List<TwitterPostDTO>>(twitterPosts);
         }
+
+        public async Task<List<TwitterPostDTO>> GetFavoriteUserTwitterPostsByUserIdAsync(string userId)
+        {
+            ValidateStringData(userId);
+
+            var favoriteTweets = await unitOfWork.TwitterPostRepository.GetFavoriteUserTwitterPostsByUserIdAsync(userId);
+            return mapper.Map<List<TwitterPostDTO>>(favoriteTweets);
+        }
     }
 }

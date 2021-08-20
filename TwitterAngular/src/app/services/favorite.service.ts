@@ -18,4 +18,8 @@ export class FavoriteService {
     getFavoritesByUserId(id:string){
         return this.httpClient.get<favorite[]>(this.apiUrl+"getFavoritesByUserId/"+id);
     }
+
+    deleteFavoriteByTwitterPostAndUserId(favorite:favorite){
+        return this.httpClient.post(this.apiUrl+"deleteFavoriteByTwitterPostAndUserId/",favorite);
+    }
 }

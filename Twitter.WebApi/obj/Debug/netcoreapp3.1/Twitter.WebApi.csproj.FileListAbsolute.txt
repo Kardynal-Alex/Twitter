@@ -87,7 +87,6 @@ D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Domai
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Persistence.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Persistence.pdb
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Domain.pdb
-D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebApi.MvcApplicationPartsAssemblyInfo.cs
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Services.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Services.pdb

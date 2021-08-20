@@ -33,12 +33,16 @@ namespace Twitter.Persistence.Repositories
 
         public async Task<Friend> GetFriendByUserAndFriendIdAsync(Friend friend)
         {
-            return await context.Friends.FirstOrDefaultAsync(x => x.UserId == friend.UserId && x.FriendId == friend.FriendId);
+            return await context.Friends
+                .FirstOrDefaultAsync(x => x.UserId == friend.UserId && x.FriendId == friend.FriendId);
         }
 
         public async Task<List<Friend>> GetFriendsByUserIdAsync(string userId)
         {
-            return await context.Friends.Where(x => x.UserId == userId).ToListAsync();
+            return await context.Friends
+                .Where(x => x.UserId == userId)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }

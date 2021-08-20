@@ -60,5 +60,23 @@ namespace Twitter.Tests.RepositoryTests
             Assert.That(favorites, Is.EqualTo(expected)
                 .Using(new FavoriteEqualityComparer()));
         }
+
+        [Test]
+        public async Task FavoriteRepository_DeleteFavoriteByTwitterPostAndUserId()
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var favoriteRepository = new FavoriteRepository(context);
+            var favorite = new Favorite
+            {
+                TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
+            };
+
+            await favoriteRepository.DeleteFavoriteByTwitterPostAndUserIdAsync(favorite);
+            await context.SaveChangesAsync();
+
+            Assert.That(context.Favorites.Count(), Is.EqualTo(2));
+        }
     }
 }

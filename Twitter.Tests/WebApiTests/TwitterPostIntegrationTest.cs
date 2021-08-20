@@ -276,5 +276,23 @@ namespace Twitter.Tests.WebApiTests
                 .Using(new UserDTOEqualityComparer()));
         }
 
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task TwitterPostController_GetFavoriteUserTwitterPostsByUserId(string id)
+        {
+            var httpResponse = await _client.GetAsync(requestUri + "getFavoriteTwitterPostsByUserId/" + id);
+
+            httpResponse.EnsureSuccessStatusCode();
+            var stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            var actual = JsonConvert.DeserializeObject<IEnumerable<TwitterPostDTO>>(stringResponse).ToList();
+            var expected = new List<TwitterPostDTO>(new[] { TwitterPostDTOs[0], TwitterPostDTOs[1], TwitterPostDTOs[3] });
+
+            Assert.That(actual, Is.EqualTo(expected)
+              .Using(new TwitterPostDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.Images), Is.EqualTo(expected.Select(x => x.Images))
+                .Using(new ImagesDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.User), Is.EqualTo(expected.Select(x => x.User))
+                .Using(new UserDTOEqualityComparer()));
+        }
+
     }
 }

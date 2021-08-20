@@ -38,5 +38,12 @@ namespace Twitter.WebApi.Controllers
             var favoriteDTOs = await service.GetFavoritesByUserIdAsync(id);
             return Ok(favoriteDTOs);
         }
+
+        [HttpPost("deleteFavoriteByTwitterPostAndUserId")]
+        public async Task<ActionResult> DeleteFavoriteByTwitterPostAndUserId([FromBody] FavoriteDTO favoriteDTO)
+        {
+            await service.DeleteFavoriteByTwitterPostAndUserIdAsync(favoriteDTO);
+            return Ok();
+        }
     }
 }

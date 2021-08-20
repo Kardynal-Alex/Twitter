@@ -66,7 +66,16 @@ namespace Twitter.Persistence.Repositories
                                from friend in context.Friends
                                where friend.UserId == userId && (friend.FriendId == tweet.UserId || friend.UserId == tweet.UserId)
                                select tweet;
-            return await friendTweets.ToListAsync();
+            return await friendTweets.Distinct().AsNoTracking().ToListAsync();
+        }
+
+        public async Task<List<TwitterPost>> GetFavoriteUserTwitterPostsByUserIdAsync(string userId)
+        {
+            var favoriteTwitterPosts = from tweet in context.TwitterPosts.Include(x => x.Images).Include(x => x.User)
+                                       from favorite in context.Favorites
+                                       where favorite.UserId == userId && favorite.TwitterPostId == tweet.Id
+                                       select tweet;
+            return await favoriteTwitterPosts.AsNoTracking().ToListAsync();
         }
     }
 }

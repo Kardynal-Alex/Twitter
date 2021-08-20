@@ -66,5 +66,12 @@ namespace Twitter.WebApi.Controllers
             var twitterPostDTOs = await service.GetFriendsTweetsByUserIdAsync(id);
             return Ok(twitterPostDTOs);
         }
+
+        [HttpGet("getFavoriteTwitterPostsByUserId/{id}")]
+        public async Task<ActionResult<List<TwitterPostDTO>>> GetFavoriteUserTwitterPostsByUserId(string id)
+        {
+            var favoriteTweetDTOs = await service.GetFavoriteUserTwitterPostsByUserIdAsync(id);
+            return Ok(favoriteTweetDTOs);
+        }
     }
 }

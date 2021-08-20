@@ -44,6 +44,10 @@ export class TwitterPostService {
         return this.httpClient.get<twitterPost[]>(this.apiUrl+"getFriendsTweetsByUserId/"+id);
     }
 
+    getFavoriteUserTwitterPostsByUserId(id:string){
+        return this.httpClient.get<twitterPost[]>(this.apiUrl+"getFavoriteTwitterPostsByUserId/"+id);
+    }
+
     uploadPhoto(files){
         let fileToUpload=<File>files[0];
         let formData=new FormData();
