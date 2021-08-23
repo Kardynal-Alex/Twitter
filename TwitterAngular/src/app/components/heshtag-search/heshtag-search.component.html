@@ -1,0 +1,10 @@
+<div class="mainText">
+    <h2><a class="fa fa-twitter"></a>Search Twitter Posts</h2>
+</div>
+<div class="search">
+    <div class="search-box">
+        <input type="text" placeholder="Search #Twitter" name="search" [(ngModel)]="search" />
+        <button type="submit" (click)="searchTweets()"><i class="fa fa-search"></i></button>
+    </div>
+</div>
+<app-view-users-tweet [twitterPosts]="twitterPosts" *ngIf="twitterPosts"></app-view-users-tweet>

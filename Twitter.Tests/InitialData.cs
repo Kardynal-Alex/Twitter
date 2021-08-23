@@ -22,7 +22,7 @@ namespace Twitter.Tests
                 new TwitterPost
                 {
                     Id = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
-                    PostText = "TwitterPost text2",
+                    PostText = "TwitterPost text2 #test",
                     DateCreation = DateTime.Now.Date,
                     Like = 3,
                     UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
@@ -30,7 +30,7 @@ namespace Twitter.Tests
                 new TwitterPost
                 {
                     Id = new Guid("cccccccc-cccc-cccc-cccc-cccccccccccc"),
-                    PostText = "TwitterPost text3",
+                    PostText = "TwitterPost text3 #testing",
                     DateCreation = DateTime.Now.Date,
                     Like = 0,
                     UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c"

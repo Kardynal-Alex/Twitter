@@ -294,5 +294,38 @@ namespace Twitter.Tests.WebApiTests
                 .Using(new UserDTOEqualityComparer()));
         }
 
+        [Test]
+        public async Task TwitterPostController_SearchTwitterPostsByHeshTag()
+        {
+            string search = "test";
+            var httpResponse = await _client.GetAsync(requestUri + "searchTwitterPostsByHeshTag/?search=" + search);
+
+            httpResponse.EnsureSuccessStatusCode();
+            var stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            var actual = JsonConvert.DeserializeObject<IEnumerable<TwitterPostDTO>>(stringResponse).ToList();
+            var expectedTweets = new List<TwitterPostDTO>(new[]
+            {
+                TwitterPostDTOs[1],
+                TwitterPostDTOs[2]
+            });
+            var expectedImages = new List<ImagesDTO>(new[]
+            {
+                TwitterPostDTOs[1].Images,
+                TwitterPostDTOs[2].Images
+            });
+            var expectedUsers = new List<UserDTO>(new[]
+            {
+                InitialData.ExpectedUserDTOs.ElementAt(0),
+                InitialData.ExpectedUserDTOs.ElementAt(1)
+            });
+
+            Assert.That(actual, Is.EqualTo(expectedTweets)
+               .Using(new TwitterPostDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.Images), Is.EqualTo(expectedImages)
+                .Using(new ImagesDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.User), Is.EqualTo(expectedUsers)
+                .Using(new UserDTOEqualityComparer()));
+        }
+
     }
 }

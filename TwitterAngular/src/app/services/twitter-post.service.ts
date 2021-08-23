@@ -48,6 +48,10 @@ export class TwitterPostService {
         return this.httpClient.get<twitterPost[]>(this.apiUrl+"getFavoriteTwitterPostsByUserId/"+id);
     }
 
+    searchTweetsByHeshTag(search:string){
+        return this.httpClient.get<twitterPost[]>(this.apiUrl+"searchTwitterPostsByHeshTag/?search="+search);
+    }
+
     uploadPhoto(files){
         let fileToUpload=<File>files[0];
         let formData=new FormData();

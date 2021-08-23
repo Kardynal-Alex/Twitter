@@ -11,7 +11,7 @@ import { FriendService } from 'src/app/services/friend.service';
   templateUrl: './search-users.component.html',
   styleUrls: ['./search-users.component.css']
 })
-export class SearchUsersComponent implements OnInit, AfterViewInit {
+export class SearchUsersComponent implements OnInit{
 
   constructor(private authService:AuthService,
               private router:Router,
@@ -25,19 +25,19 @@ export class SearchUsersComponent implements OnInit, AfterViewInit {
       this.getFriendsByUserId(this.userId);
   }
 
-  ngAfterViewInit(){
-    
-  }
-
-  search:string="kardynal";
+  search:string="";
   users:user[];
   searchUsers(){
-    this.authService.searchUsersByNameAndSurname(this.search).subscribe(response=>{
-      this.users=response;
-      setTimeout(() => {
-        this.changeFriendButtonOposite();
-      },100);
-    });
+    if(this.search!=''){
+      this.authService.searchUsersByNameAndSurname(this.search).subscribe(response=>{
+        this.users=response;
+        setTimeout(() => {
+          this.changeFriendButtonOposite();
+        },100);
+      });
+    }else{
+      this.users=null;
+    }
   }
 
   navigateToUserProfile(id:string){

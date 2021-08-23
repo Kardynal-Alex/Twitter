@@ -11,5 +11,9 @@ namespace Twitter.Services.Abstractions
         Task<List<Claim>> GetClaims(string email);
 
         string GenerateToken(List<Claim> claims);
+
+        string GenerateRefreshToken();
+
+        ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
     }
 }

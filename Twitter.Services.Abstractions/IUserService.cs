@@ -8,7 +8,7 @@ namespace Twitter.Services.Abstractions
     {
         Task<string> FacebookLoginAsync(string accessToken);
 
-        Task<string> GoogleLoginAsync(GoogleAuthDTO googleAuthDTO);
+        Task<TokenAuthDTO> GoogleLoginAsync(GoogleAuthDTO googleAuthDTO);
 
         Task<UserDTO> GetUserByUserIdAsync(string userId);
 

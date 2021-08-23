@@ -73,5 +73,12 @@ namespace Twitter.WebApi.Controllers
             var favoriteTweetDTOs = await service.GetFavoriteUserTwitterPostsByUserIdAsync(id);
             return Ok(favoriteTweetDTOs);
         }
+
+        [HttpGet("searchTwitterPostsByHeshTag/")]
+        public async Task<ActionResult<List<TwitterPostDTO>>> SearchTwitterPostsByHeshTag(string search)
+        {
+            var searchTweets = await service.SearchTwitterPostsByHeshTagAsync(search);
+            return Ok(searchTweets);
+        }
     }
 }

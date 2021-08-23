@@ -30,12 +30,12 @@ namespace Twitter.WebApi.Controllers
         }
 
         [HttpPost("google")]
-        public async Task<ActionResult> Google([FromBody] GoogleAuthDTO model)
+        public async Task<ActionResult<TokenAuthDTO>> Google([FromBody] GoogleAuthDTO model)
         {
-            var tokenString = await service.GoogleLoginAsync(model);
-            if (tokenString != null)
+            var tokenAuthDTO = await service.GoogleLoginAsync(model);
+            if (tokenAuthDTO != null)
             {
-                return Ok(new { Token = tokenString });
+                return Ok(tokenAuthDTO);
             }
             return BadRequest();
         }

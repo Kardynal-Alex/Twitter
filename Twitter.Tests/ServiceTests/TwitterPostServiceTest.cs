@@ -286,5 +286,28 @@ namespace Twitter.Tests.ServiceTests
                 .Using(new UserDTOEqualityComparer()));
         }
 
+        [Test]
+        public async Task TwitterPostService_SearchTwitterPostsByHeshTag()
+        {
+            string search = "test";
+            var twitterPosts = TwitterPosts.Where(x => x.PostText.Contains("#" + search));
+            
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.TwitterPostRepository.SearchTwitterPostsByHeshTagAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(twitterPosts.ToList()));
+
+            var twitterPostService = new TwitterPostService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+            var actual = await twitterPostService.SearchTwitterPostsByHeshTagAsync(search);
+            var expected = TwitterPostDTOs.Where(x => x.PostText.Contains("#" + search));
+
+            Assert.AreEqual(actual.Count, expected.Count());
+            Assert.That(actual, Is.EqualTo(expected)
+               .Using(new TwitterPostDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.Images), Is.EqualTo(expected.Select(x => x.Images))
+                .Using(new ImagesDTOEqualityComparer()));
+            Assert.That(actual.Select(x => x.User), Is.EqualTo(expected.Select(x => x.User))
+                .Using(new UserDTOEqualityComparer()));
+        }
+
     }
 }

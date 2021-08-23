@@ -194,5 +194,37 @@ namespace Twitter.Tests.RepositoryTests
             Assert.That(favoriteTweets.Select(x => x.User), Is.EqualTo(expectedUsers)
                 .Using(new UserEqualityComparer()));
         }
+
+        [Test]
+        public async Task TwitterPostRepository_SearchTwitterPostsByHeshTag()
+        {
+            string search = "test";
+            await using var context = new ApplicationContext(_context);
+
+            var twitterRepository = new TwitterPostRepository(context);
+            var tweets = await twitterRepository.SearchTwitterPostsByHeshTagAsync(search);
+            var expectedTweets = new List<TwitterPost>(new[] 
+            {
+                InitialData.ExpectedTwitterPosts.ElementAt(1),
+                InitialData.ExpectedTwitterPosts.ElementAt(2)
+            });
+            var expectedImages = new List<Images>(new[]
+            {
+                InitialData.ExpectedImages.ElementAt(1),
+                InitialData.ExpectedImages.ElementAt(2)
+            });
+            var expectedUsers = new List<User>(new[]
+            {
+                InitialData.ExpectedUsers.ElementAt(0),
+                InitialData.ExpectedUsers.ElementAt(1)
+            });
+
+            Assert.That(tweets, Is.EqualTo(expectedTweets)
+                .Using(new TwitterPostEqualityComparer()));
+            Assert.That(tweets.Select(x => x.Images), Is.EqualTo(expectedImages)
+                .Using(new ImagesEqualityComparer()));
+            Assert.That(tweets.Select(x => x.User), Is.EqualTo(expectedUsers)
+                .Using(new UserEqualityComparer()));
+        }
     }
 }

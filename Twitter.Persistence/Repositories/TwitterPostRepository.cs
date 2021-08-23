@@ -77,5 +77,11 @@ namespace Twitter.Persistence.Repositories
                                        select tweet;
             return await favoriteTwitterPosts.AsNoTracking().ToListAsync();
         }
+
+        public async Task<List<TwitterPost>> SearchTwitterPostsByHeshTagAsync(string search)
+        {
+            return await context.TwitterPosts.Include(x => x.User).Include(x => x.Images)
+                .Where(x => x.PostText.Contains("#" + search)).ToListAsync();
+        }
     }
 }

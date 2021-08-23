@@ -88,7 +88,7 @@ namespace Twitter.Services
             return mapper.Map<User, UserDTO>(user);
         }
 
-        public async Task<string> GoogleLoginAsync(GoogleAuthDTO googleAuthDTO)
+        public async Task<TokenAuthDTO> GoogleLoginAsync(GoogleAuthDTO googleAuthDTO)
         {
             var payload = await VerifyGoogleToken(googleAuthDTO);
             if (payload == null)
@@ -134,7 +134,12 @@ namespace Twitter.Services
 
             var claims = await tokenService.GetClaims(user.Email);
             var token = tokenService.GenerateToken(claims);
-            return token;
+            var refreshToken = tokenService.GenerateRefreshToken();
+            return new TokenAuthDTO
+            {
+                Token = token,
+                RefreshToken = refreshToken
+            };
         }
 
         private async Task<GoogleJsonWebSignature.Payload> VerifyGoogleToken(GoogleAuthDTO externalAuth)
