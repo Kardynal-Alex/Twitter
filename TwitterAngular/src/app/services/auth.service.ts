@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocalStorageService } from './local-storage.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { user } from '../models/user';
 import { externalAuth } from '../models/external-auth';
 import { facebook } from '../models/facebook';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
     apiUrl = 'https://localhost:44318/api/account/';
     constructor(private httpClient:HttpClient,
                 private localStorage:LocalStorageService,
-                private jwtHelper: JwtHelperService) { }
+                private jwtHelper: JwtHelperService,
+                private router:Router) { }
 
     
     facebookLogin(facebookLogin:facebook){
@@ -36,14 +38,15 @@ export class AuthService {
 
     logout() {
         this.localStorage.remove("token");
+        this.localStorage.remove("refreshToken");
     }
 
     isAuthenticated() {
         const token=this.localStorage.get("token");
-        if(token && !this.jwtHelper.isTokenExpired(token))
+        if(token && token!=undefined && !this.jwtHelper.isTokenExpired(token))
           return true;
-        else 
-          return false;
+          
+        return false;
     }
     
     checkIfIsAdmin(){

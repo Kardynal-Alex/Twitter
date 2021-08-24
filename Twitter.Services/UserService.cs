@@ -6,7 +6,9 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Twitter.Contracts;
 using Twitter.Domain.Entities;
@@ -173,6 +175,30 @@ namespace Twitter.Services
 
             var userFriends = await unitOfWork.UserRepository.GetUserFriendsByUserIdAsync(userId);
             return mapper.Map<List<UserDTO>>(userFriends);
+        }
+
+        public async Task<TokenAuthDTO> RefreshTokenAsync(TokenAuthDTO tokenAuthDTO)
+        {
+            if (tokenAuthDTO is null)
+                throw new TwitterException("Token authDTO is empty");
+
+            string token = tokenAuthDTO.Token;
+
+            var principal = tokenService.GetPrincipalFromExpiredToken(token);
+            var email = principal.Identity.Name;
+
+            var user = await unitOfWork.UserManager.FindByEmailAsync(email);
+            if (user == null)
+                throw new TwitterException("User is not founded!");
+
+            var newToken = tokenService.GenerateToken(principal.Claims.ToList());
+            var newRefreshToken = tokenService.GenerateRefreshToken();
+
+            return new TokenAuthDTO
+            {
+                Token = newToken,
+                RefreshToken = newRefreshToken
+            };
         }
     }
 }

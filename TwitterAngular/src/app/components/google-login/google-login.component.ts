@@ -56,7 +56,9 @@ export class GoogleLoginComponent implements OnInit {
           document.getElementById('auth').style.display="none";
           this.toastrService.success("Login successfully.");
           const token=(<any>response).token;
-          this.localStorage.set("token", JSON.stringify(token));
+          const refreshToken = (<any>response).refreshToken;
+          this.localStorage.set("token", token);
+          this.localStorage.set("refreshToken", refreshToken);
           document.getElementById('router').className="router1";
         },error=>{
           this.toastrService.error("error");

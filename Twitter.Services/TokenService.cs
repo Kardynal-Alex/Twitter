@@ -60,7 +60,8 @@ namespace Twitter.Services
                 new Claim("surname", user.Surname),
                 new Claim("email", user.Email),
                 new Claim("role", user.Role),
-                new Claim("profileimagepath", user.ProfileImagePath)
+                new Claim("profileimagepath", user.ProfileImagePath),
+                new Claim(ClaimTypes.Name, user.UserName)
             };
             return claims;
         }
@@ -72,8 +73,8 @@ namespace Twitter.Services
                 ValidateAudience = false, 
                 ValidateIssuer = false,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345")),
-                ValidateLifetime = false 
+                IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                ValidateLifetime = true 
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

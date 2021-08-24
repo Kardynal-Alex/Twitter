@@ -60,5 +60,16 @@ namespace Twitter.WebApi.Controllers
             var userFriendDTOs = await service.GetUserFriendsByUserIdAsync(id);
             return Ok(userFriendDTOs);
         }
+
+        [HttpPost("refreshToken")]
+        public async Task<ActionResult<TokenAuthDTO>> RefreshToken(TokenAuthDTO tokenAuthDTO)
+        {
+            var result = await service.RefreshTokenAsync(tokenAuthDTO);
+            if(result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
+        }
     }
 }

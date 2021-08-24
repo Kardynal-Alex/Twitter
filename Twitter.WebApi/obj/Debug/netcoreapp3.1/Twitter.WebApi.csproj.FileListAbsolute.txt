@@ -105,4 +105,3 @@ D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Google.Apis.d
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Google.Apis.Auth.PlatformServices.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Google.Apis.Auth.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Google.Apis.Core.dll
-D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebApi.MvcApplicationPartsAssemblyInfo.cs
