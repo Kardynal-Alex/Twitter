@@ -31,5 +31,11 @@ namespace Twitter.Persistence.Repositories
             return await context.Likes.Where(x => x.UserId == userId)
                 .AsNoTracking().ToListAsync();
         }
+
+        public async Task<Like> GetLikeByUserAndTwitterPostIdAsync(Like like)
+        {
+            return await context.Likes
+                .FirstOrDefaultAsync(x => x.TwitterPostId == like.TwitterPostId && x.UserId == like.UserId);
+        }
     }
 }

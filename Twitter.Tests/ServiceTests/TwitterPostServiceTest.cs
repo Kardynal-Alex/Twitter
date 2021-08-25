@@ -309,5 +309,31 @@ namespace Twitter.Tests.ServiceTests
                 .Using(new UserDTOEqualityComparer()));
         }
 
+        [Test]
+        public async Task TwitterPostService_UpdateOnlyTwitterPost()
+        {
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+
+            mockUnitOfWork.Setup(x => x.TwitterPostRepository.UpdateTwitterPost(It.IsAny<TwitterPost>()));
+            var twitterPostService = new TwitterPostService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+
+            var twitterPostDTO = new TwitterPostDTO
+            {
+                Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                PostText = "update TwitterPost text1",
+                DateCreation = DateTime.Now.Date,
+                Like = 0,
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+            };
+            await twitterPostService.UpdateOnlyTwitterPost(twitterPostDTO);
+
+            mockUnitOfWork.Verify(x => x.TwitterPostRepository.UpdateTwitterPost(It.Is<TwitterPost>(x =>
+                  x.Id == twitterPostDTO.Id && x.PostText == twitterPostDTO.PostText &&
+                  x.DateCreation.Date == twitterPostDTO.DateCreation.Date && x.Like == twitterPostDTO.Like &&
+                  x.UserId == twitterPostDTO.UserId)), Times.Once);
+
+            mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
+        }
+
     }
 }

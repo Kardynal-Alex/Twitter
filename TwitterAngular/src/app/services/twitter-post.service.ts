@@ -20,6 +20,10 @@ export class TwitterPostService {
         return this.httpClient.put(this.apiUrl+"updateTwitterPost/",twitterPost);
     }
 
+    updateOnlyTwitterPost(twitterPost:twitterPost){
+        return this.httpClient.put(this.apiUrl+"updateOnlyTwitterPost/",twitterPost);
+    }
+
     createImgPath(serverPath: string){
         return `https://localhost:44318/${serverPath}`;
     }

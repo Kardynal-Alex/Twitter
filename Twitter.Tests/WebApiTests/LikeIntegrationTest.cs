@@ -108,5 +108,32 @@ namespace Twitter.Tests.WebApiTests
                 .Using(new LikeDTOEqualityComparer()));
         }
 
+        [Test]
+        public async Task LikeRepository_GetLikeByUserAndTwitterPostId()
+        {
+            var likeDTO = new LikeDTO
+            {
+                Id = new Guid("74d1b908-ff65-4c74-b836-44a4ca840ce8"),
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
+            };
+            var content = new StringContent(JsonConvert.SerializeObject(likeDTO), Encoding.UTF8, "application/json");
+            var httpResponse = await _client.PostAsync(requestUri + "getLikeByUserAndTwitterPostId", content);
+
+            httpResponse.EnsureSuccessStatusCode();
+            using (var test = _factory.Services.CreateScope())
+            {
+                var context = test.ServiceProvider.GetService<ApplicationContext>();
+                var like = await context.Likes.FirstOrDefaultAsync(x =>
+                    x.TwitterPostId == likeDTO.TwitterPostId && x.UserId == likeDTO.UserId);
+
+                var expected = new AutoMapperHelper<Like, LikeDTO>().MapToType(like);
+
+                Assert.NotNull(expected.Id);
+                Assert.AreEqual(likeDTO.TwitterPostId, expected.TwitterPostId);
+                Assert.AreEqual(likeDTO.UserId, expected.UserId);
+            }
+        }
+
     }
 }

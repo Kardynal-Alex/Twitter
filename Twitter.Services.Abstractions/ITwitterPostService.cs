@@ -24,5 +24,7 @@ namespace Twitter.Services.Abstractions
         Task<List<TwitterPostDTO>> GetFavoriteUserTwitterPostsByUserIdAsync(string userId);
 
         Task<List<TwitterPostDTO>> SearchTwitterPostsByHeshTagAsync(string search);
+
+        Task UpdateOnlyTwitterPost(TwitterPostDTO twitterPostDTO);
     }
 }

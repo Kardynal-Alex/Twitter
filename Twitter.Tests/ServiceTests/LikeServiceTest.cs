@@ -86,5 +86,28 @@ namespace Twitter.Tests.ServiceTests
             Assert.That(actual, Is.EqualTo(InitialData.ExpectedLikeDTOs)
                 .Using(new LikeDTOEqualityComparer()));
         }
+
+        [Test]
+        public async Task LikeRepository_GetLikeByUserAndTwitterPostId()
+        {
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.LikeRepository.GetLikeByUserAndTwitterPostIdAsync(It.IsAny<Like>()))
+                .Returns(Task.FromResult(InitialData.ExpectedLikes.ElementAt(0)));
+
+            var likeService = new LikeService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+            var likeDTO = new LikeDTO
+            {
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
+            };
+
+            var actual = await likeService.GetLikeByUserAndTwitterPostIdAsync(likeDTO);
+            var expected = InitialData.ExpectedLikeDTOs.ElementAt(0);
+
+            Assert.NotNull(actual);
+            Assert.NotNull(expected.Id);
+            Assert.AreEqual(actual.TwitterPostId, expected.TwitterPostId);
+            Assert.AreEqual(actual.UserId, expected.UserId);
+        }
     }
 }

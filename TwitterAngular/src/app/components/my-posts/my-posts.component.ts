@@ -1,5 +1,5 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
@@ -9,6 +9,7 @@ import { twitterPost } from 'src/app/models/twitter-post';
 import { user } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { TwitterPostService } from 'src/app/services/twitter-post.service';
+import { OutputTweetsComponent } from '../output-tweets/output-tweets.component';
 
 @Component({
   selector: 'app-my-posts',
@@ -42,6 +43,7 @@ export class MyPostsComponent implements OnInit {
     });
   }
 
+  @ViewChild('child') child:OutputTweetsComponent;
   createTwitterPost(form:NgForm){
     const idGuid=Guid.create().toString();
     this.images['id']=idGuid;
@@ -60,8 +62,8 @@ export class MyPostsComponent implements OnInit {
       form.resetForm();
       for(let i of this.numbersOfImages)
         this.images['image'+(i+1)]='';
-        //this.twitterPosts.unshift(twitterPost);
-        this.getTwitterPostByUserId();
+      this.getTwitterPostByUserId();
+      this.child.setLikesAfterUpdates();
     },error=>{
       this.toastrService.error("Something went wrong!");
     })

@@ -19,4 +19,8 @@ export class LikeService {
     getLikesByUserId(id:string){
         return this.httpClient.get<like[]>(this.apiUrl+"getLikesByUserId/"+id);
     }
+
+    getLikeByUserAndTwitterPostId(like:like){
+        return this.httpClient.post(this.apiUrl+"getLikeByUserAndTwitterPostId/",like);
+    }
 }

@@ -120,5 +120,15 @@ namespace Twitter.Services
             var searchTeewts = await unitOfWork.TwitterPostRepository.SearchTwitterPostsByHeshTagAsync(search);
             return mapper.Map<List<TwitterPostDTO>>(searchTeewts);
         }
+
+        public async Task UpdateOnlyTwitterPost(TwitterPostDTO twitterPostDTO)
+        {
+            ValidateTwitterPostDTO(twitterPostDTO);
+
+            var twitterPost = mapper.Map<TwitterPostDTO, TwitterPost>(twitterPostDTO);
+            unitOfWork.TwitterPostRepository.UpdateTwitterPost(twitterPost);
+
+            await unitOfWork.SaveAsync();
+        }
     }
 }

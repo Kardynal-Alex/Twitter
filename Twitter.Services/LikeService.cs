@@ -58,5 +58,14 @@ namespace Twitter.Services
             if (string.IsNullOrEmpty(model))
                 throw new TwitterException("Incorect string data length or null");
         }
+
+        public async Task<LikeDTO> GetLikeByUserAndTwitterPostIdAsync(LikeDTO likeDTO)
+        {
+            ValidateLikeDTO(likeDTO);
+
+            var mappedLike = mapper.Map<LikeDTO, Like>(likeDTO);
+            var like = await unitOfWork.LikeRepository.GetLikeByUserAndTwitterPostIdAsync(mappedLike);
+            return mapper.Map<Like, LikeDTO>(like);
+        }
     }
 }

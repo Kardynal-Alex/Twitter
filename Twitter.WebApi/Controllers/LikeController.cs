@@ -38,5 +38,12 @@ namespace Twitter.WebApi.Controllers
             var likeDTOs = await service.GetLikesByUserIdAsync(id);
             return Ok(likeDTOs);
         }
+
+        [HttpPost("getLikeByUserAndTwitterPostId")]
+        public async Task<ActionResult<LikeDTO>> GetLikeByUserAndTwitterPostId([FromBody] LikeDTO likeDTO)
+        {
+            var expected = await service.GetLikeByUserAndTwitterPostIdAsync(likeDTO);
+            return Ok(expected);
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace Twitter.Domain.Repositories
         void DeleteLikeById(Guid id);
 
         Task<List<Like>> GetLikesByUserIdAsync(string userId);
+
+        Task<Like> GetLikeByUserAndTwitterPostIdAsync(Like like);
     }
 }

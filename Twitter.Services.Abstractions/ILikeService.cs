@@ -12,5 +12,7 @@ namespace Twitter.Services.Abstractions
         Task DeleteLikeByIdAsync(Guid id);
 
         Task<List<LikeDTO>> GetLikesByUserIdAsync(string userId);
+
+        Task<LikeDTO> GetLikeByUserAndTwitterPostIdAsync(LikeDTO likeDTO);
     }
 }

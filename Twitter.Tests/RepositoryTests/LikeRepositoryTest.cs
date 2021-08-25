@@ -57,5 +57,25 @@ namespace Twitter.Tests.RepositoryTests
             Assert.That(likes, Is.EqualTo(InitialData.ExpectedLikes)
                 .Using(new LikeEqualityComparer()));
         }
+
+        [Test]
+        public async Task LikeRepository_GetLikeByUserAndTwitterPostId()
+        {
+            await using var context = new ApplicationContext(_context);
+            var likeRepository = new LikeRepository(context);
+            var like = new Like
+            {
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
+            };
+
+            var actual = await likeRepository.GetLikeByUserAndTwitterPostIdAsync(like);
+            var expected = InitialData.ExpectedLikes.ElementAt(0);
+
+            Assert.NotNull(actual);
+            Assert.NotNull(expected.Id);
+            Assert.AreEqual(actual.TwitterPostId, expected.TwitterPostId);
+            Assert.AreEqual(actual.UserId, expected.UserId);
+        }
     }
 }

@@ -80,5 +80,12 @@ namespace Twitter.WebApi.Controllers
             var searchTweets = await service.SearchTwitterPostsByHeshTagAsync(search);
             return Ok(searchTweets);
         }
+
+        [HttpPut("updateOnlyTwitterPost")]
+        public async Task<ActionResult> UpdateOnlyTwitterPost([FromBody] TwitterPostDTO twitterPostDTO)
+        {
+            await service.UpdateOnlyTwitterPost(twitterPostDTO);
+            return Ok();
+        }
     }
 }

@@ -218,6 +218,7 @@ namespace Twitter.Tests.WebApiTests
                .Using(new UserDTOEqualityComparer()));
         }
 
+        [Test]
         public async Task TwitterPostController_UpdateTwitterPostWithImages()
         {
             var twitterPostDTO = new TwitterPostDTO
@@ -245,7 +246,13 @@ namespace Twitter.Tests.WebApiTests
                 var context = test.ServiceProvider.GetService<ApplicationContext>();
                 var updatedTwitterPost = await context.TwitterPosts.Include(x => x.Images)
                     .FirstOrDefaultAsync(x => x.Id == twitterPostDTO.Id);
-                var expected = new AutoMapperHelper<TwitterPost, TwitterPostDTO>().MapToType(updatedTwitterPost);
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<TwitterPost, TwitterPostDTO>();
+                    cfg.CreateMap<Images, ImagesDTO>();
+                });
+                var mapper = new Mapper(config);
+                var expected = mapper.Map<TwitterPost, TwitterPostDTO>(updatedTwitterPost);
 
                 Assert.That(twitterPostDTO, Is.EqualTo(expected)
                     .Using(new TwitterPostDTOEqualityComparer()));
@@ -325,6 +332,33 @@ namespace Twitter.Tests.WebApiTests
                 .Using(new ImagesDTOEqualityComparer()));
             Assert.That(actual.Select(x => x.User), Is.EqualTo(expectedUsers)
                 .Using(new UserDTOEqualityComparer()));
+        }
+
+        [Test]
+        public async Task TwitterPostController_UpdateOnlyTwitterPost()
+        {
+            var twitterPostDTO = new TwitterPostDTO
+            {
+                Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                PostText = "update TwitterPost text1",
+                DateCreation = DateTime.Now.Date,
+                Like = 2,
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+            };
+            var content = new StringContent(JsonConvert.SerializeObject(twitterPostDTO), Encoding.UTF8, "application/json");
+            var httpResponse = await _client.PutAsync(requestUri + "updateOnlyTwitterPost", content);
+
+            httpResponse.EnsureSuccessStatusCode();
+            using (var test = _factory.Services.CreateScope())
+            {
+                var context = test.ServiceProvider.GetService<ApplicationContext>();
+                var updatedTwitterPost = await context.TwitterPosts
+                    .FirstOrDefaultAsync(x => x.Id == twitterPostDTO.Id);
+                var expected = new AutoMapperHelper<TwitterPost, TwitterPostDTO>().MapToType(updatedTwitterPost);
+
+                Assert.That(twitterPostDTO, Is.EqualTo(expected)
+                    .Using(new TwitterPostDTOEqualityComparer()));
+            }
         }
 
     }
