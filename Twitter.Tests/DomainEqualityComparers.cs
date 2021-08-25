@@ -118,4 +118,22 @@ namespace Twitter.Tests
         }
     }
 
+    public class LikeEqualityComparer : IEqualityComparer<Like>
+    {
+        public bool Equals([AllowNull] Like x, [AllowNull] Like y)
+        {
+            if (x == null && y == null)
+                return true;
+            if (x == null || y == null)
+                return false;
+
+            return x.Id == y.Id && x.UserId == y.UserId && x.TwitterPostId == y.TwitterPostId;
+        }
+
+        public int GetHashCode([DisallowNull] Like obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
+
 }

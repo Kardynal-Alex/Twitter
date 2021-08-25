@@ -28,7 +28,7 @@ export class HeshtagSearchComponent implements OnInit {
   }
 
   twitterPosts:twitterPost[];
-  search:string="test";
+  search:string="";
   searchTweets(){
     if(this.search!=''){
       this.twitterPostService.searchTweetsByHeshTag(this.search).subscribe(response=>{

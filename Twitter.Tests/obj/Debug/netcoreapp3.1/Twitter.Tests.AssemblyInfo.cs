@@ -16,8 +16,8 @@ using System.Reflection;
 [assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Twitter.Persistence, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Asp.Net(project)\\Twitter\\Twitter.Persistence", "Twitter.Persistence.csproj", "0")]
 [assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Twitter.Services.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=n" +
     "ull", "D:\\Asp.Net(project)\\Twitter\\Twitter.Services.Abstractions", "Twitter.Services.Abstractions.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Twitter.Services", "D:\\Asp.Net(project)\\Twitter\\Twitter.Services", "Twitter.Services.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Twitter.WebApi", "D:\\Asp.Net(project)\\Twitter\\Twitter.WebApi", "Twitter.WebApi.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Twitter.Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Asp.Net(project)\\Twitter\\Twitter.Services", "Twitter.Services.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Twitter.WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Asp.Net(project)\\Twitter\\Twitter.WebApi", "Twitter.WebApi.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Twitter.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

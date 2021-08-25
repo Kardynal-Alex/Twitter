@@ -39,6 +39,7 @@ namespace Twitter.Services.Configurations
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IFriendService, FriendService>();
             services.AddTransient<IFavoriteService, FavoriteService>();
+            services.AddTransient<ILikeService, LikeService>();
 
             return services;
         }

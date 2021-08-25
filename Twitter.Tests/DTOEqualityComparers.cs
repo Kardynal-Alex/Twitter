@@ -117,4 +117,22 @@ namespace Twitter.Tests
             return obj.GetHashCode();
         }
     }
+
+    public class LikeDTOEqualityComparer : IEqualityComparer<LikeDTO>
+    {
+        public bool Equals([AllowNull] LikeDTO x, [AllowNull] LikeDTO y)
+        {
+            if (x == null && y == null)
+                return true;
+            if (x == null || y == null)
+                return false;
+
+            return x.Id == y.Id && x.UserId == y.UserId && x.TwitterPostId == y.TwitterPostId;
+        }
+
+        public int GetHashCode([DisallowNull] LikeDTO obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
 }

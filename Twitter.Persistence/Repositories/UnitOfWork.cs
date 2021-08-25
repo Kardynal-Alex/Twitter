@@ -73,6 +73,15 @@ namespace Twitter.Persistence.Repositories
             }
         }
 
+        private ILikeRepository likeRepository;
+        public ILikeRepository LikeRepository 
+        {
+            get
+            {
+                return likeRepository ?? (likeRepository = new LikeRepository(context));
+            }
+        }
+
         private readonly UserManager<User> userManager;
         public UserManager<User> UserManager
         {

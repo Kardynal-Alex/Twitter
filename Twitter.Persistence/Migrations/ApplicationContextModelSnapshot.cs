@@ -237,6 +237,23 @@ namespace Twitter.Persistence.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("Twitter.Domain.Entities.Like", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TwitterPostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Likes");
+                });
+
             modelBuilder.Entity("Twitter.Domain.Entities.TwitterPost", b =>
                 {
                     b.Property<Guid>("Id")

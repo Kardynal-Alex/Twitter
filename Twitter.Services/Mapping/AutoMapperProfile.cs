@@ -15,6 +15,7 @@ namespace Twitter.Services.Mapping
             CreateMap<Comment, CommentDTO>().ReverseMap();
             CreateMap<Friend, FriendDTO>().ReverseMap();
             CreateMap<Favorite, FavoriteDTO>().ReverseMap();
+            CreateMap<Like, LikeDTO>().ReverseMap();
         }
     }
 }

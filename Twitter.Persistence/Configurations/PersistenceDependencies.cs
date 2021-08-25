@@ -30,6 +30,7 @@ namespace Twitter.Persistence.Configurations
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IFriendRepository, FriendRepository>();
             services.AddTransient<IFavoriteRepository, FavoriteRepository>();
+            services.AddTransient<ILikeRepository, LikeRepository>();
 
             return services;
         }

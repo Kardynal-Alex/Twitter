@@ -19,6 +19,8 @@ namespace Twitter.Domain.Repositories
 
         IFavoriteRepository FavoriteRepository { get; }
 
+        ILikeRepository LikeRepository { get; }
+
         UserManager<User> UserManager { get; }
         
         SignInManager<User> SignInManager { get; }

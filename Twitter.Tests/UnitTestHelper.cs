@@ -87,6 +87,7 @@ namespace Twitter.Tests
             context.Comments.AddRange(InitialData.ExpectedComments);
             context.Friends.AddRange(InitialData.ExpectedFriends);
             context.Favorites.AddRange(InitialData.ExpectedFavorites);
+            context.Likes.AddRange(InitialData.ExpectedLikes);
 
             context.SaveChanges();
         }

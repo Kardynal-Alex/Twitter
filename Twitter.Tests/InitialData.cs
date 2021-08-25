@@ -193,6 +193,29 @@ namespace Twitter.Tests
                     UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
                 }
             };
+
+        public static IEnumerable<Like> ExpectedLikes =>
+            new[]
+            {
+                new Like
+                {
+                     Id = new Guid("74d1b908-ff65-4c74-b836-44a4ca840ce8"),
+                     UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                     TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
+                },
+                new Like
+                {
+                    Id = new Guid("ca193be4-332b-0a12-c56d-e187528c7fec"),
+                    UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    TwitterPostId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")
+                },
+                new Like
+                {
+                    Id = new Guid("6e552428-b4b3-ebf8-c750-ae5b64e46677"),
+                    UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    TwitterPostId = new Guid("cccccccc-cccc-cccc-cccc-cccccccccccc")
+                }
+            };
         #endregion
         #region DTO data
         public static IEnumerable<CommentDTO> ExpectedCommentDTOs =>
@@ -296,6 +319,29 @@ namespace Twitter.Tests
                     Id = new Guid("ca193be4-332b-0a12-c56d-e187528c7fec"),
                     TwitterPostId = new Guid("dddddddd-dddd-dddd-dddd-dddddddddddd"),
                     UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
+                }
+            };
+
+        public static IEnumerable<LikeDTO> ExpectedLikeDTOs =>
+            new[]
+            {
+                new LikeDTO
+                {
+                     Id = new Guid("74d1b908-ff65-4c74-b836-44a4ca840ce8"),
+                     UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                     TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
+                },
+                new LikeDTO
+                {
+                    Id = new Guid("ca193be4-332b-0a12-c56d-e187528c7fec"),
+                    UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    TwitterPostId = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")
+                },
+                new LikeDTO
+                {
+                    Id = new Guid("6e552428-b4b3-ebf8-c750-ae5b64e46677"),
+                    UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    TwitterPostId = new Guid("cccccccc-cccc-cccc-cccc-cccccccccccc")
                 }
             };
         #endregion
