@@ -62,6 +62,7 @@ namespace Twitter.Tests.WebApiTests
                 PostText = "new TwitterPost",
                 DateCreation = DateTime.Now.Date,
                 Like = 0,
+                NComments = 0,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
                 Images = new ImagesDTO
                 {
@@ -108,6 +109,7 @@ namespace Twitter.Tests.WebApiTests
                 PostText = "",
                 DateCreation = DateTime.Now.Date,
                 Like = 0,
+                NComments = 0,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
             };
             await CheckExceptionWhileAddNewTwitterPost(twitterPostDTO);
@@ -121,6 +123,11 @@ namespace Twitter.Tests.WebApiTests
             twitterPostDTO.Like = 0;
             twitterPostDTO.UserId = "";
             await CheckExceptionWhileAddNewTwitterPost (twitterPostDTO);
+
+            //Number of comments is negative number
+            twitterPostDTO.UserId = "925695ec-0e70-4e43-8514-8a0710e11d53";
+            twitterPostDTO.NComments = -1;
+            await CheckExceptionWhileAddNewTwitterPost(twitterPostDTO);
         }
 
         private async Task CheckExceptionWhileAddNewTwitterPost(TwitterPostDTO model)
@@ -157,6 +164,7 @@ namespace Twitter.Tests.WebApiTests
                 PostText = "TwitterPost text1",
                 DateCreation = DateTime.Now.Date,
                 Like = 0,
+                NComments = 0,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
                 Images = new ImagesDTO
                 {
@@ -227,6 +235,7 @@ namespace Twitter.Tests.WebApiTests
                 PostText = "update TwitterPost text1",
                 DateCreation = DateTime.Now.Date,
                 Like = 0,
+                NComments = 1,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
                 Images = new ImagesDTO
                 {
@@ -343,6 +352,7 @@ namespace Twitter.Tests.WebApiTests
                 PostText = "update TwitterPost text1",
                 DateCreation = DateTime.Now.Date,
                 Like = 2,
+                NComments = 3,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
             };
             var content = new StringContent(JsonConvert.SerializeObject(twitterPostDTO), Encoding.UTF8, "application/json");

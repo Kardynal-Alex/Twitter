@@ -47,7 +47,10 @@ namespace Twitter.Services
                 throw new TwitterException("Incorect PostText length or null");
 
             if (!int.TryParse(model.Like.ToString(), out int like) || like < 0)
-                throw new TwitterException("Incorect Like format ot less than 0");
+                throw new TwitterException("Incorect Like format or less than 0");
+
+            if (!int.TryParse(model.NComments.ToString(), out int nComments) || nComments < 0)
+                throw new TwitterException("Incorect Number of Comments format or less than 0");
 
             if (string.IsNullOrEmpty(model.UserId)) 
                 throw new TwitterException("Incorect UserId length or null");

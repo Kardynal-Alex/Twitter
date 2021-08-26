@@ -54,6 +54,7 @@ namespace Twitter.Tests.ServiceTests
                 PostText = "TwitterPost text new",
                 DateCreation = DateTime.Now.Date,
                 Like = 0,
+                NComments = 0,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
                 Images = new ImagesDTO
                 {
@@ -103,6 +104,11 @@ namespace Twitter.Tests.ServiceTests
             twitterPostDTO.Like = 0;
             twitterPostDTO.UserId = "";
             Assert.ThrowsAsync<TwitterException>(async () => await twitterPostService.AddTwitterPostsAsync(twitterPostDTO));
+
+            //Number of comments is negative number
+            twitterPostDTO.UserId = "925695ec-0e70-4e43-8514-8a0710e11d53";
+            twitterPostDTO.NComments = -1;
+            Assert.ThrowsAsync<TwitterException>(async () => await twitterPostService.AddTwitterPostsAsync(twitterPostDTO));
         }
 
         [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
@@ -139,6 +145,7 @@ namespace Twitter.Tests.ServiceTests
                 PostText = "TwitterPost text new",
                 DateCreation = DateTime.Now.Date,
                 Like = 0,
+                NComments = 0,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
                 Images = new ImagesDTO
                 {
@@ -218,6 +225,7 @@ namespace Twitter.Tests.ServiceTests
                 PostText = "update TwitterPost text1",
                 DateCreation = DateTime.Now.Date,
                 Like = 0,
+                NComments = 0,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
                 Images = new ImagesDTO
                 {
@@ -323,6 +331,7 @@ namespace Twitter.Tests.ServiceTests
                 PostText = "update TwitterPost text1",
                 DateCreation = DateTime.Now.Date,
                 Like = 0,
+                NComments = 0,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
             };
             await twitterPostService.UpdateOnlyTwitterPost(twitterPostDTO);

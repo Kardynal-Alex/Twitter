@@ -17,6 +17,7 @@ namespace Twitter.Tests
                     PostText = "TwitterPost text1",
                     DateCreation = DateTime.Now.Date,
                     Like = 0,
+                    NComments = 0,
                     UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
                 },
                 new TwitterPost
@@ -25,6 +26,7 @@ namespace Twitter.Tests
                     PostText = "TwitterPost text2 #test",
                     DateCreation = DateTime.Now.Date,
                     Like = 3,
+                    NComments = 2,
                     UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
                 },
                 new TwitterPost
@@ -33,6 +35,7 @@ namespace Twitter.Tests
                     PostText = "TwitterPost text3 #testing",
                     DateCreation = DateTime.Now.Date,
                     Like = 0,
+                    NComments = 0,
                     UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c"
                 },
                 new TwitterPost
@@ -41,6 +44,7 @@ namespace Twitter.Tests
                     PostText = "TwitterPost text4",
                     DateCreation = DateTime.Now.Date,
                     Like = 5,
+                    NComments = 1,
                     UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c"
                 }
         };

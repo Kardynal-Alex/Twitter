@@ -1,5 +1,6 @@
 <link href='https://css.gg/more-o.css' rel='stylesheet'>
 <link href='https://css.gg/card-hearts.css' rel='stylesheet'>
+<link href='https://css.gg/comment.css' rel='stylesheet'>
 <div *ngFor="let tweet of twitterPosts | sort:'desc':'dateCreation'">
     <ng-template [ngTemplateOutlet]="loadTemplate(tweet)" 
         [ngTemplateOutletContext]="{ $implicit: tweet}">
@@ -40,9 +41,15 @@
 
             </div>
         </div>
-        <div class="like">
-            <i id="like-{{tweet['id']}}" class="gg-card-hearts" (click)="changeHeartIconTweet(tweet)"></i>
-            <p>{{tweet['like']}}</p>
+        <div class="flex">
+            <div class="like">
+                <i id="like-{{tweet['id']}}" class="gg-card-hearts" (click)="changeHeartIconTweet(tweet)"></i>
+                <p>{{tweet['like']}}</p>
+            </div>
+            <div class="commentIcon">
+                <i class="gg-comment"></i>
+                <p>{{tweet['nComments']}}</p>
+            </div>
         </div>
         <div class="icon">
             <i class="gg-more-o" (click)="togle3DotsForm(tweet['id'])"></i>

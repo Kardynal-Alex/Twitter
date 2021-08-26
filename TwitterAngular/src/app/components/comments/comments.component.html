@@ -5,8 +5,13 @@
         </div>
         <form #createCommentFrom="ngForm">
             <div class="textArea">
-                <textarea type="text" name="makeComment" autosize id="makeComment" ngModel 
-                #makeComment minlength="2" placeholder="Tweet your reply" rows="2"></textarea>
+                <textarea autosize type="text" name="textarea" [(ngModel)]="textArea"
+                required minlength="10" placeholder="What`s happening?" contenteditable></textarea>
+                <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible" style="position: absolute;" 
+                (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
+            </div>
+            <div class="emoji">
+                <a (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀</a>
             </div>
             <div class="replyBtn">
                 <button (click)="addComment(createCommentFrom)">Reply</button>

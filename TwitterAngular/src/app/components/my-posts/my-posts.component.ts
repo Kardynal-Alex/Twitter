@@ -52,6 +52,7 @@ export class MyPostsComponent implements OnInit {
       postText:this.textArea,
       dateCreation:new Date(Date.now()),
       like:0,
+      nComments:0,
       userId:this.user['id'],
       user:null,
       images:this.images,

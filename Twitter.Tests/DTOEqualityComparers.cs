@@ -15,7 +15,7 @@ namespace Twitter.Tests
                 return false;
 
             return x.Id == y.Id && x.PostText == y.PostText && x.DateCreation.Date == y.DateCreation.Date
-                && x.Like == y.Like && x.UserId == y.UserId;
+                && x.Like == y.Like && x.UserId == y.UserId && x.NComments == y.NComments;
         }
 
         public int GetHashCode([DisallowNull] TwitterPostDTO obj)

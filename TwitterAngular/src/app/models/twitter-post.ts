@@ -7,6 +7,7 @@ export class twitterPost{
     postText:string;
     dateCreation:Date;
     like:number;
+    nComments:number;
     userId:string;
     user:user;
     images:images;

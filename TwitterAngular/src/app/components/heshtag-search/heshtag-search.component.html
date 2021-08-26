@@ -9,6 +9,7 @@
 </div>
 <link href='https://css.gg/shape-square.css' rel='stylesheet'>
 <link href='https://css.gg/card-hearts.css' rel='stylesheet'>
+<link href='https://css.gg/comment.css' rel='stylesheet'>
 <div class="twitterPosts">
     <div *ngFor="let tweet of twitterPosts | sort:'desc':'dateCreation'">
         <div class="twitterPost">
@@ -44,9 +45,15 @@
                     </div>
                 </div>
             </div>
+            <div class="flex">
             <div class="like">
                 <i id="like-{{tweet['id']}}" class="gg-card-hearts" (click)="changeHeartIconTweet(tweet)"></i>
                 <p>{{tweet['like']}}</p>
+            </div>
+            <div class="commentIcon">
+                <i class="gg-comment"></i>
+                <p>{{tweet['nComments']}}</p>
+            </div>
             </div>
             <div class="save">
                 <i id="save-{{tweet['id']}}" class="gg-shape-square" (click)="changeIconSavedPost(tweet['id'])"></i>

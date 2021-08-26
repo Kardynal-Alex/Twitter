@@ -1,4 +1,5 @@
 <link href='https://css.gg/card-hearts.css' rel='stylesheet'>
+<link href='https://css.gg/comment.css' rel='stylesheet'>
 <div class="mainText">
     <h2><a class="fa fa-twitter"></a>Twitter Posts</h2>
 </div>
@@ -29,9 +30,15 @@
             <img [src]="createImgPath(twitterPost['images']['image4'])" /> 
         </div>
     </div>
-    <div class="like">
-        <i id="like-{{twitterPost['id']}}" class="gg-card-hearts" (click)="changeHeartIconTweet(twitterPost)" ></i>
-         <p>{{twitterPost['like']}}</p>
+    <div class="flex">
+        <div class="like">
+            <i id="like-{{twitterPost['id']}}" class="gg-card-hearts" (click)="changeHeartIconTweet(twitterPost)" ></i>
+            <p>{{twitterPost['like']}}</p>
+        </div>
+        <div class="commentIcon">
+            <i class="gg-comment"></i>
+            <p>{{twitterPost['nComments']}}</p>
+        </div>
     </div>
 </div>
-<app-comments [id]="id" [comments]="twitterPost['comments']"></app-comments>
+<app-comments [id]="id" [comments]="twitterPost['comments']" [twitterPost]="twitterPost"></app-comments>

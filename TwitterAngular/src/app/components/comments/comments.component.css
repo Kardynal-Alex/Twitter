@@ -21,6 +21,10 @@
     border-radius: 20px;
 }
 
+.textArea {
+    position: relative;
+}
+
 .textArea textarea {
     border: none;
     height: auto;
@@ -30,6 +34,17 @@
     padding: 8px 10px;
     overflow: hidden;
     font-size: 20px;
+}
+
+.emoji {
+    font-size: 20px;
+    margin-top: 0;
+}
+
+.emoji-mart {
+    position: absolute;
+    margin-top: 110px;
+    margin-left: -640px;
 }
 
 .replyBtn {

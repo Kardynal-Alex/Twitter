@@ -122,6 +122,7 @@ namespace Twitter.Tests.RepositoryTests
                 PostText = "TwitterPost text1 text1",
                 DateCreation = DateTime.Now.Date,
                 Like = 1,
+                NComments = 0,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
             };
 
@@ -134,6 +135,7 @@ namespace Twitter.Tests.RepositoryTests
                 PostText = "TwitterPost text1 text1",
                 DateCreation = DateTime.Now.Date,
                 Like = 1,
+                NComments = 0,
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53"
             }).Using(new TwitterPostEqualityComparer()));
         }
