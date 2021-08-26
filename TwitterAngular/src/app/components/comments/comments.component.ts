@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { comment } from 'src/app/models/comment';
+import { like } from 'src/app/models/like';
 import { twitterPost } from 'src/app/models/twitter-post';
 import { user } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -28,13 +29,14 @@ export class CommentsComponent implements OnInit {
   @Input() comments:comment[];
   @Input() id:string;
   @Input() twitterPost:twitterPost;
+  @Input() like:like;
   user:user;
   getCommentByTweetId(){
     this.commentService.getCommentsByTwitterPostId(this.id).subscribe(response=>{
       this.comments=response;
     })
   }
-
+  //creation comment
   addComment(form:NgForm){
     if(this.textArea.length>=2){
       const comment:comment={
@@ -74,6 +76,39 @@ export class CommentsComponent implements OnInit {
   public addEmoji(event) {
      this.textArea = `${this.textArea}${event.emoji.native}`;
      this.isEmojiPickerVisible = false;
+  }
+
+  //edit comment
+  @ViewChild('readOnlyTemplate', {static: false}) readOnlyTemplate: TemplateRef<any>|undefined;
+  @ViewChild('editTemplate', {static: false}) editTemplate: TemplateRef<any>|undefined;
+  editedComment:comment=null;
+  editCommentMethod(comment: comment) {
+    this.editedComment=comment;
+  }
+
+  loadTemplate(comment: comment) {
+    if (this.editedComment && this.editedComment['id'] == comment['id']) {
+        return this.editTemplate;
+    } else {
+        return this.readOnlyTemplate;
+    }
+  }
+
+  updateComment(){
+    this.commentService.updateComment(this.editedComment)
+    .subscribe(response=>{
+      this.editedComment=null;
+      this.getCommentByTweetId();
+      if(this.like!=null)
+        document.getElementById("like-"+this.twitterPost['id']).style.background="red";
+      this.toastrService.success("Successfuly updated!");
+    });
+  }
+
+  public isEmojiPickerVisibleForEdit: boolean;
+  public addEmojiForEdit(event) {
+     this.editedComment['text'] = `${this.editedComment['text']}${event.emoji.native}`;
+     this.isEmojiPickerVisibleForEdit = false;
   }
 
 }

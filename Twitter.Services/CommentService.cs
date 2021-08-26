@@ -60,5 +60,14 @@ namespace Twitter.Services
             if (string.IsNullOrEmpty(guid.ToString()))
                 throw new TwitterException("Incorect guid data");
         }
+
+        public async Task UpdateCommentAsync(CommentDTO commentDTO)
+        {
+            ValidateCommentDTO(commentDTO);
+
+            var comment = mapper.Map<CommentDTO, Comment>(commentDTO);
+            unitOfWork.CommentRepository.UpdateComment(comment);
+            await unitOfWork.SaveAsync();
+        }
     }
 }

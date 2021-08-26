@@ -38,5 +38,12 @@ namespace Twitter.WebApi.Controllers
             await service.DeleteCommentByIdAsync(id);
             return Ok();
         }
+
+        [HttpPut("updateComment")]
+        public async Task<ActionResult> UpdateComment([FromBody] CommentDTO commentDTO)
+        {
+            await service.UpdateCommentAsync(commentDTO);
+            return Ok();
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace Twitter.Services.Abstractions
         Task DeleteCommentByIdAsync(Guid id);
 
         Task<List<CommentDTO>> GetCommentsByTwitterPostIdAsync(Guid twitterPostId);
+
+        Task UpdateCommentAsync(CommentDTO commentDTO);
     }
 }

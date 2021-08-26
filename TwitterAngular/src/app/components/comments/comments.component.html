@@ -21,23 +21,55 @@
 </div>
 <div class="comments">
     <div *ngFor="let comment of comments | sort:'desc':'dateCreation'" >
-        <div class="comment">
-            <div class="imageComment">
-                <img [src]="comment['profileImagePath']" />
-                
-                <div class="flexBox">
-                    <div class="flex">
-                        <p>{{comment['author']}} {{comment['dateCreation']|date:'mediumDate'}}</p>
-                        <div class="deleteComment" *ngIf="comment['userId']==user['id']">
-                            <a (click)="deleteComment(comment['id'])">&times;</a>
-                        </div>
-                    </div>
-                    <div class="text">
-                        <p>{{comment['text']}}</p>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+        <ng-template [ngTemplateOutlet]="loadTemplate(comment)" 
+        [ngTemplateOutletContext]="{ $implicit: comment}">
+        </ng-template>
     </div>
 </div>
+
+<ng-template #readOnlyTemplate let-comment>
+    <div class="comment">
+        <div class="imageComment">
+            <img [src]="comment['profileImagePath']" />
+            
+            <div class="flexBox">
+                <div class="flex">
+                    <p>{{comment['author']}} {{comment['dateCreation']|date:'mediumDate'}}</p>
+                    <div class="deleteComment" *ngIf="comment['userId']==user['id']">
+                        <a (click)="deleteComment(comment['id'])">&times;</a>
+                    </div>
+                    <div class="editComIcon" *ngIf="comment['userId']==user['id']">
+                        <link href='https://css.gg/edit-markup.css' rel='stylesheet'>
+                        <i class="gg-edit-markup" (click)="editCommentMethod(comment)"></i>
+                    </div>
+                </div>
+                <div class="text">
+                    <p>{{comment['text']}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #editTemplate let-comment>
+    <div class="comment">
+        <div class="imageComment">
+            <img [src]="comment['profileImagePath']" />
+            
+            <div class="flexBox">
+                <div class="textArea">
+                    <textarea autosize type="text" name="textarea" [(ngModel)]="editedComment['text']"
+                    required minlength="10" contenteditable></textarea>
+                    <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisibleForEdit" style="position: absolute;" 
+                    (emojiSelect)="addEmojiForEdit($event)" title="Choose your emoji"></emoji-mart>
+                </div>
+                <div class="emoji">
+                    <a (click)="isEmojiPickerVisibleForEdit = !isEmojiPickerVisibleForEdit;">😀</a>
+                </div>
+                <div class="replyBtn">
+                    <button (click)="updateComment()">Edit Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

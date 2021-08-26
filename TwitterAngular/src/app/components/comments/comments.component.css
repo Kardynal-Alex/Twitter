@@ -23,13 +23,14 @@
 
 .textArea {
     position: relative;
+    float: right;
 }
 
 .textArea textarea {
     border: none;
     height: auto;
     width: 90%;
-    min-width: 640px;
+    min-width: 630px;
     resize: both;
     padding: 8px 10px;
     overflow: hidden;
@@ -108,6 +109,15 @@
 
 .deleteComment a:hover {
     color: #1a91da;
+}
+
+.editComIcon {
+    position: absolute;
+    margin-left: 28%;
+}
+
+.editComIcon i:hover {
+    background: red;
 }
 
 .flex {

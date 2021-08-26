@@ -129,5 +129,35 @@ namespace Twitter.Tests.WebApiTests
                 Assert.AreEqual(3, context.Comments.Count());
             }
         }
+
+        [Test]
+        public async Task CommentController_UpdateComment()
+        {
+            var commentDTO = new CommentDTO
+            {
+                Id = new Guid("1f8d4896-a7cd-1b5d-3527-0151a96d94de"),
+                Author = "Oleksandr Kardynal",
+                Text = "new text Comment1",
+                DateCreation = DateTime.Now.Date,
+                TwitterPostId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                ProfileImagePath = "Image path1"
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(commentDTO), Encoding.UTF8, "application/json");
+            var httpResponse = await _client.PutAsync(requestUri + "updateComment", content);
+
+            httpResponse.EnsureSuccessStatusCode();
+            using (var test = _factory.Services.CreateScope())
+            {
+                var context = test.ServiceProvider.GetService<ApplicationContext>();
+                var comment = await context.Comments.FirstOrDefaultAsync(x => x.Id == commentDTO.Id);
+
+                var expectedCommentDTO = new AutoMapperHelper<Comment, CommentDTO>().MapToType(comment);
+
+                Assert.That(commentDTO, Is.EqualTo(expectedCommentDTO)
+                    .Using(new CommentDTOEqualityComparer()));
+            }
+        }
     }
 }

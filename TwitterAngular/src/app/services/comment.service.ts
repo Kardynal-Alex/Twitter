@@ -18,4 +18,8 @@ export class CommentService {
     getCommentsByTwitterPostId(id:string){
         return this.httpClient.get<comment[]>(this.apiUrl+"getCommentsByTweetId/"+id);
     }
+
+    updateComment(comment:comment){
+        return this.httpClient.put(this.apiUrl+"updateComment/",comment);
+    }
 }
