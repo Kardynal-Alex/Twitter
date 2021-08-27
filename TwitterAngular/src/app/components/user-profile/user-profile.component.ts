@@ -93,4 +93,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     return this.twitterPostService.createImgPath(path);
   }
 
+  openEditProfileForm(){
+    document.getElementById("editProfile").style.display="block";
+  }
+
 }

@@ -39,7 +39,7 @@ namespace Twitter.Services
             googleAuthSettings = googlelAuthSettingsAccessor.Value;
         }
 
-        public async Task<string> FacebookLoginAsync(string accessToken)
+        public async Task<TokenAuthDTO> FacebookLoginAsync(string accessToken)
         {
             HttpClient Client = new HttpClient();
             // 1.generate an app access token
@@ -78,7 +78,12 @@ namespace Twitter.Services
 
             var claims = await tokenService.GetClaims(userInfo.Email);
             var token = tokenService.GenerateToken(claims);
-            return token;
+            var refreshToken = tokenService.GenerateRefreshToken();
+            return new TokenAuthDTO
+            {
+                Token = token,
+                RefreshToken = refreshToken
+            };
         }
 
         public async Task<UserDTO> GetUserByUserIdAsync(string userId)
@@ -199,6 +204,29 @@ namespace Twitter.Services
                 Token = newToken,
                 RefreshToken = newRefreshToken
             };
+        }
+
+        public async Task UpdateUserProfileAsync(UserDTO userDTO)
+        {
+            var user = await unitOfWork.UserManager.FindByIdAsync(userDTO.Id);
+
+            user.Name = userDTO.Name ?? user.Name;
+            user.Surname = userDTO.Surname ?? user.Surname;
+            user.ProfileImagePath = userDTO.ProfileImagePath ?? user.ProfileImagePath;
+
+            var result = await unitOfWork.UserManager.UpdateAsync(user);
+            if (!result.Succeeded) 
+                throw new TwitterException("Cannot update user");
+
+            var comments = await unitOfWork.CommentRepository.GetUserCommentsByUserIdAsync(user.Id);
+            foreach (var comment in comments)
+            {
+                comment.Author = user.Name + " " + user.Surname;
+                comment.ProfileImagePath = user.ProfileImagePath;
+            }
+            unitOfWork.CommentRepository.UpdateComments(comments);
+
+            await unitOfWork.SaveAsync();
         }
     }
 }

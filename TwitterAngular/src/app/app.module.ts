@@ -31,6 +31,7 @@ import { UserFriendsComponent } from './components/user-friends/user-friends.com
 import { SavedPostsComponent } from './components/saved-posts/saved-posts.component';
 import { InstantSearchComponent } from './components/instant-search/instant-search.component';
 import { HeshtagSearchComponent } from './components/heshtag-search/heshtag-search.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 const appRoutes: Routes =[
@@ -70,7 +71,8 @@ export function tokenGetter() {
     UserFriendsComponent,
     SavedPostsComponent,
     InstantSearchComponent,
-    HeshtagSearchComponent
+    HeshtagSearchComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -30,6 +30,10 @@
 .profileImage img {
     border-radius: 20px;
     margin: 10px 10px 0;
+    width: 150px;
+    height: 150px;
+    max-width: 150px;
+    max-height: 150px;
 }
 
 .profileImage {
@@ -104,5 +108,9 @@
     flex-wrap: wrap;
     margin-left: 10px;
     margin-top: -9px;
+}
+
+.like:hover {
+    cursor: pointer;
 }
 

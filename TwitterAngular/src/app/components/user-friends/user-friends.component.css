@@ -53,3 +53,12 @@
     margin-left: 40px;
     font-weight: 600;
 }
+
+.imageProfile:hover,
+.friendBtn button:hover {
+    cursor: pointer;
+}
+
+.user:hover {
+    background-color: #f7f7f7;
+}

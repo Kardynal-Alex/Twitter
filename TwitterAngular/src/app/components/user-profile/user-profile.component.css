@@ -60,7 +60,8 @@
 }
 
 .info,
-.friends a {
+.friends a,
+.editProfileBtn a {
     border-radius: 20px;
     border: 1px solid black;
 }
@@ -74,13 +75,25 @@
     font-weight: 600;
 }
 
-.friends {
+.friends,
+.editProfileBtn {
     font-size: 20px;
     margin: 20px;
 }
 
-.friends a {
+.friends a,
+.editProfileBtn a {
     color: black;
     text-decoration: none;
     padding: 5px 10px 5px 10px;
+}
+
+.editProfileBtn {
+    margin-left: 10px;
+}
+
+.editProfileBtn:hover,
+.friends:hover,
+.friendBtn button:hover {
+    cursor: pointer;
 }

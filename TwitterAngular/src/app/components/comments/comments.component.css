@@ -19,6 +19,10 @@
 
 .profileImage img {
     border-radius: 20px;
+    max-width: 70px;
+    max-height: 70px;
+    width: 70px;
+    height: 70px;
 }
 
 .textArea {
@@ -30,7 +34,8 @@
     border: none;
     height: auto;
     width: 90%;
-    min-width: 630px;
+    max-width: 630px; 
+    width: 630px;
     resize: both;
     padding: 8px 10px;
     overflow: hidden;
@@ -87,6 +92,8 @@
     border-radius: 20px;
     width: 70px;
     height: 70px;
+    max-width: 70px;
+    max-height: 70px;
 }
 
 .imageComment p {
@@ -126,4 +133,11 @@
 
 .text p {
     font-size: 22px;
+}
+
+.emoji:hover,
+.replyBtn button:hover,
+.editComIcon:hover,
+.deleteComment:hover {
+    cursor: pointer;
 }

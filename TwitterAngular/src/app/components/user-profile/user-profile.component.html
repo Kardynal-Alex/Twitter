@@ -17,5 +17,9 @@
     <div class="friends">
         <a routerLink="/user-friends/{{friendId}}">Friends</a>
     </div>
+    <div class="editProfileBtn" *ngIf="user['id']==userId">
+        <a (click)="openEditProfileForm()">Edit Profile</a>
+        <app-edit-profile [user]="user"></app-edit-profile>
+    </div>
 </div>
 <app-view-users-tweet [twitterPosts]="twitterPosts"></app-view-users-tweet>

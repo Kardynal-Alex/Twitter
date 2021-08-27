@@ -30,6 +30,7 @@
 .link:hover {
     background: #e7e7e8;
     border-radius: 30px;
+    cursor: pointer;
 }
 
 .active {

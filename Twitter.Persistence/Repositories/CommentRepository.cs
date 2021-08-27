@@ -38,5 +38,16 @@ namespace Twitter.Persistence.Repositories
         {
             context.Comments.Update(comment);
         }
+
+        public void UpdateComments(List<Comment> comments)
+        {
+            context.UpdateRange(comments);
+        }
+
+        public async Task<List<Comment>> GetUserCommentsByUserIdAsync(string userId)
+        {
+            return await context.Comments.Where(x => x.UserId == userId)
+                .AsNoTracking().ToListAsync();
+        }
     }
 }

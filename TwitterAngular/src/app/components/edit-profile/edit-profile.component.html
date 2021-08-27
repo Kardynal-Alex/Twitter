@@ -1,0 +1,30 @@
+<div class="editProfile" id="editProfile" style="display: none;">
+    <div class="modal">
+        
+        <form method="post" class="modal-content animate">
+            <div class="header">
+                <span onclick="document.getElementById('editProfile').style.display='none'"
+                    class="close" title="Close Modal">&times;</span>
+                <p>Edit profile</p>
+                <button (click)="edituserProfile()">Save</button>
+            </div>
+            <hr>
+            <div class="container">
+                <div class="image">
+                    <img [src]="user['profileImagePath']" *ngIf="user['profileImagePath']">
+                    <input type="file" #file  formControlName="Image" placeholder="Choose file" 
+                    (change)="uploadProfileImage(file.files)" style="display:none;" multiple required><br>
+                    <button type="button" class="btn btn-success" (click)="file.click()" 
+                    >Change</button>
+                </div>
+                <label for="uname"><b>Name</b></label><br>
+                <input type="text" placeholder="Enter name" required minlength="2"
+                [(ngModel)]="user['name']" name="Name"><br>
+          
+                <label for="psw"><b>Surname</b></label><br>
+                <input type="text" placeholder="Enter surname" required minlength="2"
+                [(ngModel)]="user['surname']" name="Surnmame"><br>
+              </div>
+        </form>
+    </div>
+</div>

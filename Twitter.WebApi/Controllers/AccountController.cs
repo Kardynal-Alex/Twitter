@@ -19,12 +19,12 @@ namespace Twitter.WebApi.Controllers
         }
 
         [HttpPost("facebook")]
-        public async Task<ActionResult> Facebook([FromBody] FacebookAuthDTO model)
+        public async Task<ActionResult<TokenAuthDTO>> Facebook([FromBody] FacebookAuthDTO model)
         {
-            var tokenString = await service.FacebookLoginAsync(model.AccessToken);
-            if (tokenString != null)
+            var tokenAuthDTO = await service.FacebookLoginAsync(model.AccessToken);
+            if (tokenAuthDTO != null)
             {
-                return Ok(new { Token = tokenString });
+                return Ok(tokenAuthDTO);
             }
             return BadRequest();
         }
@@ -70,6 +70,13 @@ namespace Twitter.WebApi.Controllers
                 return Ok(result);
             }
             return BadRequest();
+        }
+        
+        [HttpPut("updateUser")]
+        public async Task<ActionResult> UpdateUserProfile([FromBody] UserDTO userDTO)
+        {
+            await service.UpdateUserProfileAsync(userDTO);
+            return Ok();
         }
     }
 }

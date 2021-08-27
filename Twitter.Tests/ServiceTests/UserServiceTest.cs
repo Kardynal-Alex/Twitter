@@ -37,10 +37,10 @@ namespace Twitter.Tests.ServiceTests
             mockUnitOfWork.Setup(x => x.UserManager).Returns(mockUserManager.Object);
 
             var userService = new UserService(mockUnitOfWork.Object,
-                                            mockTokenService.Object,
-                                            UnitTestHelper.CreateMapperProfile(),
-                                            new Mock<IOptions<FacebookAuthSettings>>().Object,
-                                            new Mock<IOptions<GoogleAuthSettings>>().Object);
+                                              mockTokenService.Object,
+                                              UnitTestHelper.CreateMapperProfile(),
+                                              new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                              new Mock<IOptions<GoogleAuthSettings>>().Object);
 
             var userDTO = await userService.GetUserByUserIdAsync(userId);
 
@@ -99,13 +99,13 @@ namespace Twitter.Tests.ServiceTests
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.Setup(x => x.UserManager).Returns(mockUserManager.Object);
             var userService = new UserService(mockUnitOfWork.Object,
-                                            mockTokenService.Object,
-                                            UnitTestHelper.CreateMapperProfile(),
-                                            facebookAuthSettings,
-                                            googleAuthSetting);
+                                             mockTokenService.Object,
+                                             UnitTestHelper.CreateMapperProfile(),
+                                             new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                             new Mock<IOptions<GoogleAuthSettings>>().Object);
 
             var token = await userService.FacebookLoginAsync(InitialData.FBAccessToken);
-            Assert.IsTrue(token.Length > 50);
+            Assert.IsTrue(token.Token.Length > 50);
         }
 
         [Test]
@@ -122,10 +122,10 @@ namespace Twitter.Tests.ServiceTests
                 .Returns(Task.FromResult(InitialData.ExpectedUsers.ToList()));
 
             var userService = new UserService(mockUnitOfWork.Object,
-                                            mockTokenService.Object,
-                                            UnitTestHelper.CreateMapperProfile(),
-                                            new Mock<IOptions<FacebookAuthSettings>>().Object,
-                                            new Mock<IOptions<GoogleAuthSettings>>().Object);
+                                              mockTokenService.Object,
+                                              UnitTestHelper.CreateMapperProfile(),
+                                              new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                              new Mock<IOptions<GoogleAuthSettings>>().Object);
             var users = await userService.SearchUsersByNameAndSurnameAsync(search);
 
             Assert.AreEqual(users.Count, InitialData.ExpectedUserDTOs.Count());
@@ -142,15 +142,60 @@ namespace Twitter.Tests.ServiceTests
                 .Returns(Task.FromResult(InitialData.ExpectedUsers.ToList()));
 
             var userService = new UserService(mockUnitOfWork.Object,
-                                           mockTokenService.Object,
-                                           UnitTestHelper.CreateMapperProfile(),
-                                           new Mock<IOptions<FacebookAuthSettings>>().Object,
-                                           new Mock<IOptions<GoogleAuthSettings>>().Object);
+                                              mockTokenService.Object,
+                                              UnitTestHelper.CreateMapperProfile(),
+                                              new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                              new Mock<IOptions<GoogleAuthSettings>>().Object);
             var actual = await userService.GetUserFriendsByUserIdAsync(userId);
 
             Assert.AreEqual(actual.Count, InitialData.ExpectedUserDTOs.Count());
             Assert.That(actual, Is.EqualTo(InitialData.ExpectedUserDTOs)
                .Using(new UserDTOEqualityComparer()));
+        }
+
+        [Test]
+        public async Task UserService_UpdateProfile()
+        {
+            var mockUserManager = GetUserManagerMock<User>();
+            mockUserManager.Setup(x => x.Users)
+                .Returns(InitialData.ExpectedUsers.AsQueryable());
+            mockUserManager.Setup(x => x.FindByIdAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(InitialData.ExpectedUsers.ElementAt(0)));
+            mockUserManager.Setup(x => x.UpdateAsync(It.IsAny<User>()))
+                .Returns(Task.FromResult(IdentityResult.Success));
+
+            var userDTO = new UserDTO
+            {
+                Id = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                Name = "new Oleksandr",
+                Surname = "new Kardynal",
+                Role = "admin",
+                Email = "admin@gmail.com",
+                ProfileImagePath = "new Image path1"
+            };
+            var mockTokenService = new Mock<ITokenService>();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            var comments = InitialData.ExpectedComments.Where(x => x.UserId == userDTO.Id).ToList();
+            mockUnitOfWork.Setup(x => x.CommentRepository.GetUserCommentsByUserIdAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(comments));
+            mockUnitOfWork.Setup(x => x.CommentRepository.UpdateComments(It.IsAny<List<Comment>>()));
+            mockUnitOfWork.Setup(x => x.UserManager).Returns(mockUserManager.Object);
+
+            var userService = new UserService(mockUnitOfWork.Object,
+                                              mockTokenService.Object,
+                                              UnitTestHelper.CreateMapperProfile(),
+                                              new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                              new Mock<IOptions<GoogleAuthSettings>>().Object);
+            await userService.UpdateUserProfileAsync(userDTO);
+
+            mockUnitOfWork.Verify(x => x.CommentRepository.GetUserCommentsByUserIdAsync(userDTO.Id), Times.Once);
+            mockUnitOfWork.Verify(x => x.CommentRepository.UpdateComments(comments), Times.Once);
+            mockUserManager.Verify(x => x.FindByIdAsync(userDTO.Id), Times.Once);
+            mockUserManager.Verify(x => x.UpdateAsync(It.Is<User>(x =>
+                  x.Id == userDTO.Id && x.Name == userDTO.Name && x.Surname == userDTO.Surname &&
+                  x.Role == userDTO.Role && x.ProfileImagePath == userDTO.ProfileImagePath &&
+                  x.Email == userDTO.Email)), Times.Once);
+            mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
         }
 
         Mock<UserManager<TIDentityUser>> GetUserManagerMock<TIDentityUser>() where TIDentityUser : IdentityUser

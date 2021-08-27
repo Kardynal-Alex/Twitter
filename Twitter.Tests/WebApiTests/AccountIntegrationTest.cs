@@ -102,5 +102,31 @@ namespace Twitter.Tests.WebApiTests
                .Using(new UserDTOEqualityComparer()));
         }
 
+        [Test]
+        public async Task AccountController_UpdateUserProfile()
+        {
+            var userDTO = new UserDTO
+            {
+                Id = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                Name = "Oleksandr",
+                Surname = "Kardynal",
+                Role = "admin",
+                Email = "admin@gmail.com",
+                ProfileImagePath = "new Image path1"
+            };
+            var content = new StringContent(JsonConvert.SerializeObject(userDTO), Encoding.UTF8, "application/json");
+            var httpResponse = await _client.PutAsync(requestUri + "updateUser", content);
+
+            httpResponse.EnsureSuccessStatusCode();
+            using (var test = _factory.Services.CreateScope())
+            {
+                var context = test.ServiceProvider.GetService<ApplicationContext>();
+                var user = await context.Users.FirstOrDefaultAsync(x => x.Id == userDTO.Id);
+                var expected = new AutoMapperHelper<User, UserDTO>().MapToType(user);
+
+                Assert.That(userDTO, Is.EqualTo(expected)
+                    .Using(new UserDTOEqualityComparer()));
+            }
+        }
     }
 }

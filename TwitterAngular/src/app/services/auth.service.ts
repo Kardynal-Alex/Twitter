@@ -36,6 +36,10 @@ export class AuthService {
         return this.httpClient.get<user[]>(this.apiUrl+"getUserFriendsByUserId/"+id);
     }
 
+    updateUserProfile(user:user){
+        return this.httpClient.put(this.apiUrl+"updateUser/",user);
+    }
+
     logout() {
         this.localStorage.remove("token");
         this.localStorage.remove("refreshToken");

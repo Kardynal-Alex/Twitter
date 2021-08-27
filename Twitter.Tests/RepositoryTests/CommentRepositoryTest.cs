@@ -90,5 +90,22 @@ namespace Twitter.Tests.RepositoryTests
                 UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c"
             }).Using(new CommentEqualityComparer()));
         }
+
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task CommentRepository_GetUserCommentsByUserId(string userId)
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var commentRepository = new CommentRepository(context);
+            var actual = await commentRepository.GetUserCommentsByUserIdAsync(userId);
+            var expected = new List<Comment>(new[]
+            {
+                InitialData.ExpectedComments.ElementAt(0),
+                InitialData.ExpectedComments.ElementAt(2)
+            });
+
+            Assert.That(actual, Is.EqualTo(expected)
+                .Using(new CommentEqualityComparer()));
+        }
     }
 }

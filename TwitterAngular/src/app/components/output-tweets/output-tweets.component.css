@@ -22,6 +22,10 @@
 .tweetPost .profileImage img {
     margin: 10px;
     border-radius: 20px;
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .text {
@@ -92,6 +96,15 @@
     line-height: 0;
     font-weight: 600;
     margin-top: 11px;
+}
+
+.like:hover,
+.save:hover,
+.icon:hover,
+.form-container a:hover,
+.profileImage:hover,
+.text:hover {
+    cursor: pointer;
 }
 
 .commentIcon {
@@ -175,7 +188,8 @@
     border: none;
     height: auto;
     width: 96%;
-    min-width: 600px;
+    max-width: 600px;
+    width: 600px;
     min-height: 100px;
     resize: both;
     padding: 8px 10px;

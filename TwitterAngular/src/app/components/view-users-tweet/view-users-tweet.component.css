@@ -17,6 +17,10 @@ body {
     background-color: #f7f7f7;
 }
 
+.flexBox:hover {
+    cursor: pointer;
+}
+
 .flexBox {
     display: flexbox;
 }
@@ -118,4 +122,10 @@ body {
 
 .save i {
     font-size: 20px;
+}
+
+.like:hover,
+.save:hover,
+.userImage:hover {
+    cursor: pointer;
 }
