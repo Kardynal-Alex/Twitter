@@ -36,6 +36,10 @@ export class AuthService {
         return this.httpClient.get<user[]>(this.apiUrl+"getUserFriendsByUserId/"+id);
     }
 
+    getUserFollowers(id:string){
+        return this.httpClient.get<user[]>(this.apiUrl+"getUserFollowers/"+id);
+    }
+
     updateUserProfile(user:user){
         return this.httpClient.put(this.apiUrl+"updateUser/",user);
     }

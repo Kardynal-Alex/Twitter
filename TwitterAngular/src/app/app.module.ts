@@ -32,6 +32,7 @@ import { SavedPostsComponent } from './components/saved-posts/saved-posts.compon
 import { InstantSearchComponent } from './components/instant-search/instant-search.component';
 import { HeshtagSearchComponent } from './components/heshtag-search/heshtag-search.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { UserFollowersComponent } from './components/user-followers/user-followers.component';
 
 
 const appRoutes: Routes =[
@@ -42,6 +43,7 @@ const appRoutes: Routes =[
   { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [LoginGuard] },
   { path: 'search-users', component:SearchUsersComponent, canActivate: [LoginGuard] },
   { path: 'user-friends/:id', component: UserFriendsComponent, canActivate: [LoginGuard] },
+  { path: 'user-followers/:id', component: UserFollowersComponent, canActivate: [LoginGuard] },
   { path: 'saved-posts', component: SavedPostsComponent, canActivate: [LoginGuard] },
   { path: 'heshtag-search', component: HeshtagSearchComponent, canActivate: [LoginGuard] },
   { path: 'test', component: TestComponent },
@@ -72,7 +74,8 @@ export function tokenGetter() {
     SavedPostsComponent,
     InstantSearchComponent,
     HeshtagSearchComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    UserFollowersComponent
   ],
   imports: [
     BrowserModule,

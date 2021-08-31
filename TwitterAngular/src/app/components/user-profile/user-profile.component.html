@@ -15,7 +15,10 @@
 </div>
 <div class="info">
     <div class="friends">
-        <a routerLink="/user-friends/{{friendId}}">Friends</a>
+        <a routerLink="/user-friends/{{friendId}}">Following</a>
+    </div>
+    <div class="friends">
+        <a routerLink="/user-followers/{{friendId}}">Followers</a>
     </div>
     <div class="editProfileBtn" *ngIf="user['id']==userId">
         <a (click)="openEditProfileForm()">Edit Profile</a>

@@ -228,5 +228,14 @@ namespace Twitter.Services
 
             await unitOfWork.SaveAsync();
         }
+
+        public async Task<List<UserDTO>> GetUserFollowersAsync(string userFriendId)
+        {
+            if (string.IsNullOrEmpty(userFriendId))
+                throw new TwitterException("Icorect id");
+
+            var users = await unitOfWork.UserRepository.GetUserFollowersAsync(userFriendId);
+            return mapper.Map<List<UserDTO>>(users);
+        }
     }
 }

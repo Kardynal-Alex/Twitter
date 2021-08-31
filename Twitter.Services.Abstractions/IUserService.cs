@@ -19,5 +19,7 @@ namespace Twitter.Services.Abstractions
         Task<TokenAuthDTO> RefreshTokenAsync(TokenAuthDTO tokenAuthDTO);
 
         Task UpdateUserProfileAsync(UserDTO userDTO);
+
+        Task<List<UserDTO>> GetUserFollowersAsync(string userFriendId);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Twitter.Domain.Entities;
@@ -43,6 +44,18 @@ namespace Twitter.Tests.RepositoryTests
             var userFriends = await userRepository.GetUserFriendsByUserIdAsync(userId);
 
             Assert.That(userFriends, Is.EqualTo(InitialData.ExpectedUsers)
+                .Using(new UserEqualityComparer()));
+        }
+
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task UserRepository_GetUserFollowers(string userFriendId)
+        {
+            await using var context = new ApplicationContext(_context);
+            var userRepository = new UserRepository(context);
+            var followers = await userRepository.GetUserFollowersAsync(userFriendId);
+            var expected = InitialData.ExpectedUsers;
+
+            Assert.That(followers, Is.EqualTo(expected)
                 .Using(new UserEqualityComparer()));
         }
     }

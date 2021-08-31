@@ -31,5 +31,13 @@ namespace Twitter.Persistence.Repositories
                             ON f.UserId='{userId}' AND u.Id=f.FriendId";
             return await context.Users.FromSqlRaw(query).ToListAsync();
         }
+
+        public async Task<List<User>> GetUserFollowersAsync(string userFriendId)
+        {
+            var query = $@" SELECT u.* FROM dbo.AspNetUsers as u
+                            INNER JOIN dbo.Friends as f on u.Id=f.UserId 
+                            WHERE f.FriendId='{userFriendId}' AND u.Id!='{userFriendId}'";
+            return await context.Users.FromSqlRaw(query).ToListAsync();
+        }
     }
 }

@@ -198,6 +198,27 @@ namespace Twitter.Tests.ServiceTests
             mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
         }
 
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task UserService_GetUserFollowers(string userFriendId)
+        {
+            var mockTokenService = new Mock<ITokenService>();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.UserRepository.GetUserFollowersAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(InitialData.ExpectedUsers.ToList()));
+
+            var userService = new UserService(mockUnitOfWork.Object,
+                                  mockTokenService.Object,
+                                  UnitTestHelper.CreateMapperProfile(),
+                                  new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                  new Mock<IOptions<GoogleAuthSettings>>().Object);
+
+            var actual = await userService.GetUserFollowersAsync(userFriendId);
+            var expected = InitialData.ExpectedUserDTOs;
+
+            Assert.That(actual, Is.EqualTo(expected)
+                .Using(new UserDTOEqualityComparer()));
+        }
+
         Mock<UserManager<TIDentityUser>> GetUserManagerMock<TIDentityUser>() where TIDentityUser : IdentityUser
         {
             return new Mock<UserManager<TIDentityUser>>(

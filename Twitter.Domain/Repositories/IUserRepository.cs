@@ -10,5 +10,7 @@ namespace Twitter.Domain.Repositories
         Task<List<User>> SearchUserByNameAndSurname(string search);
 
         Task<List<User>> GetUserFriendsByUserIdAsync(string userId);
+
+        Task<List<User>> GetUserFollowersAsync(string userFriendId);
     }
 }

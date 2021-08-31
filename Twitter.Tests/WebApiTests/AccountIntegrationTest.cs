@@ -128,5 +128,19 @@ namespace Twitter.Tests.WebApiTests
                     .Using(new UserDTOEqualityComparer()));
             }
         }
+
+        [TestCase("925695ec-0e70-4e43-8514-8a0710e11d53")]
+        public async Task AccountController_GetUserFollowers(string id)
+        {
+            var httpResponse = await _client.GetAsync(requestUri + "getUserFollowers/" + id);
+
+            httpResponse.EnsureSuccessStatusCode();
+            var stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            var actual = JsonConvert.DeserializeObject<List<UserDTO>>(stringResponse);
+
+            Assert.That(actual, Is.EqualTo(InitialData.ExpectedUserDTOs)
+               .Using(new UserDTOEqualityComparer()));
+        }
+
     }
 }

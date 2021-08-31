@@ -78,5 +78,12 @@ namespace Twitter.WebApi.Controllers
             await service.UpdateUserProfileAsync(userDTO);
             return Ok();
         }
+
+        [HttpGet("getUserFollowers/{id}")]
+        public async Task<ActionResult<List<UserDTO>>> GetUserFollowers(string id)
+        {
+            var followers = await service.GetUserFollowersAsync(id);
+            return Ok(followers);
+        }
     }
 }
