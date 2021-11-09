@@ -6,4 +6,5 @@ D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domai
 D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.csproj.CoreCompileInputs.cache
 D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.dll
 D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.pdb
-D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.csprojAssemblyReference.cache
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.csproj.AssemblyReference.cache
+D:\Asp.Net(project)\Twitter\Twitter.Domain\obj\Debug\netcoreapp3.1\Twitter.Domain.GeneratedMSBuildEditorConfig.editorconfig

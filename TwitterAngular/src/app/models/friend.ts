@@ -1,5 +1,5 @@
-export class friend{
-    id:string;
-    userId:string;
-    friendId:string;
+export class friend {
+    id : string;
+    userId : string;
+    friendId : string;
 }

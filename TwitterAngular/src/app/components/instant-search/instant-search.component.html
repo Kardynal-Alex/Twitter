@@ -1,14 +1,13 @@
 <div class="search">
     <div class="searchBar">
-        <input type="text" placeholder="Search Twitter" [(ngModel)]="search" 
-        (ngModelChange)="instantSearch()" >
+        <input type="text" placeholder="Search Twitter" [(ngModel)]="search" (ngModelChange)="instantSearch()">
     </div>
 </div>
 <div class="users">
     <div *ngFor="let user of users">
         <div class="user">
             <div class="userImage">
-                <img [src]="user['profileImagePath']" (click)="navigateToUserProfile(user['id'])"/>
+                <img [src]="user['profileImagePath']" (click)="navigateToUserProfile(user['id'])" />
             </div>
             <p>{{user['name']}} {{user['surname']}}</p>
         </div>

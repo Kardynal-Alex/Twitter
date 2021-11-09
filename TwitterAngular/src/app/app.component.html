@@ -1,10 +1,9 @@
-
-<div id="menu" class="menu" *ngIf="isAuth" >
+<div id="menu" class="menu" *ngIf="isAuth">
   <app-menu [isAuth]="isAuth"></app-menu>
 </div>
 <div class="instantSearch" *ngIf="isAuth">
   <app-instant-search></app-instant-search>
 </div>
-<div id="router" class="router"> 
+<div id="router" class="router">
   <router-outlet [isAuth]="isAuth"></router-outlet>
 </div>

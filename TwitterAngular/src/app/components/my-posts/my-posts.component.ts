@@ -1,119 +1,124 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Guid } from 'guid-typescript';
-import { ToastrService } from 'ngx-toastr';
-import { images } from 'src/app/models/images';
-import { twitterPost } from 'src/app/models/twitter-post';
-import { user } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/auth.service';
-import { TwitterPostService } from 'src/app/services/twitter-post.service';
-import { OutputTweetsComponent } from '../output-tweets/output-tweets.component';
+import {HttpClient, HttpEventType} from '@angular/common/http';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
+import {Guid} from 'guid-typescript';
+import {ToastrService} from 'ngx-toastr';
+import {images} from 'src/app/models/images';
+import {twitterPost} from 'src/app/models/twitter-post';
+import {user} from 'src/app/models/user';
+import {AuthService} from 'src/app/services/auth.service';
+import {TwitterPostService} from 'src/app/services/twitter-post.service';
+import {OutputTweetsComponent} from '../output-tweets/output-tweets.component';
 
-@Component({
-  selector: 'app-my-posts',
-  templateUrl: './my-posts.component.html',
-  styleUrls: ['./my-posts.component.css']
-})
+@Component({selector: 'app-my-posts', templateUrl: './my-posts.component.html', styleUrls: ['./my-posts.component.css']})
 export class MyPostsComponent implements OnInit {
 
-  constructor(private authService:AuthService,
-              private httpClient:HttpClient,
-              private toastrService:ToastrService,
-              private twitterPostService:TwitterPostService,
-              private router:Router) { }
+    constructor(private authService : AuthService, private httpClient : HttpClient, private toastrService : ToastrService, private twitterPostService : TwitterPostService, private router : Router) {}
 
-  numbersOfImages=Array.from(Array(4).keys());
-  user:user;
-  images:images={
-    image1:'',image2:'',image3:'',image4:'',id:null
-  };
-  twitterPosts:twitterPost[];
-  ngOnInit(){
-    document.getElementById('router').className="router1";
-    this.user=this.authService.getUserFromToken();
-    this.getTwitterPostByUserId();
-  }
-
-  getTwitterPostByUserId(){
-    if(this.user['id'] && this.user['id']!=undefined)
-    this.twitterPostService.getTwitterPostByUserId(this.user['id']).subscribe(response=>{
-      this.twitterPosts=response;
-    });
-  }
-
-  @ViewChild('child') child:OutputTweetsComponent;
-  createTwitterPost(form:NgForm){
-    const idGuid=Guid.create().toString();
-    this.images['id']=idGuid;
-    const twitterPost:twitterPost={
-      id:idGuid,
-      postText:this.textArea,
-      dateCreation:new Date(Date.now()),
-      like:0,
-      nComments:0,
-      userId:this.user['id'],
-      user:null,
-      images:this.images,
-      comments:null
+    numbersOfImages = Array.from(Array(4).keys());
+    user : user;
+    images : images = {
+        image1: '',
+        image2: '',
+        image3: '',
+        image4: '',
+        id: null
+    };
+    twitterPosts : twitterPost[];
+    ngOnInit() {
+        document.getElementById('router').className = "router1";
+        this.user = this.authService.getUserFromToken();
+        this.getTwitterPostByUserId();
     }
-    this.twitterPostService.addTwitterPost(twitterPost).subscribe(response=>{
-      this.toastrService.success("Post is added");
-      form.resetForm();
-      for(let i of this.numbersOfImages)
-        this.images['image'+(i+1)]='';
-      this.getTwitterPostByUserId();
-      this.child.setLikesAfterUpdates();
-    },error=>{
-      this.toastrService.error("Something went wrong!");
-    })
-  }
 
-  navigateToUserProfile(id:string){
-    this.router.navigate(['user-profile/'+id]);
-  }
-
-  openImageUploadForm(){
-    var x=document.getElementById("uploadImages");
-    if(x.style.display=="block")
-      x.style.display="none";
-    else
-      x.style.display="block";
-  }
-
-  response;
-  uploadFiles(files, field, number){
-    if(files.length === 0)
-      return;
-    this.twitterPostService.uploadPhoto(files).subscribe(event=>{
-      if (event.type === HttpEventType.Response) {
-            this.response=event.body;
-            document.getElementById('but-'+number).style.display='none';
-            this.images[field]=this.response['dbPath'];
-            this.toastrService.success('Photo is uploaded!');
-      }
-    });
-  }
-
-  deletePhotoByPath(imagePath:string, field:string){
-    if(imagePath!==''){
-      this.twitterPostService.deletePhoto(imagePath).subscribe(response=>{
-        this.toastrService.success("Photo is deleted");
-        this.images[field]='';
-      });
+    getTwitterPostByUserId() {
+        if (this.user['id'] && this.user['id'] != undefined) 
+            this.twitterPostService.getTwitterPostByUserId(this.user['id']).subscribe(response => {
+                this.twitterPosts = response;
+            });
+        
     }
-  }
 
-  public createImgPath(serverPath: string){
-    return this.twitterPostService.createImgPath(serverPath);
-  }
+    @ViewChild('child')child : OutputTweetsComponent;
+    createTwitterPost(form : NgForm) {
+        const idGuid = Guid.create().toString();
+        this.images['id'] = idGuid;
+        const twitterPost: twitterPost = {
+            id: idGuid,
+            postText: this.textArea,
+            dateCreation: new Date(Date.now()),
+            like: 0,
+            nComments: 0,
+            userId: this.user['id'],
+            user: null,
+            images: this.images,
+            comments: null
+        }
+        this.twitterPostService.addTwitterPost(twitterPost).subscribe(response => {
+            this.toastrService.success("Post is added");
+            form.resetForm();
+            for (let i of this.numbersOfImages) 
+                this.images['image' + (
+                        i + 1
+                    )] = '';
+            
+            this.getTwitterPostByUserId();
+            this.child.setLikesAfterUpdates();
+        }, error => {
+            this.toastrService.error("Something went wrong!");
+        })
+    }
 
-  public textArea: string = '';
-  public isEmojiPickerVisible: boolean;
-  public addEmoji(event) {
-     this.textArea = `${this.textArea}${event.emoji.native}`;
-     this.isEmojiPickerVisible = false;
-  }
+    navigateToUserProfile(id : string) {
+        this.router.navigate(['user-profile/' + id]);
+    }
+
+    openImageUploadForm() {
+        var x = document.getElementById("uploadImages");
+        if (x.style.display == "block") 
+            x.style.display = "none";
+         else 
+            x.style.display = "block";
+        
+    }
+
+    response;
+    uploadFiles(files, field, number) {
+        if (files.length === 0) 
+            return;
+        
+        this.twitterPostService.uploadPhoto(files).subscribe(event => {
+            if (event.type === HttpEventType.Response) {
+                this.response = event.body;
+                document.getElementById('but-' + number).style.display = 'none';
+                this.images[field] = this.response['dbPath'];
+                this.toastrService.success('Photo is uploaded!');
+            }
+        });
+    }
+
+    deletePhotoByPath(imagePath : string, field : string) {
+        if (imagePath !== '') {
+            this.twitterPostService.deletePhoto(imagePath).subscribe(response => {
+                this.toastrService.success("Photo is deleted");
+                this.images[field] = '';
+            });
+        }
+    }
+
+    public createImgPath(serverPath : string) {
+        return this.twitterPostService.createImgPath(serverPath);
+    }
+
+    public textArea : string = '';
+    public isEmojiPickerVisible : boolean;
+    public addEmoji(event) {
+        this.textArea = `${
+            this.textArea
+        }${
+            event.emoji.native
+        }`;
+    }
 
 }

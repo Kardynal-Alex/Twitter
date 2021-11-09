@@ -10,7 +10,6 @@ D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Contr
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Services.Abstractions.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Services.Abstractions.pdb
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Twitter.Contracts.pdb
-D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebApi.csprojAssemblyReference.cache
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebApi.AssemblyInfoInputs.cache
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebApi.AssemblyInfo.cs
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebApi.csproj.CoreCompileInputs.cache
@@ -106,3 +105,5 @@ D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Google.Apis.A
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Google.Apis.Auth.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\bin\Debug\netcoreapp3.1\Google.Apis.Core.dll
 D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebApi.MvcApplicationPartsAssemblyInfo.cs
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebApi.csproj.AssemblyReference.cache
+D:\Asp.Net(project)\Twitter\Twitter.WebApi\obj\Debug\netcoreapp3.1\Twitter.WebApi.GeneratedMSBuildEditorConfig.editorconfig

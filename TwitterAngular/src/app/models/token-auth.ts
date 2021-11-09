@@ -1,4 +1,4 @@
-export class tokenAuth{
-    token:string;
-    refreshToken:string;
+export class tokenAuth {
+    token : string;
+    refreshToken : string;
 }

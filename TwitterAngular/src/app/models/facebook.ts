@@ -1,3 +1,3 @@
-export interface facebook{
-    accessToken:string;
+export interface facebook {
+    accessToken: string;
 }

@@ -1,5 +1,5 @@
-export class like{
-    id:string;
-    twitterPostId:string;
-    userId:string;
+export class like {
+    id : string;
+    twitterPostId : string;
+    userId : string;
 }

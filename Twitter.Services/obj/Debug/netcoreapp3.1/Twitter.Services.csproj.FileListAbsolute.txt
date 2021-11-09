@@ -7,10 +7,11 @@ D:\Asp.Net(project)\Twitter\Twitter.Services\bin\Debug\netcoreapp3.1\Twitter.Ser
 D:\Asp.Net(project)\Twitter\Twitter.Services\bin\Debug\netcoreapp3.1\Twitter.Domain.pdb
 D:\Asp.Net(project)\Twitter\Twitter.Services\bin\Debug\netcoreapp3.1\Twitter.Services.Abstractions.pdb
 D:\Asp.Net(project)\Twitter\Twitter.Services\bin\Debug\netcoreapp3.1\Twitter.Contracts.pdb
-D:\Asp.Net(project)\Twitter\Twitter.Services\obj\Debug\netcoreapp3.1\Twitter.Services.csprojAssemblyReference.cache
 D:\Asp.Net(project)\Twitter\Twitter.Services\obj\Debug\netcoreapp3.1\Twitter.Services.AssemblyInfoInputs.cache
 D:\Asp.Net(project)\Twitter\Twitter.Services\obj\Debug\netcoreapp3.1\Twitter.Services.AssemblyInfo.cs
 D:\Asp.Net(project)\Twitter\Twitter.Services\obj\Debug\netcoreapp3.1\Twitter.Services.csproj.CoreCompileInputs.cache
 D:\Asp.Net(project)\Twitter\Twitter.Services\obj\Debug\netcoreapp3.1\Twitter.Services.csproj.CopyComplete
 D:\Asp.Net(project)\Twitter\Twitter.Services\obj\Debug\netcoreapp3.1\Twitter.Services.dll
 D:\Asp.Net(project)\Twitter\Twitter.Services\obj\Debug\netcoreapp3.1\Twitter.Services.pdb
+D:\Asp.Net(project)\Twitter\Twitter.Services\obj\Debug\netcoreapp3.1\Twitter.Services.csproj.AssemblyReference.cache
+D:\Asp.Net(project)\Twitter\Twitter.Services\obj\Debug\netcoreapp3.1\Twitter.Services.GeneratedMSBuildEditorConfig.editorconfig

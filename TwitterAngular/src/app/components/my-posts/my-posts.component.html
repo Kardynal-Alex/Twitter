@@ -5,14 +5,14 @@
     </div>
     <div class="tweetForm">
         <div class="profileImage">
-            <img [src]="user['profileImagePath']" (click)="navigateToUserProfile(user['id'])"/>
+            <img [src]="user['profileImagePath']" (click)="navigateToUserProfile(user['id'])" />
         </div>
         <form #createTwitterPostForm="ngForm">
             <div class="textArea">
-                <textarea autosize type="text" name="textarea" [(ngModel)]="textArea"
-                required minlength="10" placeholder="What`s happening?" contenteditable></textarea>
-                <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible" style="position: absolute;" 
-                (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
+                <textarea autosize type="text" name="textarea" [(ngModel)]="textArea" required minlength="10"
+                    placeholder="What`s happening?" contenteditable></textarea>
+                <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible" style="position: absolute;"
+                    (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
             </div>
             <div class="flex">
                 <div class="emoji">
@@ -23,28 +23,27 @@
                 </div>
             </div>
             <div id="uploadImages" style="display: none;">
-                <div class="images" >
+                <div class="images">
                     <div *ngFor="let n of numbersOfImages; let i=index">
                         <div class="image">
                             <div class="cancel">
                                 <button (click)="deletePhotoByPath(images['image'+(i+1)],'image'+(i+1))"
-                                *ngIf="images['image'+(i+1)]">&times;</button>
+                                    *ngIf="images['image'+(i+1)]">&times;</button>
                             </div>
 
                             <img [src]="createImgPath(images['image'+(i+1)])" *ngIf="images['image'+(i+1)]" />
 
                             <input type="file" #file (change)="uploadFiles(file.files,'image'+(i+1),(i+1))"
-                            style="display: none;" multiple required onclick="this.value=null" />
+                                style="display: none;" multiple required onclick="this.value=null" />
                             <div class="upload" *ngIf="!images['image'+(i+1)]">
-                                <button id="but-{{(i+1)}}" (click)="file.click()" >+</button>
+                                <button id="but-{{(i+1)}}" (click)="file.click()">+</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tweetBtn">
-                <button type="submit" 
-                (click)="createTwitterPost(createTwitterPostForm)">Tweet</button>
+                <button type="submit" (click)="createTwitterPost(createTwitterPostForm)">Tweet</button>
             </div>
         </form>
     </div>
